@@ -1,4 +1,4 @@
-
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'runit/testcase'
 require 'runit/cui/testrunner'
 
