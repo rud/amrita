@@ -22,7 +22,7 @@ ObjectSpace.each_object(Class) do |klass|
   end
 end
 
-RUNIT::CUI::TestRunner.quiet_mode = true
+RUNIT::CUI::TestRunner.quiet_mode = false
 if RUNIT::CUI::TestRunner.run(suite).succeed?
   puts "every test OK"
 else
