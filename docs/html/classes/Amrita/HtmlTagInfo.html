@@ -1,0 +1,162 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>Class: Amrita::HtmlTagInfo</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+
+<table summary="Information on class" width="100%" border="0" cellspacing="0">
+ <tr class="title-row">
+ <td class="big-title-font">
+   <sup><font color="aqua">Class</font></sup> Amrita::HtmlTagInfo
+ </td>
+ <td align="right">
+   <table summary="layout" cellspacing="0" cellpadding="2">
+     <tr valign="top">
+      <td class="small-title-font">In:</td>
+      <td class="small-title-font">
+        <a href="../../files/lib/amrita/tag_rb.html" class="aqua">
+lib/amrita/tag.rb
+         </a>
+<br />
+      </td>
+     </tr>
+     <tr>
+      <td class="small-title-font">Parent:</td>
+      <td class="small-title-font">
+        <a href="TagInfo.html" class="aqua">
+TagInfo
+         </a>
+      </td>
+     </tr>
+   </table>
+  </td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+
+
+<table summary="Methods" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Methods</td></tr>
+</table>
+<div class="name-list">
+<a href="#M000164">new</a>&nbsp; &nbsp;
+</div>
+
+
+
+<table summary="Included modules" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Included modules</td></tr>
+</table>
+<div class="name-list">
+    <span class="method-name"><a href="../Amrita.html">Amrita</a></span>
+</div>
+
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Class methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000164"></a>
+<b>new</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/tag.rb, line 280</span>
+    <span class="kw">def</span> initialize
+      <span class="kw">super</span>
+
+      pptype1 = )html head body table ul ol div br table tr)
+      pptype1.each <span class="kw">do</span> |name|
+        get_tag_info(name).pptype = 1
+      <span class="kw">end</span>
+
+      pptype2 = )title link meta tr li th td h1 h2 h3 h4 h5 h6 p)
+      pptype2.each <span class="kw">do</span> |name|
+        get_tag_info(name).pptype = 2
+      <span class="kw">end</span>
+      empty = )area base basefont bgsound br col frame hr img input isindex 
+	         keygen link meta nextid param spacer wbr) 
+      empty.each <span class="kw">do</span> |name|
+        get_tag_info(name).can_be_empty = <span class="kw">true</span>
+      <span class="kw">end</span>
+
+      get_tag_info(:a).set_url_attr(:href)
+      get_tag_info(:base).set_url_attr(:href)
+      get_tag_info(:img).set_url_attr(:src)
+      get_tag_info(:img).set_url_attr(:usemap)
+      get_tag_info(:form).set_url_attr(:action)
+      get_tag_info(:link).set_url_attr(:href)
+      get_tag_info(:area).set_url_attr(:href)
+      get_tag_info(:body).set_url_attr(:background)
+      get_tag_info(:script).set_url_attr(:src)
+      get_tag_info(:object).set_url_attr(:classid)
+      get_tag_info(:object).set_url_attr(:codebase)
+      get_tag_info(:object).set_url_attr(:data)
+      get_tag_info(:object).set_url_attr(:archive)
+      get_tag_info(:object).set_url_attr(:usemap)
+      get_tag_info(:applet).set_url_attr(:codebase)
+      get_tag_info(:applet).set_url_attr(:archive)
+      get_tag_info(:applet).set_url_attr(:usemap)
+      get_tag_info(:q).set_url_attr(:cite)
+      get_tag_info(:blockquote).set_url_attr(:cite)
+      get_tag_info(:ins).set_url_attr(:cite)
+      get_tag_info(:del).set_url_attr(:cite)
+      get_tag_info(:frame).set_url_attr(:longdesc)
+      get_tag_info(:frame).set_url_attr(:src)
+      get_tag_info(:iframe).set_url_attr(:longdesc)
+      get_tag_info(:iframe).set_url_attr(:src)
+      get_tag_info(:head).set_url_attr(:profile)
+
+      BLOCK.each <span class="kw">do</span> |t| 
+        get_tag_info(t).tag_class = TagBlock 
+      <span class="kw">end</span>
+
+      INLINE.each <span class="kw">do</span> |t| 
+        get_tag_info(t).tag_class = TagInline
+      <span class="kw">end</span>
+
+      EMPTY.each <span class="kw">do</span> |t| 
+        get_tag_info(t).tag_class = TagEmpty
+      <span class="kw">end</span>
+
+      LIST.each <span class="kw">do</span> |t| 
+        get_tag_info(t).tag_class = TagList
+      <span class="kw">end</span>
+
+      ITEM.each <span class="kw">do</span> |t| 
+        get_tag_info(t).tag_class = TagItem
+      <span class="kw">end</span>
+
+      )thead tbody tfoot).each <span class="kw">do</span> |t|
+        get_tag_info(t).tag_class = TagTableSection
+      <span class="kw">end</span>
+
+      )dt dd).each <span class="kw">do</span> |t|
+        get_tag_info(t).tag_class = TagDT
+      <span class="kw">end</span>
+
+      get_tag_info(:pre).tag_class = TagPre
+      get_tag_info(:p).tag_class = TagP
+
+    <span class="kw">end</span>
+</pre>
+
+</body>

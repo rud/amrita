@@ -1,0 +1,19 @@
+Page : CKString {
+	value = source;
+}
+
+HTML : CKString {
+	value = htmlFile;
+}
+
+Definition : CKString {
+	value = definitionFile;
+}
+
+Ruby : CKString {
+	value = rubyFile;
+}
+
+Link : CKHyperlink {
+	href = "http://www.spice-of-life.net";
+}

@@ -1,0 +1,247 @@
+
+= Amrita quick start guide
+
+== 1. hello world
+
+Amritaには2レベルのAPIがあります。このサンプルでは高レベルAPIのみ扱います。
+
+高レベルAPIは Amrita::Template と そこから導出された 
+Amrita::TemplateFile と Amrita::TemplateText というクラスからなりたっています。
+これらのクラスは、他のAmritaのクラスを隠していいます。
+
+
+=== HTML template
+
+最も簡単なテンプレートは次のようなものです。
+
+  :include: sample/hello/template.html
+
+Amritaは +id+ 属性を持った要素を動的な要素として扱います。
+そして、モデルデータから +id+ 属性の値をキーにしてデータを取り出します。
+
+
+=== code
+
+上記のテンプレートを使用し、結果を標準出力に出力するコードは以下のようになります。
+
+  :include: sample/hello/hello.rb
+
+
+
+Amrita::Templateはテンプレートとモデルデータをミックスして
+出力のHTMLドキュメントを作成します。
+
+=== output
+
+結果は以下のようになります。
+
+  <html>
+    <body>
+      <h1>hello world</h1>
+      <p>Amrita is a html template library for Ruby</p>
+    </body>
+  </html>
+
+"hello world"というテキストは、モデルデータから+title+というキーで取り出
+され <tt>id="title"</tt>という属性を持った要素、すなわち<tt><h1></tt>に
+挿入されます。
+
+<tt><p id="body">...</p></tt>も同様に処理されます。
+
+== 説明
+
+Amritaは以下のステップで使用します。
+
+1. テンプレートファイルへのパスを指定して、Amrita::TemplateFile 
+   オブジェクトを生成する
+
+      tmpl = TemplateFile.new("template.html")
+
+2. テンプレート展開のためのモデルデータを作成する
+
+      data = {
+        :title => "hello world",
+        :body => "Amrita is a html template library for Ruby"
+      }
+
+   モデルデータはさまざまな形をとれますが、
+   必ずテンプレートの +id+ で示される構造に適合している必要があります。
+   この場合は、テンプレートにはふたつの+id+があって、
+   その値は "title" と "body" です。
+   従って、モデルデータはこのふたつのキーに対応する値を持つ必要があります。
+
+
+3.  Amrita::Template#expand を呼ぶ
+   
+      tmpl.expand(STDOUT, data)
+
+    +expand+ の最初のパラメータはストリームです。
+    Amritaは << メソッドによって結果を出力します。
+    従って、 << メソッドを受けつける任意のオブジェクト
+    (File等のIO,String, Array)を使用することができます。
+
+---
+
+== 2 list 
+
+このサンプルはAmritaで繰り返しを行なう方法を説明します。
+
+繰り返しを行ないたい要素に配列を与えればその要素がコピーされます。
+
+
+=== code and output
+
+code:
+
+  :include: sample/hello/list.rb
+
+output:
+
+  <ul>        
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>       
+
+
+=== description
+
+   tmpl = TemplateText.new <<END
+   <ul>                         
+     <li id=list1>              
+   </ul>                        
+   END                          
+
+このサンプルでは Amrita::TemplateText を使用しています。
+このクラスはテンプレートをファイルでなく文字列として受け取ります。
+その他の点では、Amrita::TemplateFile と同様に使用できます。
+
+    data = {                 
+       :list1=>[ 1, 2, 3 ]   
+    }
+
+モデルデータは配列をデータとして持つHashです。
+あるHTML要素に対応するモデルデータが配列(Enumerable)であった場合、
+Amritaはその要素をコピーして、
+それぞれを配列の各要素によって展開します。
+
+    tmpl.prettyprint = true  
+    tmpl.expand(STDOUT, data)
+
++prettyprint+ がセットされていると、
+出力は整形されます。
+
+---
+
+== 3. table 
+
+== code and output
+
+code:
+
+  :include: sample/hello/table.rb
+
+output:
+
+  <table>                    
+    <tr>                     
+    <th>name</th>            
+    <th>author</th>          
+    </tr>                    
+    <tr>                     
+    <td>Ruby</td>            
+    <td>matz</td>            
+    </tr>                    
+    <tr>                     
+    <td>perl</td>            
+    <td>Larry Wall</td>      
+    </tr>                    
+    <tr>                     
+    <td>python</td>          
+    <td>Guido van Rossum</td>
+    </tr>                    
+  </table>                   
+
+=== description
+
+   <table border="1">                      
+     <tr><th>name</th><th>author</th></tr> 
+     <tr id="table1">                        
+       <td id="name"><td id="author">      
+     </tr>                                 
+   </table>                                
+   
+
+   data = {                                               
+      :table1=>[                                          
+         { :name=>"Ruby", :author=>"matz" },              
+         { :name=>"perl", :author=>"Larry Wall" },        
+         { :name=>"python", :author=>"Guido van Rossum" },
+      ]                                                   
+   }                                                      
+
+対応するモデルデータが配列なので、
+<tt><tr id="table1">...</tr></tt> の部分は3回コピーされます。
+そして、その繰り返しのたびに、
+子要素は <tt>{ :name=>"...", :author=>"..." }</tt> というデータによって
+展開されます。
+
+このように、Amritaは HTMLの +id+ で作られた構造にモデルデータを再帰的に
+適用していきます。
+よって、どのような複雑なHTMLでもAmritaによって生成することができます。
+
+---
+
+== 4. conditional
+
+もし、ある要素に対応するモデルデータが +nil+ か +false+ だった場合、
+その要素は削除されます。
+この機能を利用して、
+テンプレートの中で出力する部分を選択することができます。
+
+
+== code and output
+
+code:
+
+  :include: sample/hello/conditional.rb
+
+output:
+
+  <html>                                                     
+    <body>                                                   
+      <div>                                                  
+        <h1>Group A</h1>                                     
+        <div> This group has only one data: "only_one".      
+        </div>                                               
+      </div>                                                 
+      <div>                                                  
+        <h1>Group B</h1>                                     
+        <div> Here's the list of this group's data.          
+          <ul>                                               
+            <li>one</li>                                     
+            <li>two</li>                                     
+            <li>three</li>                                   
+          </ul>                                              
+        </div>                                               
+      </div>                                                 
+      <div>                                                  
+        <h1>Group C</h1>                                     
+        <div>                                                
+          <em>This group has no data.</em>                   
+        </div>                                               
+      </div>                                                 
+    </body>                                                  
+  </html>                                                    
+
+=== description
+
+このテンプレートには <tt><div id=...>...</div></tt> という場所が3つあり
+ます。そのうちひとつだけが使われます。+no_data+ +one_data+ +many_data+の
+うちひとつだけがセットされています。 Hashはセットされてないキーに対して
+は、+nil+を返すので、その +nil+ に対応する部分は削除されます。
+
+モデルデータが+true+の場合は、モデルデータは変更されずにそのまま出力され
+ます。
+
+---

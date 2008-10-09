@@ -1,0 +1,1329 @@
+conditional.rb
+
+<html> 
+  <body> 
+    <div> 
+      <h1>Group A</h1>  
+      <div> This group has only one data: "only_one". 
+      </div>  
+    </div>
+    <div> 
+      <h1>Group B</h1>   
+      <div> Here's the list of this group's data. 
+        <ul> 
+          <li>one</li>
+          <li>two</li>
+          <li>three</li>
+        </ul> 
+      </div> 
+    </div>
+    <div> 
+      <h1>Group C</h1> 
+      <div> 
+        <em>This group has no data.</em> 
+      </div>   
+    </div> 
+  </body> 
+</html> 
+hello.rb
+<html>
+   <body>
+      <h1>hello world</h1>
+      <p>Amrita is a html template libraly for Ruby</p>
+   </body>
+</html>
+
+list.rb
+
+<ul> 
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+</ul> 
+table.rb
+
+<table border="1"> 
+  <tr>
+  <th>name</th>
+  <th>author</th>
+  </tr> 
+  <tr> 
+  <td>Ruby</td>
+  <td>matz</td>
+  </tr>
+  <tr> 
+  <td>perl</td>
+  <td>Larry Wall</td>
+  </tr>
+  <tr> 
+  <td>python</td>
+  <td>Guido van Rossum</td>
+  </tr> 
+</table> 
+filelist.rb
+<file name="CVS" type="directory">
+     
+     <mode>drwxr-xr-x</mode>
+     <times>
+       <ctime>Sat Dec 28 15:51:57 JST 2002</ctime>
+       <mtime>Sat Dec 28 15:51:57 JST 2002</mtime>
+       <atime>Mon Jan 06 16:48:20 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>3091461</inode>
+     </unix_inf>
+  </file><file name="index.html" type="file">
+     <size>2397</size>
+     <mode>-rw-rw-r--</mode>
+     <times>
+       <ctime>Mon Jan 06 13:26:55 JST 2003</ctime>
+       <mtime>Mon Jan 06 13:26:55 JST 2003</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82715</inode>
+     </unix_inf>
+  </file><file name="amstest.ams" type="file">
+     <size>474</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Tue Aug 06 10:36:18 JST 2002</ctime>
+       <mtime>Tue Aug 06 10:36:18 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82694</inode>
+     </unix_inf>
+  </file><file name="amsyaml.ams" type="file">
+     <size>628</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Sat Aug 24 16:31:40 JST 2002</ctime>
+       <mtime>Sat Aug 24 16:31:40 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82695</inode>
+     </unix_inf>
+  </file><file name="amxtest.amx" type="file">
+     <size>626</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Thu Aug 22 15:29:36 JST 2002</ctime>
+       <mtime>Thu Aug 22 15:29:36 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82696</inode>
+     </unix_inf>
+  </file><file name="amxtest.xml" type="file">
+     <size>389</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Wed Aug 21 16:11:56 JST 2002</ctime>
+       <mtime>Wed Aug 21 16:11:56 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82697</inode>
+     </unix_inf>
+  </file><file name="filelist.rb" type="file">
+     <size>1178</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Thu Sep 05 16:03:49 JST 2002</ctime>
+       <mtime>Thu Sep 05 16:03:49 JST 2002</mtime>
+       <atime>Mon Jan 06 16:48:47 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82698</inode>
+     </unix_inf>
+  </file><file name="filelist2.rb" type="file">
+     <size>1241</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Thu Sep 05 22:12:16 JST 2002</ctime>
+       <mtime>Thu Sep 05 22:12:16 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82699</inode>
+     </unix_inf>
+  </file><file name="makeurl.rb" type="file">
+     <size>801</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Mon Oct 21 11:35:29 JST 2002</ctime>
+       <mtime>Mon Oct 21 11:35:29 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82700</inode>
+     </unix_inf>
+  </file><file name="makeurl2.rb" type="file">
+     <size>856</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Wed Sep 18 10:19:07 JST 2002</ctime>
+       <mtime>Wed Sep 18 10:19:07 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82701</inode>
+     </unix_inf>
+  </file><file name="merge_template.rb" type="file">
+     <size>964</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Thu Sep 05 16:03:49 JST 2002</ctime>
+       <mtime>Thu Sep 05 16:03:49 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82702</inode>
+     </unix_inf>
+  </file><file name="merge_template2.rb" type="file">
+     <size>1029</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Thu Sep 05 16:03:49 JST 2002</ctime>
+       <mtime>Thu Sep 05 16:03:49 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82703</inode>
+     </unix_inf>
+  </file><file name="parts1.rb" type="file">
+     <size>1352</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Thu Oct 24 16:48:43 JST 2002</ctime>
+       <mtime>Thu Oct 24 16:48:43 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82704</inode>
+     </unix_inf>
+  </file><file name="parts2.rb" type="file">
+     <size>1417</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Thu Oct 24 16:48:43 JST 2002</ctime>
+       <mtime>Thu Oct 24 16:48:43 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82705</inode>
+     </unix_inf>
+  </file><file name="precompile.rb" type="file">
+     <size>2596</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Fri Aug 02 16:27:34 JST 2002</ctime>
+       <mtime>Fri Aug 02 16:27:34 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82706</inode>
+     </unix_inf>
+  </file><file name="proc.rb" type="file">
+     <size>820</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Thu Jul 18 11:28:46 JST 2002</ctime>
+       <mtime>Thu Jul 18 11:28:46 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82707</inode>
+     </unix_inf>
+  </file><file name="rexml_doc.xml" type="file">
+     <size>38922</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Thu Jul 25 16:34:07 JST 2002</ctime>
+       <mtime>Thu Jul 25 16:34:07 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82708</inode>
+     </unix_inf>
+  </file><file name="sanitizer.rb" type="file">
+     <size>995</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Thu Aug 01 15:59:36 JST 2002</ctime>
+       <mtime>Thu Aug 01 15:59:36 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82709</inode>
+     </unix_inf>
+  </file><file name="time.rb" type="file">
+     <size>295</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Wed Jul 17 16:19:53 JST 2002</ctime>
+       <mtime>Wed Jul 17 16:19:53 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82710</inode>
+     </unix_inf>
+  </file><file name="xhtml.rb" type="file">
+     <size>637</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Wed Jul 24 17:06:46 JST 2002</ctime>
+       <mtime>Wed Jul 24 17:06:46 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82711</inode>
+     </unix_inf>
+  </file><file name="xml1.rb" type="file">
+     <size>1354</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Wed Sep 18 14:53:51 JST 2002</ctime>
+       <mtime>Wed Sep 18 14:53:51 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82712</inode>
+     </unix_inf>
+  </file><file name="xml2.rb" type="file">
+     <size>1277</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Thu Jul 25 10:11:37 JST 2002</ctime>
+       <mtime>Thu Jul 25 10:11:37 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82713</inode>
+     </unix_inf>
+  </file><file name="xml3.rb" type="file">
+     <size>3617</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Fri Aug 02 16:27:34 JST 2002</ctime>
+       <mtime>Fri Aug 02 16:27:34 JST 2002</mtime>
+       <atime>Mon Jan 06 13:28:18 JST 2003</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>82714</inode>
+     </unix_inf>
+  </file>filelist2.rb
+nil
+makeurl.rb
+
+<table border="1"> 
+  <tr>
+  <th>name</th>
+  <th>author</th>
+  <th>webpage</th>
+  </tr> 
+  <tr> 
+  <td>Ruby</td> 
+  <td>matz</td> 
+  <td><a href="http://www.ruby-lang.org/">Ruby Home Page</a></td> 
+  </tr>
+  <tr> 
+  <td>perl</td> 
+  <td>Larry Wall</td> 
+  <td><a href="http://www.perl.com/">Perl.com</a></td> 
+  </tr>
+  <tr> 
+  <td>python</td> 
+  <td>Guido van Rossum</td> 
+  <td><a href="http://www.python.org/">Python Language Website</a></td> 
+  </tr> 
+</table> 
+makeurl2.rb
+<table border="1">
+  <tr><th>name</th><th>author</th><th>webpage</th></tr>
+  <tr>
+    <td>Ruby</td>
+    <td>matz</td>
+    <td><a href="http://www.ruby-lang.org/">Ruby Home Page</a></td>
+  </tr><tr>
+    <td>perl</td>
+    <td>Larry Wall</td>
+    <td><a href="http://www.perl.com/">Perl.com</a></td>
+  </tr><tr>
+    <td>python</td>
+    <td>Guido van Rossum</td>
+    <td><a href="http://www.python.org/">Python Language Website</a></td>
+  </tr>
+</table>
+merge_template.rb
+  <html>
+    <head>
+      <title>Insertion MockUp</title>
+    </head>
+    <body>
+      This comes from a template fragment:
+      <b>Hello World!</b>
+    </body>
+  </html>
+merge_template2.rb
+  <html>
+    <head>
+      <title>Insertion MockUp</title>
+    </head>
+    <body>
+      This comes from a template fragment:
+      <b>Hello World</b>
+    </body>
+  </html>
+parts1.rb
+
+<html> 
+  <body>  
+    <h1>Scripting Languages</h1>   
+    <ul> 
+      <li>Ruby</li>
+      <li>Perl</li>
+      <li>Python</li>
+    </ul>  
+    <table>  
+      <tr> 
+      <td>Ruby</td>
+      <td>matz</td>
+      <td><a href="http://www.ruby-lang.org/">http://www.ruby-lang.org/</a></td>
+      </tr>  
+      <tr> 
+      <td>perl</td>
+      <td>Larry Wall</td>
+      <td><a href="http://www.perl.com/">http://www.perl.com/</a></td>
+      </tr>  
+      <tr> 
+      <td>python</td>
+      <td>Guido van Rossum</td>
+      <td><a href="http://www.python.org/">http://www.python.org/</a></td>
+      </tr>  
+    </table> 
+  </body> 
+</html>
+parts2.rb
+
+<html> 
+  <body> 
+    <table> 
+      <tr>
+      <th>name</th>
+      <th>author</th>
+      <th>url</th>
+      </tr>  
+      <tr> 
+      <td>perl</td>
+      <td>Larry Wall</td>
+      <td>http://www.perl.com/(no need to visit)</td> 
+      </tr>  
+      <tr> 
+      <td><b>Ruby</b></td>
+      <td><strong>matz</strong></td>
+      <td><a href="http://www.ruby-lang.org/">http://www.ruby-lang.org/</a></td>
+      </tr>  
+      <tr> 
+      <td>python</td>
+      <td>Guido van Rossum</td>
+      <td>http://www.python.org/(no need to visit)</td> 
+      </tr>  
+    </table> 
+    <div align="right">
+      <font size="-1">....It's only a joke! Don't be angry.</font>
+    </div> 
+  </body> 
+</html>
+precompile.rb
+<table border="1">
+  <tr><th>name</th><th>author</th><th>webpage</th></tr>
+  <tr>
+    <td>Ruby</td>
+    <td>matz</td>
+    <td><a href="http://www.ruby-lang.org/">Ruby Home Page</a></td>
+  </tr><tr>
+    <td>perl</td>
+    <td>Larry Wall</td>
+    <td><a href="http://www.perl.com/">Perl.com</a></td>
+  </tr><tr>
+    <td>python</td>
+    <td>Guido van Rossum</td>
+    <td><a href="http://www.python.org/">Python Language Website</a></td>
+  </tr>
+</table>
+<table border="1">
+  <tr><th>name</th><th>author</th><th>webpage</th></tr>
+  <tr>
+    <td>Ruby</td>
+    <td>matz</td>
+    <td><a href="http://www.ruby-lang.org/">Ruby Home Page</a></td>
+  </tr><tr>
+    <td>perl</td>
+    <td>Larry Wall</td>
+    <td><a href="http://www.perl.com/">Perl.com</a></td>
+  </tr><tr>
+    <td>python</td>
+    <td>Guido van Rossum</td>
+    <td><a href="http://www.python.org/">Python Language Website</a></td>
+  </tr>
+</table>
+----code generated by Amrita(debug mode)-----
+include Amrita
+extend Amrita::HtmlCompiler::RuntimeRoutines
+
+def self::expand(_formatter, _data, _context)
+  __d2 = _data # Amrita::HtmlCompiler::HashData
+  # with_dictionary __d2
+   # put_static_element 
+   # Amrita::HtmlCompiler::HashData __d2
+    _formatter << "<table border=\"1\">\n  "
+     # put_static_element 
+     # Amrita::HtmlCompiler::HashData __d2
+      _formatter << "<tr>"
+       # put_static_element 
+       # Amrita::HtmlCompiler::HashData __d2
+      _formatter << "<th>name</th>"
+       # put_static_element 
+       # Amrita::HtmlCompiler::HashData __d2
+      _formatter << "<th>author</th>"
+       # put_static_element 
+       # Amrita::HtmlCompiler::HashData __d2
+    _formatter << "<th>webpage</th></tr>\n  "
+    __d3 = __d2[:table1] # Amrita::HtmlCompiler::HashData
+    _context.do_copy do
+      __d5 = __d3 # Amrita::HtmlCompiler::ArrayData
+      __d5.each do |__d7|
+        # with_dictionary __d7
+         # put_static_element 
+         # Amrita::HtmlCompiler::HashData __d7
+        if _context.do_delete_id
+        _formatter << "<tr>"
+        else
+        _formatter << "<tr id=\"table1\">"
+        end
+          _formatter << "\n    "
+          __d8 = __d7[:name] # Amrita::HtmlCompiler::HashData
+          if __d8
+             # put_static_element 
+             # Amrita::HtmlCompiler::ScalarData __d7
+            if _context.do_delete_id
+            _formatter << "<td>"
+            else
+            _formatter << "<td id=\"name\">"
+            end
+              _formatter.format_text(__d8.to_s) 
+          _formatter << "</td>"
+          end
+          _formatter << "\n    "
+          __d9 = __d7[:author] # Amrita::HtmlCompiler::HashData
+          if __d9
+             # put_static_element 
+             # Amrita::HtmlCompiler::ScalarData __d7
+            if _context.do_delete_id
+            _formatter << "<td>"
+            else
+            _formatter << "<td id=\"author\">"
+            end
+              _formatter.format_text(__d9.to_s) 
+          _formatter << "</td>"
+          end
+          _formatter << "\n    "
+           # put_static_element 
+           # Amrita::HtmlCompiler::HashData __d7
+            _formatter << "<td>"
+            __d10 = __d7[:webpage] # Amrita::HtmlCompiler::HashData
+            __d11 = e(:a,a(:id, "webpage")) .clone
+            if _context.delete_id
+              __d11.delete_attr!(:id)
+            end
+            __d11.hide_hid!
+            __d10.each { |a| __d11[a.key_symbol] = a.value } 
+             # put_dynamic_element 
+            e = __d11
+            if _context.do_delete_id
+              e = e.clone
+              e.delete_attr!(:id)
+            end
+            if e.no_child? and _formatter.can_be_single?(e)
+              _formatter << _formatter.format_single_tag(e)
+            else
+              _formatter.format_element(e) do
+                __d12 = __d10.body # Amrita::HtmlCompiler::AttrData
+                _formatter.format_text(__d10.body.to_s) 
+              end
+            end
+      _formatter << "</td>\n  </tr>"
+      end
+    end
+  _formatter << "\n</table>\n"
+end
+----code generated by Amrita end ------------
+----start benchmark -------
+3.366772 seconds for 100 times without compiling
+2.186922 seconds for 100 times with pre_format
+0.931382 seconds for 100 times with pre-compiled code
+0.538006 seconds for 100 times with pre-compiled code(optimized using sample data)
+proc.rb
+
+<ul> 
+  <li><font color="black">java</font> </li>
+  <li><em><font color="red" size="big">I love Ruby!</font></em> </li>
+  <li><font color="blue">perl</font> </li>
+  <li><font color="black">python</font> </li>
+  <li><font color="blue">c++</font> </li>
+  <li><font color="black">c</font> </li>
+  <li><font color="blue">sml</font> </li>
+  <li><font color="black">cobol</font> </li>
+  <li><font color="blue">fortran</font> </li>
+  <li><font color="black">ada</font> </li>
+  <li><font color="blue">lisp</font> </li>
+</ul> 
+sanitizer.rb
+<p>I want to insert new line.&lt;br&gt;But I can't</p>
+<p>I can insert new line <br>with escape { ... } <br>But it may be dangerous</p>
+<p yyy="&quot;&gt;&lt;/p&gt;XSS attack here&lt;p">But amrita sanitize it!</p>
+<a href="">href is treated in a special way</a>
+time.rb
+ 2003/1/6  xhtml.rb
+
+<?xml version="1.0"?> <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+  <head> 
+    <title>xhtml sample</title> 
+  </head> 
+  <body> 
+    <h1>SAMPLE1</h1> 
+    <p>members of this HASH will be inserted here and title</p> 
+    <hr /> 
+  </body> 
+</html> 
+xml1.rb
+------------HTML output ----------------------
+
+<table border="1"> 
+  <tr>
+  <th>name</th>
+  <th>author</th>
+  <th>ISBN</th>
+  </tr> 
+  <tr> 
+  <td>Ruby In A Nutshell</td>
+  <td>Yukihiro Matsumoto, David L. Reynolds</td>
+  <td>0596002149</td>
+  </tr>
+  <tr> 
+  <td>Programming Ruby</td>
+  <td>David Thomas, Andrew Hunt</td>
+  <td>0201710897</td>
+  </tr>
+  <tr> 
+  <td>The Ruby Way</td>
+  <td>Hal Fulton</td>
+  <td>0672320835</td>
+  </tr> 
+</table> 
+------------XML output ----------------------
+<booklist>
+  <book>
+     <title>Ruby In A Nutshell</title>
+     <author>Yukihiro Matsumoto, David L. Reynolds</author>
+     <isbn>0596002149</isbn>
+  </book><book>
+     <title>Programming Ruby</title>
+     <author>David Thomas, Andrew Hunt</author>
+     <isbn>0201710897</isbn>
+  </book><book>
+     <title>The Ruby Way</title>
+     <author>Hal Fulton</author>
+     <isbn>0672320835</isbn>
+  </book>
+</booklist>
+------------XML output(pretty-printed) ----------------------
+
+<booklist> 
+  <book> 
+    <title>Ruby In A Nutshell</title> 
+    <author>Yukihiro Matsumoto, David L. Reynolds</author> 
+    <isbn>0596002149</isbn> 
+  </book>
+  <book> 
+    <title>Programming Ruby</title> 
+    <author>David Thomas, Andrew Hunt</author> 
+    <isbn>0201710897</isbn> 
+  </book>
+  <book> 
+    <title>The Ruby Way</title> 
+    <author>Hal Fulton</author> 
+    <isbn>0672320835</isbn> 
+  </book> 
+</booklist>
+xml2.rb
+
+<table border="1"> 
+  <tr>
+  <th>title</th>
+  <th>author</th>
+  <th>ISBN</th>
+  </tr> 
+  <tr> 
+  <td>Ruby In A Nutshell</td>
+  <td>Yukihiro Matsumoto<br>David L. Reynolds
+  <br> 
+  </td>
+  <td><a href="http://www.amazon.com/exec/obidos/ASIN/0596002149">0596002149</a></td>
+  </tr>
+  <tr> 
+  <td>Programming Ruby</td>
+  <td>David Thomas<br>Andrew Hunt
+  <br> 
+  </td>
+  <td><a href="http://www.amazon.com/exec/obidos/ASIN/0201710897">0201710897</a></td>
+  </tr>
+  <tr> 
+  <td>The Ruby Way</td>
+  <td>Hal Fulton<br> 
+  </td>
+  <td><a href="http://www.amazon.com/exec/obidos/ASIN/0672320835">0672320835</a></td>
+  </tr> 
+</table> 
+xml3.rb
+
+<html> 
+  <head> 
+    <title>REXML</title> 
+  </head> 
+  <body> 
+    <div align="center"> 
+      <img src="img/rexml.png">
+      <h1>REXML</h1> 
+    </div> 
+    <div> 
+      <ul> 
+        <li> <a href="#s1">1. overview</a> 
+        <ul> 
+          <li>1. 1 purpose</li>
+          <li>1. 2 general</li>
+          <li>1. 3 features</li> 
+        </ul> 
+        </li>
+        <li> <a href="#s2">2. operation</a> 
+        <ul> 
+          <li>2. 1 Installation</li>
+          <li>2. 2 Unit tests</li>
+          <li>2. 3 Benchmarks</li>
+          <li>2. 4 General Usage</li> 
+        </ul> 
+        </li>
+        <li> <a href="#s3">3. status</a> 
+        <ul> 
+          <li>3. 1 Speed and Completeness</li>
+          <li>3. 2 XPath</li>
+          <li>3. 3 Namespaces</li>
+          <li>3. 4 Mailing list</li>
+          <li>3. 5 RSS</li>
+          <li>3. 6 Applications that use REXML</li>
+          <li>3. 7 changelog</li>
+          <li>3. 8 bugs</li>
+          <li>3. 9 todo</li> 
+        </ul> 
+        </li> 
+      </ul> 
+    </div> 
+    <div> 
+      <h2><a name="s1">1. overview</a></h2> 
+      <div> 
+        <h3>1. 1 purpose</h3> 
+        <p>REXML is an XML processor for the language Ruby. REXML is conformant (passes 100% of the Oasis non-validating tests), and includes full XPath support. It is reasonably fast, and is implemented in pure Ruby. Best of all, it has a clean, intuitive API.</p>
+        <p>This software is distribute under the <a href="LICENSE.txt">Ruby license</a>.</p> 
+      </div>
+      <div> 
+        <h3>1. 2 general</h3> 
+        <p>Why REXML? There, at the time of this writing, already two XML parsers for Ruby. The first is a Ruby binding to a native XML parser. This is a fast parser, using proven technology. However, it isn't very portable. The second is a native Ruby implementation, and as useful as it is, it has (IMO) a difficult API.</p>
+        <p>I have this problem: I dislike obfuscated APIs. There are several XML parser APIs for Java. Most of them follow DOM or SAX, and are very similar in philosophy with an increasing number of Java APIs. Namely, they look like they were designed by theorists who never had to use their own APIs. The extant XML APIs, in general, suck. They take a markup language which was specifically designed to be very simple, elegant, and powerful, and wrap an obnoxious, bloated, and large API around it. I was always having to refer to the API documentation to do even the most basic XML tree manipulations; nothing was intuitive, and almost every operation was complex.</p>
+        <p>Then along came Electric XML.</p>
+        <p>Ah, bliss. Look at the Electric XML API. First, the library is small; less than 500K. Next, the API is intuitive. You want to parse a document? <tt>doc = new Document( some_file )</tt>. Create and add a new element? <tt>element = parent.addElement( tag_name )</tt>. Write out a subtree?? <tt>element.write( writer )</tt>. Now how about DOM? To parse some file: <pre>parser = new DOMParser(); parser.parse( new InputSource( new FileInputStream( some_file ) ) )</pre> Create a new element? First you have to know the owning document of the to-be-created node (can anyone say "global variables, or obtuse, multi-argument methods"?) and call <pre>element = doc.createElement( tag_name ) parent.appendChild( element )</pre> "appendChild"? Where did they get that from? How many different methods do we have in Java in how many different classes for adding children to parents? <tt>addElement()</tt>? <tt>add()</tt>? <tt>put()</tt>? <tt>appendChild()</tt>? Heaven forbid that you want to create an Element elsewhere in the code without having access to the owning document. I'm not even going to go into what travesty of code you have to go through to write out an XML sub-tree in DOM.</p>
+        <p>So, I use Electric XML extensively. It is small, fast, and intuitive. IE, the API doesn't add a bunch of work to the task of writing software. When I started to write more software in Ruby, I needed an XML parser. I wasn't keen on the native library binding, "XMLParser", because I try to avoid complex library dependancies in my software, when I can. For a long time, I used NQXML, because it was the only other parser out there. However, the NQXML API can be even more painful than the Java DOM API. Almost all element operations requires accessing some indirect node access... you had to do something like element.node.attr['key'], and it is never obvious to me when you access the element directly, or the node.. or, really, why they're two different objects, anyway. This is even more unfortunate since Ruby is so elegent and intuitive, and bad APIs really stand out. I'm not, by the way, trying to insult NQXML; I just don't like the API.</p>
+        <p>I wrote the people at TheMind (Electric XML... get it?) and asked them if I could do a translation to Ruby. They said yes. After a few weeks of hacking on it for a couple of hours each week, and after having gone down a few blind alleys in the translation, I had a working beta. IE, it parsed, but hadn't gone through a lot of strenuous testing. Along the way, I had made a few changes to the API, and a lot of changes to the code. First off, Ruby does iterators differently than Java. Java uses a lot of helper classes. Helper classes are exactly the kinds of things that theorists come up with... they look good on paper, but using them is like chewing glass. You find that you spend 50% of your time writing helper classes just to support the other 50% of the code that actually does the job you were trying to solve in the first place. In this case, the Java helper classes are either Enumerations or Iterators. Ruby, on the other hand, uses blocks, which is much more elegant. Rather than:</p>
+        <pre><tt>for (Enumeration e=parent.getChildren(); e.hasMoreElements(); ) {
+   Element child = (Element)e.nextElement();
+   // Do something with child
+}</tt></pre>
+        <p>you get:</p>
+        <pre><tt>parent.each_child{ |child| # Do something with child }</tt></pre>
+        <p>Can't you feel the peace and contentment in this block of code? Ruby is the language Buddha would have programmed in.</p>
+        <p>Anyhoo, I chose to use blocks in REXML directly, since this is more common to Ruby code than <tt>for x in y ... end</tt>, which is as orthoganal to the original Java as possible.</p>
+        <p>Also, I changed the naming conventions to more Ruby-esque method names. For example, the Java method <tt>getAttributeValue()</tt> becomes in Ruby <tt>get_attribute_value()</tt>. This is a toss-up. I actually like the Java naming convention more<footnote>This is no longer true. I'm a convert to the Ruby naming scheme, for Ruby. The reason being that Ruby does a superb job of hiding the difference between attributes and methods; in fact, for all intents and purposes, you <em>can't</em> access attributes directly; all attribute accessors are methods. What this means in the long run is that there is no reason to have different naming conventions for attributes and methods.</footnote>, but the latter is more common in Ruby code, and I'm trying to make things easy for Ruby programmers, not Java programmers.</p>
+        <p>The biggest change was in the code. The Java version of Electric XML did a lot of efficient String-array parsing, character by character. Ruby, however, has ubiquitous, efficient, and powerful regular expression support. All regex functions are done in native code, so it is very fast, and the power of Ruby regex rivals that of Perl. Therefore, a direct conversion of the Java code to Ruby would have been more difficult, and much slower, than using Ruby regexps. I therefore used regexs. In doing so, I cut the number of lines of sourcecode by half.</p>
+        <p>Finally, by this point the API looks almost nothing like the original Electric XML API, and practically none of the code is even vaguely similar. However, even though the actual code is completely different, I did borrow the same process of processing XML as Electric, and am deeply indebted to the Electric XML code for inspiration.</p>
+        <p>One last thing. If you use and like this software, and you feel compelled to make some contribution to the author by way of saying "thanks", and you happen to know what a tea cozy is and where to get them, then you can send me one. Send those puppies to: <pre>Sean Russell 60252 Rimfire Rd. Bend, OR 97702 USA</pre> If you're outside of the US, make sure you write "gift" on it to avoid the taxes. If you don't want to send a tea cozy, you can also send money. Or don't send anything. Offer me a job I can't refuse, in Western Europe somewhere.</p> 
+      </div>
+      <div> 
+        <h3>1. 3 features</h3> 
+        <li>Four intuitive parsing APIs.</li>
+        <li>Intuitive, powerful, and reasonably fast tree parsing API (a-la DOM<footnote>Be aware, however, that REXML does not have a DOM API.</footnote></li>
+        <li>Fast stream parsing API (a-la SAX)<footnote>This is not a SAX API.</footnote></li>
+        <li>SAX2-based API<footnote>In addition to the native REXML streaming API. This is slower than the native REXML API, but does a lot more work for you.</footnote></li>
+        <li>Pull parsing API.</li>
+        <li>Small</li>
+        <li>Reasonably fast</li>
+        <li>Native Ruby</li>
+        <li>Full XPath support<footnote>Currently only available for the tree API</footnote></li>
+        <li>XML 1.0 conformant<footnote>REXML passes all of the non-validating OASIS tests. There are probably places where REXML isn't conformant, but I try to fix them as they're reported.</footnote></li>
+        <li>ISO-8859-1, UNILE, UTF-16 and UTF-8 input and output</li>
+        <li>Documentation</li> 
+      </div> 
+    </div>
+    <div> 
+      <h2><a name="s2">2. operation</a></h2> 
+      <div> 
+        <h3>2. 1 Installation</h3> 
+        <p>Run <tt>ruby bin/install.rb</tt>. By the way, you really should look at these sorts of files before you run them as root. They could contain anything, and since (in Ruby, at least) they tend to be mercifully short, it doesn't hurt to glance over them. If you want to uninstall REXML, run <tt>ruby bin/install.rb -u</tt>.</p> 
+      </div>
+      <div> 
+        <h3>2. 2 Unit tests</h3> 
+        <p>If you have Test::Unit installed, you can run the unit test cases. You can run both installed and not installed tests; to run the tests before installing REXML, run <tt>ruby -I. bin/suite.rb</tt>. To run them with an installed REXML, use <tt>ruby bin/suite.rb</tt>.</p> 
+      </div>
+      <div> 
+        <h3>2. 3 Benchmarks</h3> 
+        <p>There is a benchmark suite in <tt>benchmarks/</tt>. To run the benchmarks, change into that directory and run <tt>ruby comparison.rb</tt>. If you have nothing else installed, only the benchmarks for REXML will be run. However, if you have any of the following installed, benchmarks for those tools will also be run:</p>
+        <ul>
+          <li>NQXML</li>
+          <li>XMLParser</li>
+          <li>Electric XML (you must copy <tt>EXML.jar</tt> into the <tt>benchmarks</tt> directory and compile <tt>flatbench.java</tt> before running the test)</li>
+        </ul>
+        <p>The results will be written to <tt>index.html</tt>.</p> 
+      </div>
+      <div> 
+        <h3>2. 4 General Usage</h3> 
+        <p>Please see <a href="docs/tutorial.html">the Tutorial</a>.</p>
+        <p>The API documentation is available <a href="http://www.germane-software.com/software/XML/rexml/doc">on-line</a>, or it can be downloaded as an archive <a href="http://www.germane-software.com/software/archives/rexml_api_2.4.0.tbz2">in tbz2 format (~40Kb)</a>, <a href="http://www.germane-software.com/software/archives/rexml_api_2.4.0.tgz">in tgz format (~70Kb)</a>, or (if you're a masochist) <a href="http://www.germane-software.com/software/archives/rexml_api_2.4.0.zip">in zip format (~280Kb)</a>. The best solution is to download and install Dave Thomas' most excellent <a href="http://rdoc.sourceforge.net">rdoc</a> and generate the API docs yourself; then you'll be sure to have the latest API docs and won't have to keep downloading the doc archive.</p>
+        <p>The unit tests in <tt>test/</tt> and the benchmarking code in <tt>benchmark/</tt> provide additional examples of using REXML. The Tutorial provides examples with commentary. The documentation unpacks into <a href="doc/index.html"></a>.</p>
+        <p>Kouhei Sutou maintains a <a href="http://www.germane-software.com/software/rexml_doc_ja/current/index.html">Japanese version</a> of the REXML 2.2.2 API docs. The Japanese API documentation is also available for download as a <a href="http://www.germane-software.com/software/archives/rexml_api_ja_2_2_2.tar.gz">gzipped tarball</a>, a <a href="http://www.germane-software.com/software/archives/rexml_api_ja_2_2_2.tar.bz2">bzipped tarball (smallest)</a>, or a <a href="http://www.germane-software.com/software/archives/rexml_api_ja_2_2_2.zip">zip file (largest)</a>.</p> 
+      </div> 
+    </div>
+    <div> 
+      <h2><a name="s3">3. status</a></h2> 
+      <div> 
+        <h3>3. 1 Speed and Completeness</h3> 
+        <p>Unfortunately, NQXML is the only package REXML can be compared against; XMLParser uses expat, which is a native library, and really is a different beast altogether. So in comparing NQXML and REXML you can look at four things: speed, size, completeness, and API.</p>
+        <p><a href="benchmarks/index.html">Benchmarks</a></p>
+        <p>REXML is faster than NQXML in some things, and slower than NQXML in a couple of things. You can see this for yourself by running the supplied benchmarks. Most of the places where REXML are slower are because of the convenience methods<footnote>For example, <tt>element.elements[index]</tt> isn't really an array operation; index can be an Integer or an XPath, and this feature is relatively time expensive.</footnote>. On the positive side, most of the convenience methods can be bypassed if you know what you are doing. Check the <a href="benchmarks/index.html"> benchmark comparison page</a> for a <em>general</em> comparison. You can look at the benchmark code yourself to decide how much salt to take with them.</p>
+        <p>The sizes of the XML parsers are close<footnote>As measured with <tt>ruby -nle 'print unless /^\s*(#.*|)$/' *.rb | wc -l</tt> </footnote>. NQXML 1.1.3 has 1580 non-blank, non-comment lines of code; REXML 2.0 has 2340<footnote>REXML started out with about 1200, but that number has been steadily increasing as features are added. XPath accounts for 541 lines of that code, so the core REXML has about 1800 LOC.</footnote>.</p>
+        <p>REXML is a conformant XML 1.0 parser. It supports multiple language encodings, and internal processing uses the required UTF-8 and UTF-16 encodings. It passes 100% of the Oasis non-validating tests. Furthermore, it provides a full implementation of XPath, a SAX2 and a PullParser API.</p>
+        <p>The last thing is the API, and this is where I think REXML wins. The core API is clean and intuitive, and things work the way you would expect them to. Convenience methods abound, and you can code for either convenience or speed. REXML code is terse, and readable, like Ruby code should be. The best way to decide which you like more is to write a couple of small applications in each, then use the one you're more comfortable with.</p> 
+      </div>
+      <div> 
+        <h3>3. 2 XPath</h3> 
+        <p>As of release 2.0, XPath 1.0 is fully implemented.</p>
+        <p>I fully expect bugs to crop up from time to time, so if you see any bogus XPath results, please let me know. That said, since I'm now following the XPath grammar and spec fairly closely, I suspect that you won't be surprised by REXML's XPath very often, and it should become rock solid fairly quickly.</p>
+        <p>Check the "bugs" section for known problems; there are little bits of XPath here and there that are not yet implemented, but I'll get to them soon.</p>
+        <p>Namespace support is rather odd, but it isn't my fault. I can only do so much and still conform to the specs. In particular, XPath attempts to help as much as possible. Therefore, in the trivial cases, you can pass namespace prefixes to Element.elements[...] and so on -- in these cases, XPath will use the namespace environment of the base element you're starting your XPath search from. However, if you want to do something more complex, like pass in your own namespace environment, you have to use the XPath first(), each(), and match() methods. Also, default namespaces <em>force</em> you to use the XPath methods, rather than the convenience methods, because there is no way for XPath to know what the mappings for the default namespaces should be. This is exactly why I loath namespaces -- a pox on the person(s) who thought them up!</p> 
+      </div>
+      <div> 
+        <h3>3. 3 Namespaces</h3> 
+        <p>Namespace support is now fairly stable. One thing to be aware of is that REXML is not (yet) a validating parser. This means that some invalid namespace declarations are not caught.</p> 
+      </div>
+      <div> 
+        <h3>3. 4 Mailing list</h3> 
+        <p>There is a low-volume mailing list dedicated to REXML. To subscribe, send an empty email to <a href="mailto:ser-rexml-subscribe@germane-software.com">ser-rexml-subscribe@germane-software.com</a>. This list is more or less spam proof. To unsubscribe, similarly send a message to <a href="mailto:ser-rexml-unsubscribe@germane-software.com">ser-rexml-unsubscribe@germane-software.com</a>.</p> 
+      </div>
+      <div> 
+        <h3>3. 5 RSS</h3> 
+        <p>An <a href="http://www.germane-software.com/software/rexml/rss.xml">RSS file</a> for REXML is now being generated from the change log. This allows you to be alerted of upgrades via 'pull' as they become available, if you have an RSS browser. This is an abuse of the RSS mechanism, which was intended to be a distribution system for headlines linked back to full articles, but it works. The headline for REXML is the version number, and the description is the change log. The links all link back to the REXML home page. The URL for the RSS itself is http://www.germane-software.com/software/rexml/rss.xml</p>
+        <p>For those who are interested, there's a <a href="docs/sloccount.txt">SLOCCount</a> (by David A. Wheeler) file with stats on the REXML sourcecode. Note that the SLOCCount output includes the files in the test/, benchmarks/, and bin/ directories, as well as the main sourcecode for REXML itself.</p> 
+      </div>
+      <div> 
+        <h3>3. 6 Applications that use REXML</h3> 
+        <ul> 
+          <li>Ned Konz's <a href="http://www.bikenomad.microship.com/ruby/">ruby-htmltools</a> uses REXML</li> 
+          <li>Hiroshi NAKAMURA's <a href="http://www.ruby-lang.org/en/raa-list.rhtml?name=SOAP4R">SOAP4R</a> package can use REXML as the XML processor.</li>
+          <li>Chris Morris' <a href="http://clabs.org/clxmlserial.htm">XML Serializer</a>. XML Serializer provides a serialization mechanism for Ruby that provides a bidirectional mapping between Ruby classes and XML documents.</li>
+          <li>Much of the <a href="http://www.rubyxml.com">RubyXML</a> site is generated with scripts that use REXML. RubyXML is a great place to find information about th intersection between Ruby and XML.</li>
+          <li><a href="http://www.pinkjuice.com/ruby/jelly/">Jelly</a> is a generic utility for generating Ruby libs (XML writers) from W3C XML schemas.</li>
+        </ul> 
+      </div>
+      <div> 
+        <h3>3. 7 changelog</h3>  
+        <li> 
+        <ul> 
+          <li> Internal entities weren't being (recursively) expanded. </li> 
+          <li>PullParser text() method now returns two arguments; normalized text, and unnormalized text. That means that users have access to the raw text, without entity replacement, and processed text, with entities replaced. Existing applications using PullParser don't need to be changed; the behavior is backwards compatible. I can't do it for SAX2 yet, because I don't know whether text should be passed to SAX2 listeners normalized or not.</li> 
+          <li>Hannes Wyss noticed a bug involving whitespace before the root document element.</li> 
+        </ul> 
+        </li> 
+        <li>This is also the 2.4.0 FRC release.
+        <ul>
+          <li>REXML is now in the RPKG database, and is a Gentoo package as well.</li>
+          <li>The root node of an XML document is the document, not the document element. Make sense? Well, it's true. '/' of "&lt;a/&gt;" in XPath gives you the parent of 'a', which is a Document object, not 'a'. REXML's XPath has been correct in this for a while. However, REXML always gave that Document node a name: "UNDEFINED". This was not correct. Document::name and Document::expanded_name now return an empty string, which is more in line with the XPath spec.</li>
+          <li>Mike fixed up Functions::tr to handle Unicode better.</li>
+          <li>Fixed a bug in Functions::number.</li>
+          <li>Added some more good diffs from Mike, cleaning up some Ruby 1.7 warnings. Mike also pointed me to a regexp optimization and sent me the most awesome tea cozy -- pictures will be posted.</li>
+          <li>Changed the behaviour of XPath. <em>Please notice this</em>, because it is important. By popular demand, the XPath axe <tt>attribute::</tt> (and the shortcut <tt>@</tt>) now return an <tt>Attribute</tt> node, not the attribute value. This means that you have to specifically fetch the attribute value if that is what you want. Additionally, to do this without incurring a massive speed penalty, I had to change the behavior of <tt>Attribute::to_s().</tt> It now returns just the attribute value, not the key='value' attribute string. If you want that formatted string, you have to use <tt>Attribute::to_string()</tt>, which is a new method.</li>
+          <li>The distribution mechanism that I use to make releasing versions of REXML easy has been completely revamped, and now seems to have most of the bugs worked out. One of the hard drives on the server died, and we took the opportunity to install a new version of Linux; the sourcecode repository seems to have settled down, and jitterbug is back to working. Sorry for any inconveniences during the changeover.</li>
+          <li>Kouhei found a bug in XPath WRT processing instructions. I've fixed it.</li>
+          <li>Kouhei also found a bug in XPath numeric comparisons. Fixed.</li>
+        </ul>
+        </li>
+        <li>
+        <ul>
+          <li>attribute::* and @* now works</li>
+          <li>If node()[@x] matched a non-Element node, XPath would throw an exception.</li>
+          <li>Upgraded the install.rb file; fixed a couple of bugs, added redirection and a --noop mode. This was for Portage support.</li>
+        </ul>
+        </li>
+        <li>
+        <ul>
+          <li>Fixed a bug that caused text containing &gt; to be split into two text nodes. This incurred a speed penalty, but I'll try to improve that later.</li>
+          <li>Added a bug tracking system.</li>
+          <li>Fixed a comment parsing bug.</li>
+          <li>Mike Stok fixed Functions#translate and cleaned up some cruft that slipped through in Functions#substring.</li>
+          <li>Fixed a bug in Element#prefixes, and fixed Attributes#prefixes to use DOCTYPE declared namespaces. Added DocType#attributes_of(Element).</li>
+          <li>Fixed a bug in writing Attlist declarations.</li>
+          <li>Added AttlistDecl#each; AttlistDecl now includes Enumerable</li>
+          <li>Fixed Functions#name and Functions#local_name; fixed unit test.</li>
+          <li>Fixed a bug re. functions w/in predicates in XPath</li>
+          <li>Fixes for Child#parent=()</li>
+          <li>Fixes and speed improvement for creating Text nodes</li>
+          <li>SAX2Parser bug fixes</li>
+          <li>Added dist.xml and an ant build file</li>
+          <li>Tom sent a new version of his pretty printer</li>
+          <li>Kouhei has a new version of his Japanese API documentation translation online</li>
+        </ul>
+        </li>
+        <li>Fixed a bug in XPath that kept non-Element nodes from being returned from recursive paths. This had a side effect of speeding up XPath recursions. Fixed a bug in Document WRT text outside of the document. Added peek and unshift methods to the PullParser API. XPath methods now accept an array of nodes in addition to a single node. Fixed a bug in Functions::string(). Changed the unit tests to the Test::Unit platform. This allows the unit tests to be run under a GUI. More Function fixes (substring) by Mike Stok. There was a major bug in XPath handling of math operations, which is fixed. Strings pulled from IO streams are now tainted. Lots of bug fixes in PullParser -- it now passes 100% of the Oasis tests. Bug fix for stream parsing in Entity. Bug fixes in DocType -- SAX2Parser now passes 100% of Oasis tests. REXML now processes internal ATTLIST declarations in the doctype. This includes processing of XML namespaces in the doctype. Changed pretty printing. Whitespace is now never added around Text nodes, and there's a new context property, :ignore_whitespace_nodes. There's also a new transitive pretty printer, obtained by passing 'true' as the third argument to write().</li>
+        <li>Added an alternate pretty printer by Thomas Sawyer; it is in the contrib/ directory. Speed optimizations; REXML is noticably faster now. In particular, PullParser is now just as fast as Stream parsing (10x speed increase over first version). Fixed a bug in Element.add_namespace. Fixed a problem that occurred on some systems with Entities. <em>News:</em> Kouhei Sutou has done a Japanese translation of the REXML API docs. See the section in the main REXML page about the API documentation for links. Mike Stock fixed a bug in the starts_with XPath function. Added, on request, methods to Element to filter children on type. cdatas(), instructions(), comments(), and texts() now return immutable arrays of only those child nodes.</li>
+        <li>Added a (more or less) SAX2 conforming parser. Really, this and the pull parser are just a thin layer over the legacy REXML stream parser, and you'll get better results with the original API. The best thing about this (and the primary reason I did it this way) is that REXML maintains backward compatibility with the old Stream API. After I play with pure pull parsing some more, I may decide to reimplement stream parsing on top of pull parsing, but it shouldn't affect SAX2 in any way. The SAX2 parser is slower primarily because SAX2 requires the parser to do a lot more work -- resolving namespaces and so on -- so while I know I can improve the speed some, SAX2 will <em>never</em> be as fast as REXML vanilla stream parsing. That said, the SAX2 API is pretty nice, and includes all of those stream API changes I wanted to get in, except for filter parsing. Check out the tutorial for usage information.</li>
+        <li>Added a pull parser. This is VERY experimental, and the API is likely to change.</li>
+        <li>Internal entities are now handled<footnote>Please note that entity handling complicates text manipulation. See the note in the tutorial</footnote>. Speed has been further improved for most operations, but especially for stream parsing, writing, and large document parsing.</li>
+        <li>Fixed a bug in benchmark/bench.rb that kept it from running. Added stand_alone?() to XMLDecl as an alias for the standalone accessor. Improvements to the streaming API; in particular, pulling data from non-closing streams doesn't require passing a block size of 1 to the IOSource class any longer; in fact, the block size is ignored. Added a user-supplied patch to fix the fact that not all of the DTD events were getting passed to the listener. Improved entity parsing. Better test suite; you can now pass <tt>--help</tt> to the main test suite to get a list of the new options, which include listing the available suites and listing methods in the suites, as well as instructions on how to run only certain suites or methods in suites.</li>
+        <li>Fixed broken links in documentation. Added new documentation layout; the old format -- everything on one page -- was getting a bit overwhelming. Added RSS for changelog. Bugfix for element cloning namespace loss. The Streaming API wasn't normalizing input strings; this has been fixed. Added support for deep cloning via Parent.deep_clone(). Fixed some streaming issues for SOAP4RUBY. In particular, text normalization is now also done for the Streaming API. '\r' handling is now correct, as per the XML spec, and entities are handled better. &amp;#13; is now converted to '\r' internally, and then translated back to '\r' on output. All other numeric entities (&amp;#nnn; and &amp;#xnnn;) are now converted to unicode on input, but are only converted back to entities if they don't fit in the requested encoding.</li>
+        <li>Fixed a bug with reading ISO-8859-1 encoded documents, and Document now includes Output, which it always should have.</li>
+        <li>Forgot to add output.rb to the repository.</li>
+        <li>IO optimizations, and support for ISO-8859-1 output. Fixed up pretty-printing a little. Now, if pretty-printing is turned on, text nodes are stripped before printing. This, obviously, can mess up what you'd expect from :respect_whitespace, but pretty printing, by definition, must change your formatting. Updated the tutorial a bit. Please see the section on adding text for a warning, if you're using a non-UTF-8 compatable encoding. Changed behavior of <tt>Element.attributes.each</tt>. It now itterates over key, value pairs, rather than attributes. This was a feature request. Expanded the unit tests and subsequently fixed a number of obscure bugs. I'm distributing the API documentation seperately from the main distribution now, because the API docs constitute nearly 50% of the total distribution size. FIxed a bug in namespace handling in attributes. Completely updated the API documentation for Element, Element.Elements, and Element.Attributes; the rest of the classes to follow. I'm seriously contemplating removing the examples from the API documentation, because most of them are practically duplicates of the unit tests in <tt>test/</tt>.</li>
+        <li>2.0 munged the encoding value in output. This is fixed. I left debugging turned on in XPath in 2.0.2 :-/</li>
+        <li>Added grouping '(...)' and preceding:: and following:: axis. This means that, aside from functional bugs, XPath should have no missing functionality bugs. Keep in mind that not all Functions are tested, though.</li>
+        <li>Added some unit tests, and fixed a namespace XPath bug WRT attribute default NS's. Unicode support was screwing up the upper end of ASCII support; chars between 0xF0 and 0xFD were getting munged. This has been fixed, at the cost of a small amount of speed. Optimized the descendant axes of XPath; it should be significantly faster for '//' and other descendant operations. Added several user contributed unit tests. Re-added QuickPath, the old, non-fully-XPath compliant, yet much faster, XPath processor. Everything is being converted to UTF8 now, and the XML declaration reflects this. See the bugs for more information.</li>
+        <li>True XPath support. Finally. XPath is fully implemented now, and passes all of the tests I can throw at it, including complex XPaths such as <tt>'*[* and not(*/node()) and not(*[not(@style)]) and not(*/@style != */@style)]'</tt>. It may be slower than it was, but it should be reasonably efficient for what it is doing. The XPath spec doesn't help, and thwarts most attempts at optimization. Please see the notes on XPath for more information. Oh, and some minor bugs were fixed in the XML parser.</li>
+        <li>Fixed a bug pointed out by Peter Verhage where the element names weren't being properly parsed if a namespace was involved.</li>
+        <li>Fixing problems with the 1.2.6 distribution :-/. Added an "applications using REXML" section in this document -- send me those links! Added rdoc documentation. I'm not using API2XML anymore. I think API2XML was the right model, generating XML rather than HTML (which is what rdoc does), but rdoc does a much better job at parsing Ruby source, and I really didn't want to go there in the first place. Also, I had forgotten to generate the Tutorial HTML.</li>
+        <li>Documentation fix (TR). Fixed a bug in Element.add (and, therefore, Element.add_element). Added Robert Feldt's terse xml constructor to contrib/ (check it out; it's handy). Tobias discovered a terrible bug, whereby ENTITY wasn't printing out a final '&gt;'. After a long discussion with a couple of users, and some review of the XML spec, I decided to reverse the default handling of whitespace and pretty printing. REXML now no longer defaults to pretty printing, and preserves whitespace unless otherwise directed. Added provisional namespace support to XPath. XPath is going to require another rewrite.</li>
+        <li>Bug fixes: doctypes that had spaces between the closing ] and &gt; generated errors. There was a small bug that caused too many newlines to be generated in some output. Eelis van der Weegen (what a great name!) pointed out one of the numerous API errors. Julian requested that add_attributes take both Hash (original) and array of arrays (as produced by StreamListener). I killed the mailing list, accidentally, and fixed it again. Fixed a bug in next_sibling, caused by a combination of mixing overriding &lt;=&gt;() and using Array.index().</li>
+        <li>Changes since 1.1b: 100% OASIS valid tests passed. UTF-8/16 support. Many bug fixes. to_a() added to Parent and Element.elements. Updated tutorial. Added variable IOSource buffer size, for stream parsing. delete() now fails silently rather than throwing an exception if it can't find the elemnt to delete. Added a patch to support REXMLBuilder. Reorganized file layout in distribution; added a repackaging program; added the logo.</li>
+        <li>Changes since 1.1a: Stream parsing added. Bug fixes in entity parsing. New XPath implementation, fixing many bugs and making feature complete. Completed whitespace handling, adding much functionality and fixing several bugs. Added convenience methods for inserting elememnts. Improved error reporting. Fixed attribute content to correctly handle quotes and apostrophes. Added mechanisms for handling raw text. Cleaned up utility programs (profile.rb, comparison.rb, etc.). Improved speed a little. Brought REXML up to 98.9% OASIS valid source compliance.</li> 
+      </div>
+      <div> 
+        <h3>3. 8 bugs</h3> 
+        <p>You can submit bug reports and feature requests, and view the list of known bugs, at the <a href="http://www.germane-software.com/cgi-bin/rexml">REXML bug report page.</a> Please do submit bug reports. If you really want your bug fixed fast, include an runit or Test::Unit method (or methods) that illustrates the problem. At the very least, send me some XML that REXML doesn't process properly.</p>
+        <p>You don't have to send an entire test suite -- just the unit test methods. If you don't send me a unit test, I'll have to write one myself, which will mean that your bug will take longer to fix.</p>
+        <p>When submitting bug reports, please include the version of Ruby and of REXML that you're using, and the operating system you're running on. Just run: <tt>ruby -vrrexml/rexml -e 'p REXML::Version,PLATFORM'</tt> and paste the results in your bug report.</p>
+        <li>Attributes are not handled internally as nodes, so you can't perform node functions on them. This will have to change. It'll also probably mean that, rather than returning attribute values, XPath will return the Attribute nodes.</li>
+        <li>Some of the XPath <em>functions</em> are untested<footnote>Mike Stok has been testing, debugging, and implementing some of these Functions (and he's been doing a good job) so there's steady improvement in this area.</footnote>. Any XPath functions that don't work are also bugs... please report them. If you send a unit test that illustrates the problem, I'll try to fix the problem within a couple of days (if I can) and send you a patch, personally.</li>
+        <li>Accessing prefixes for which there is no defined namespace in an XPath should throw an exception. It currently doesn't -- it just fails to match.</li> 
+      </div>
+      <div> 
+        <h3>3. 9 todo</h3> 
+        <li>True XML character support</li>
+        <li>RelaxNG support</li>
+        <li>XPath optimizations</li>
+        <li>Japanese encoding support for REXML</li>
+        <li>Add XPath support for streaming APIs</li>
+        <li>XQuery support</li>
+        <li>XUpdate support</li>
+        <li>Make sure namespaces are supported in pull parser</li>
+        <li>Namespace support in SAX2</li>
+        <li>Add document start and entity replacement events in pull parser</li>
+        <li>Better stream parsing exception handling</li>
+        <li>I'd like to hack XMLRPC4R to use REXML, for my own purposes.</li>
+        <li>RPM-ify REXML. Someone has already done this.</li>
+        <li>True DTD handling (in progress). I've given up on this. DTDs suck. I'm going straight to RelaxNG support.</li>
+        <li>I had a dream the other night about how to speed up XPath considerably; I'll have to do some testing to see if it would actually work, but I have high hopes. (depends on absolute XPaths). My dream lied. This had some interesting possibilities as an optimization for some cases, but was basically unworkable.</li>
+        <li>Absolute XPaths attribute for nodes. NOTE: This idea bombed. There is no way (AFAICS) to simplify XPath parsing.</li>
+        <li>It looks like people want XPath to return attribute nodes rather than attribute values. Since I haven't had anyone strongly voting for keeping it the way it is, this will probably change to the requested method.</li>
+        <li>Bug report submission mechanism</li>
+        <li>RFC/RCR on the REXML page</li>
+        <li>Allow the user to add entity conversions</li>
+        <li>Support internal DocType ATTLIST processing (required)</li>
+        <li>Run the streaming and pull parsing APIs against the OASIS tests</li>
+        <li>Link to Kouhei's translated documentation.</li>
+        <li>Extend pretty printing. First, make transitive pretty printing an option. Second, make sure that whitespace isn't added around/to Text nodes. Third, add :ignore_whitespace_nodes.</li>
+        <li>Taint the strings pulled from files.</li>
+        <li>Process entity declarations in DocType.</li> 
+      </div> 
+    </div> 
+  </body> 
+</html> 
+<html>
+  <body>
+      <h1>hello world</h1>
+      <p>Amrita is a html template libraly for Ruby</p>
+      <hr>
+      Mon Jan 06 16:49:04 JST 2003/
+      last-modified Tue Aug 06 10:36:18 JST 2002
+   </body>
+</html>
+
+<html>
+      <body>
+        <title>amx sample</title>
+        
+          <p>
+      amx is a XML document.
+      It contains model data as well-formed XML, HTML template 
+      and a small Ruby code map both.
+    </p><p>
+      This is a sample AMX document.
+    </p>
+        
+        <hr />
+        Mon Jan 06 16:49:05 JST 2003
+      </body>
+    </html>
+<html>
+      <head>
+        <title>amrita home page</title>
+      </head>
+      <body>
+        <a href="index_ja.html">Japanese</a>/<a href="index.html">English</a>/<a href="http://www.walrus-ruby.org/amrita/cgi-bin/aswiki/aswiki.cgi">amrita-Wiki</a>/<a href="http://amrita.s14.xrea.com/amrita-bbs/bbsmain.cgi?&theme=kari_ja&template=board&board=amrita">amrita-bbs(Japanese)</a>/<a href="http://amrita.s14.xrea.com/amrita-bbs/bbsmain_en.cgi?&theme=slash_en&template=board&board=amrita">amrita-bbs(English)</a>/
+        <hr />
+        <div>
+          <h1>amrita home page</h1>
+          <p>
+           Amrita is a a html/xhtml template library for Ruby. 
+           It makes html documents from a template and a model data.
+        </p>
+          <div>
+             <h2>What is amrita ?</h2>
+             <title>Key feature</title><ul>
+            <li>The template for amrita is a pure html/xhtml document without 
+                  special tags </li>
+
+            <li>The template can be written by designers using almost any HTML  Editor.</li>
+
+            <li>Need no change on Ruby code to change the view of <em>dynamic</em>
+                  part (not only static part) of the template</li>
+
+            <li>The model data may be standard Ruby data, Hash, Array, String... or
+                  an instance of a classes you made.</li>
+
+            <li>The output is controlled by <em>data</em> no by logic. So It's easy to
+                  write, test, debug code. (Good for eXtreamPrograming)</li>
+
+            <li>HTML template can be compiled into Ruby code before execution
+                  with a little effort.</li>
+          </ul><p>Amrita mixes a template and model data up to a html document naturally
+             matching the id attribute of HTML element to model data.</p><p> For detail see <a href="rdocs/">documents</a></p>
+             
+             <hr />
+          </div><div>
+             <h2>download</h2>
+             <ul>
+
+            <li> <a href="amrita-1.0.2.tar.gz">stable version</a>
+
+            </li>
+
+            <li> cvs repository (stable)
+
+<pre><tt>
+    $ cvs -d ":pserver:guest@cvs.walrus-ruby.org:/var/lib/cvs" login 
+     password: (no password type just return)
+    $ cvs -d ':pserver:tnaka@cvs.walrus-ruby.org:/var/lib/cvs' co -r STABLE_1_0 -d amrita_stable amrita
+</tt></pre>
+
+            </li>
+
+            <li> cvs repository (unstable)
+
+<pre><tt>
+    $ cvs -d ":pserver:guest@cvs.walrus-ruby.org:/var/lib/cvs" login 
+     password: (no password type just return)
+    $ cvs -d ":pserver:guest@cvs.walrus-ruby.org:/var/lib/cvs" co amrita
+</tt></pre>
+
+            </li>
+            <li>see <a href="sources/">sources</a></li>
+
+
+          </ul>
+             
+             <hr />
+          </div><div>
+             <h2>demo</h2>
+             <p>You can see the samples running <a href="http://www.walrus-ruby.org/amrita/">here</a></p>
+             
+             <hr />
+          </div><div>
+             <h2>amrita-users mailing list</h2>
+             <p> amrita-users@walrus-ruby.org is set up for a purpose to talk about amrita in English.
+              To subscribe this list, please send the following phrase
+<pre><tt>
+                subscribe Your-First-Name Your-Last-Name
+</tt></pre>
+             in the mail body (not subject) to the address amrita-users-ctl@walrus-ruby.org .
+
+          </p>
+             
+             <hr />
+          </div><div>
+             <h2>status</h2>
+             <p>amrita is stable now. The main features and API are fixed. 
+           </p><p>But the archive has many experimental features. These features are
+              not so tested and may change or deleted later.
+           </p><p>I mean "main features" the features described in docs/Tour or
+              these source files.
+           </p><ul>
+              <li>node.rb</li>
+              <li>node_expand.rb</li>
+              <li>format.rb</li>
+              <li>compiler.rb</li>
+              <li>parser.rb</li>
+              <li>template.rb</li>
+              <li>xml.rb</li>
+              <li>tag.rb</li>
+           </ul><p>I mean "experimental feature" the features described in docs/Tour2 or
+              these source files.
+           </p><ul>
+              <li>ams.rb</li>
+              <li>amx.rb</li>
+              <li>cgikit.rb</li>
+              <li>handlers.rb</li>
+              <li>merge.rb</li>
+              <li>parts.rb</li>
+           </ul>
+             
+             <hr />
+          </div><div>
+             <h2>unstable branch</h2>
+             <p> The unstable version was forked from V1.0.1 . 
+               In this branch, some of next features will be developed.
+           </p><ul>
+              <li>make experimental features more stable as main feature</li>
+              <li>optimizing for Ruby 1.8.x </li>
+              <li>extention module for speed up</li>
+              <li>a "template to C code (extention module)" compiler</li>
+              <li>optimizing for JRuby and/or "template to Java compiler"</li>
+           </ul><p> The priority of thease feature is not fixed. Requests are welcome .
+           </p>
+             
+             <hr />
+          </div><div>
+             <h2>ChangeLog</h2>
+             <p>amrita before V1.0.1 has a XSS vunerability . If you are using pre_format option, update it to V1.0.2 or later .</p>
+             <div>
+               <h3>V1.0.2</h3>
+               <ul>
+              <li>fixed XSS vunerability of sanitizing with pre_format
+              </li>
+              <li>fixed a bug of amrita_sanitize_xxx for Fixnum
+              </li>
+              <li>fixed a bug (using MergeTemplate with compiler)
+              </li>
+              <li>fixed a bug (using PartsTemplate with compiler)
+              </li>
+            </ul>
+             </div><div>
+               <h3>V1.0.1</h3>
+               <ul>
+              <li> tested under ruby-1.6.8 and ruby-1.8.0-preview1
+              </li>
+              <li> now archive includes RDoc documents
+              </li>
+              <li> fixed bug of merge.rb
+              </li>
+              <li> I followed API changes of cgikit 1.0b5 except Examples/SourcePage
+              </li>
+              <li>fixed bug of compiler(AttrData)
+              </li>
+            </ul>
+             </div><div>
+               <h3>V1.0.0</h3>
+               <ul>
+              <li> fixed the problem that the 0.9.6 template compiler doesn't consider	attr_filter on attribute expansion.
+              </li>
+            </ul>
+             </div><div>
+               <h3>V0.9.6</h3>
+               <p> This version is RC1 for V1.0 . If no problem was found, this archive will be V1.0. </p><ul>
+              <li>fixed bug of expand_attr with compiler</li>
+              <li>added Japanese Documents</li>
+            </ul>
+             </div><div>
+               <h3>V0.9.5</h3>
+               <p> I refactored the implematation of compiler much so this release can not be RC
+            </p><ul>
+              <li>add -w for test and removed warning messages</li>
+              <li>added new experimental feature "parts-template"
+                 <p>For detail see <a href="rdocs/files/docs/Tour2.html">Tour2</a>.</p>
+              </li>
+              <li>added bbs script to sample
+              </li>
+              <li>fixed minor bugs
+              </li>
+            </ul>
+             </div><div>
+               <h3>V0.9.4</h3>
+               <p>The parser of V 0.9.3 can't parse comment correctry. 
+            This release has only fix of it.
+            </p>
+             </div><div>
+               <h3>V0.9.3</h3>
+               <p> the third beta release. I think next release will be RC1</p><ul>
+              <li>make parser do well with StringScanner_R(ruby version of strscan)
+                 <p>Now, amrita can be used without any extention library installed.
+                    (You only have to put Ruby version of strscan)</p>
+              </li>
+              <li>move tag information of parser.rb to tag.rb and make it customizable
+              </li>
+              <li>make compiler's output to sanitize correctly
+              </li>
+              <li>fixed SingleLineFormatter#initialize: added tagdict parameter
+              </li>
+              <li>fixed bug of AttrArray ( which did not use the context for expanding body )
+              </li>
+            </ul>
+             </div><div>
+               <h3>V0.9.2</h3>
+               <p> the second beta release</p><ul>
+              <li>expand_attr can be used with compiler
+              </li>
+              <li>brush up sanitizer
+              </li>
+              <li>fixed minor bugs
+              </li>
+            </ul>
+             </div><div>
+               <h3>V0.9.1</h3>
+               <p> the first beta release</p><ul>
+              <li>cgikit interface
+                 <p><a href="http://www.spice-of-life.net/download/cgikit/">cgikit</a> is a nice framework for cgi programming.
+                 An interface for it is included in this release.
+                 For detail see <a href="rdocs/files/docs/Tour2.html">Tour2</a>.</p>
+              </li>
+              <li>MergeTemplate
+                <p> You can use two or more templates to generate one output.
+                 For detail see <a href="rdocs/files/docs/Tour2.html">Tour2</a>.</p>
+              </li>
+              <li>aded yaml feature to AmritaScript
+                 <p>You can put a <a href="http://yaml4r.sf.net/">yaml</a> format data in AmritaScript.
+                 For detail see sample/tour/amsyaml.ams in the archive. </p>
+              </li>
+            </ul>
+             </div><div>
+               <h3>V0.8.5</h3>
+               <ul>
+               <li>
+                 added amx: Amrita XML extention feature
+                 <p><a href="rdocs/files/docs/XML.html">amx</a>(AMrita eXtention for XML) is a style-sheet for XML. 
+                    It converts an XML document to HTML. You can use amrita template for specifing the
+                    output format.</p>
+               </li>
+               <li>
+                 added handler and sample for mod_ruby
+               </li>
+               <li>
+                 added ams: AmritaScript feature ( idea by Mr.Beyond )
+                 <p><a href="rdocs/files/docs/Tour.html">ams</a>(AmritaScript) is an experimental feature that packs a template with the
+                    model data for it.
+                 </p>
+               </li>
+             </ul>
+             </div><div>
+               <h3></h3>
+               <p>see <a href="sources/ChangeLog">ChangeLog</a> for detail</p>
+             </div>
+             <hr />
+          </div>
+        </div>
+      </body>
+    </html>
+<html>
+      <head>
+        <title>amrita ホームページ</title>
+      </head>
+      <body>
+        <a href="index.html">English</a>/<a href="http://www.walrus-ruby.org/amrita/cgi-bin/aswiki/aswiki.cgi">amrita-Wiki</a>/<a href="http://amrita.s14.xrea.com/amrita-bbs/bbsmain.cgi?&theme=kari_ja&template=board&board=amrita">amrita-bbs(Japanese)</a>/<a href="http://amrita.s14.xrea.com/amrita-bbs/bbsmain_en.cgi?&theme=slash_en&template=board&board=amrita">amrita-bbs(English)</a>/
+        <hr />
+        <div>
+          <h1>amrita ホームページ</h1>
+          
+          <div>
+             <h2>amrita とはなにか？</h2>
+             <p>
+
+
+amrita(アムリタ)は Ruby用のhtml/xhtmlテンプレートライブラリーです。
+テンプレートとモデルデータをかけあわせてHTMLドキュメントを出力します。
+</p><p>
+特色
+
+<ul>
+<li> アムリタのテンプレートは特殊なタグを含まない普通のHTML文書です。</li>
+
+<li> テンプレートは一般的なHTMLエディタを使用して作成、修正することができます。
+</li>
+
+<li>
+静的なパートだけでなく、動的なパートの見ためを変更してもRubyのコードを変更する必要はありません。
+</li>
+
+<li> モデルデータは、Hash, Array, String等のRubyの標準データです。自作のクラスをモデルデータにすることもできます。</li>
+
+<li> 出力はロジックでなくデータによって制御されます。そのため、テストが非常しやすく、eXtreamProgramingに向いています。</li>
+
+<li> 必要ならば実行の前にテンプレートをRubyのコードにコンパイルすることもできます</li>
+
+</ul>
+</p>
+             
+             <hr />
+          </div><div>
+             <h2>ダウンロード</h2>
+             <p>amrita V1.0.1以前にはXSS脆弱性があります。pre_formatオプションを使用している場合には、至急 V1.0.2以降にアップデートしてください。</p><ul>
+
+<li> <a href="amrita-1.0.2.tar.gz">stable version</a>
+
+</li>
+
+<li> cvs repository
+
+
+<pre><tt>
+    $ cvs -d ":pserver:guest@cvs.walrus-ruby.org:/var/lib/cvs" login 
+     password: (no password type just return)
+    $ cvs -d ":pserver:guest@cvs.walrus-ruby.org:/var/lib/cvs" co amrita
+</tt></pre>
+
+</li>
+
+<li><a href="sources/">ソースを見る</a></li>
+
+<li><a href="sources/ChangeLog">更新記録</a></li>
+
+</ul>
+             
+             <hr />
+          </div>
+        </div><div>
+          <h1>ドキュメント</h1>
+          <ul>
+    <li><a href="rdocs/files/docs/QuickStart_ja.html">クィックスタートガイド</a></li>
+    <li><a href="rdocs/files/docs/Tour_ja.html">各機能の紹介</a></li>
+    <li><a href="rdocs/files/docs/Tour2_ja.html">実験的機能の紹介</a></li>
+    <li><a href="rdocs/files/docs/XML_ja.html">amritaをXMLドキュメントで使用する</a></li>
+    <li><a href="rdocs/files/docs/Cgi_ja.html">amritaをCGIで使用する</a></li>
+    <li><a href="rdocs/">APIドキュメント(英語)</a></li>
+    <li><a href="sources/">ソース</a></li>
+  </ul>
+          
+        </div><div>
+          <h1>メーリングリスト</h1>
+          <p>
+<a href="http://www.walrus-ruby.org/amrita/cgi-bin/aswiki/aswiki.cgi?c=v;p=walrus-users">こちら</a>を参照してください。
+</p>
+          
+        </div>
+      </body>
+    </html>

@@ -1,0 +1,314 @@
+<?xml version="1.0" ?>
+<?amx href="index.amx" ?>
+<document>
+    <head>
+      <title>amrita home page</title>
+      <navigation>
+        <link url="index_ja.html">Japanese</link>
+        <link url="index.html">English</link>
+        <link url="http://www.walrus-ruby.org/amrita/cgi-bin/aswiki/aswiki.cgi">amrita-Wiki</link>
+        <link url="http://amrita.s14.xrea.com/amrita-bbs/bbsmain.cgi?&theme=kari_ja&template=board&board=amrita">amrita-bbs(Japanese)</link>
+        <link url="http://amrita.s14.xrea.com/amrita-bbs/bbsmain_en.cgi?&theme=slash_en&template=board&board=amrita">amrita-bbs(English)</link>
+      </navigation>
+      <links>
+        <ref id="amrita" url="http://www.brain-tokyo.jp/research/amrita/" />
+        <ref id="amrita_demo" url="http://www.walrus-ruby.org/amrita/" />
+        <ref id="stable" url="amrita-1.0.2.tar.gz" />
+        <ref id="documents" url="rdocs/" />
+        <ref id="sources" url="sources/" />
+        <ref id="ChangeLog" url="sources/ChangeLog" />
+        <ref id="TOURDOC" url="rdocs/files/docs/Tour.html" />
+        <ref id="TOURDOC2" url="rdocs/files/docs/Tour2.html" />
+        <ref id="XMLDOC" url="rdocs/files/docs/XML.html" />
+        <ref id="yaml" url="http://yaml4r.sf.net/" />
+        <ref id="cgikit" url="http://www.spice-of-life.net/download/cgikit/" />
+      </links>
+    </head>
+
+    <body>
+
+      <section title="amrita home page">
+
+        <p>
+           Amrita is a a html/xhtml template library for Ruby. 
+           It makes html documents from a template and a model data.
+        </p>
+
+        <section title="What is amrita ?">
+
+
+          <title>Key feature</title>
+
+          <list>
+            <item>The template for amrita is a pure html/xhtml document without 
+                  special tags </item>
+
+            <item>The template can be written by designers using almost any HTML  Editor.</item>
+
+            <item>Need no change on Ruby code to change the view of <em>dynamic</em>
+                  part (not only static part) of the template</item>
+
+            <item>The model data may be standard Ruby data, Hash, Array, String... or
+                  an instance of a classes you made.</item>
+
+            <item>The output is controlled by <em>data</em> no by logic. So It's easy to
+                  write, test, debug code. (Good for eXtreamPrograming)</item>
+
+            <item>HTML template can be compiled into Ruby code before execution
+                  with a little effort.</item>
+          </list>
+
+          <p>Amrita mixes a template and model data up to a html document naturally
+             matching the id attribute of HTML element to model data.</p>
+
+          <p> For detail see <link id="documents">documents</link></p>
+        
+        </section>
+        <section title="download">
+
+          <list>
+
+            <item> <link id="stable">stable version</link>
+
+            </item>
+
+            <item> cvs repository (stable)
+
+<code>
+    $ cvs -d ":pserver:guest@cvs.walrus-ruby.org:/var/lib/cvs" login 
+     password: (no password type just return)
+    $ cvs -d ':pserver:tnaka@cvs.walrus-ruby.org:/var/lib/cvs' co -r STABLE_1_0 -d amrita_stable amrita
+</code>
+
+            </item>
+
+            <item> cvs repository (unstable)
+
+<code>
+    $ cvs -d ":pserver:guest@cvs.walrus-ruby.org:/var/lib/cvs" login 
+     password: (no password type just return)
+    $ cvs -d ":pserver:guest@cvs.walrus-ruby.org:/var/lib/cvs" co amrita
+</code>
+
+            </item>
+            <item>see <link id="sources">sources</link></item>
+
+
+          </list>
+        </section>
+
+        <section title="demo">
+  
+          <p>You can see the samples running <link id="amrita_demo">here</link></p>
+
+        </section>
+
+        <section title="amrita-users mailing list">
+          <p> amrita-users@walrus-ruby.org is set up for a purpose to talk about amrita in English.
+              To subscribe this list, please send the following phrase
+<code>
+                subscribe Your-First-Name Your-Last-Name
+</code>
+             in the mail body (not subject) to the address amrita-users-ctl@walrus-ruby.org .
+
+          </p>
+
+        </section>
+
+        <section title="status">
+           <p>amrita is stable now. The main features and API are fixed. 
+           </p>
+
+           <p>But the archive has many experimental features. These features are
+              not so tested and may change or deleted later.
+           </p>
+
+           <p>I mean "main features" the features described in docs/Tour or
+              these source files.
+           </p>
+
+           <list>
+              <item>node.rb</item>
+              <item>node_expand.rb</item>
+              <item>format.rb</item>
+              <item>compiler.rb</item>
+              <item>parser.rb</item>
+              <item>template.rb</item>
+              <item>xml.rb</item>
+              <item>tag.rb</item>
+           </list>
+
+           <p>I mean "experimental feature" the features described in docs/Tour2 or
+              these source files.
+           </p>
+
+           <list>
+              <item>ams.rb</item>
+              <item>amx.rb</item>
+              <item>cgikit.rb</item>
+              <item>handlers.rb</item>
+              <item>merge.rb</item>
+              <item>parts.rb</item>
+           </list>
+        </section>
+
+        <section title="unstable branch">
+           <p> The unstable version was forked from V1.0.1 . 
+               In this branch, some of next features will be developed.
+           </p>
+
+           <list>
+              <item>make experimental features more stable as main feature</item>
+              <item>optimizing for Ruby 1.8.x </item>
+              <item>extention module for speed up</item>
+              <item>a "template to C code (extention module)" compiler</item>
+              <item>optimizing for JRuby and/or "template to Java compiler"</item>
+           </list>
+
+           <p> The priority of thease feature is not fixed. Requests are welcome .
+           </p>
+        </section>
+
+        <section title="ChangeLog">
+          <p>amrita before V1.0.1 has a XSS vunerability . If you are using pre_format option, update it to V1.0.2 or later .</p>
+
+          <section title="V1.0.2">
+            <list>
+              <item>fixed XSS vunerability of sanitizing with pre_format
+              </item>
+              <item>fixed a bug of amrita_sanitize_xxx for Fixnum
+              </item>
+              <item>fixed a bug (using MergeTemplate with compiler)
+              </item>
+              <item>fixed a bug (using PartsTemplate with compiler)
+              </item>
+            </list>
+          </section>
+
+          <section title="V1.0.1">
+            <list>
+              <item> tested under ruby-1.6.8 and ruby-1.8.0-preview1
+              </item>
+              <item> now archive includes RDoc documents
+              </item>
+              <item> fixed bug of merge.rb
+              </item>
+              <item> I followed API changes of cgikit 1.0b5 except Examples/SourcePage
+              </item>
+              <item>fixed bug of compiler(AttrData)
+              </item>
+            </list>
+          </section>
+
+          <section title="V1.0.0">
+            <list>
+              <item> fixed the problem that the 0.9.6 template compiler doesn't consider	attr_filter on attribute expansion.
+              </item>
+            </list>
+          </section>
+
+          <section title="V0.9.6">
+            <p> This version is RC1 for V1.0 . If no problem was found, this archive will be V1.0. </p>
+            <list>
+              <item>fixed bug of expand_attr with compiler</item>
+              <item>added Japanese Documents</item>
+            </list>
+          </section>
+
+          <section title="V0.9.5">
+            <p> I refactored the implematation of compiler much so this release can not be RC
+            </p>
+            <list>
+              <item>add -w for test and removed warning messages</item>
+              <item>added new experimental feature "parts-template"
+                 <p>For detail see <link id="TOURDOC2">Tour2</link>.</p>
+              </item>
+              <item>added bbs script to sample
+              </item>
+              <item>fixed minor bugs
+              </item>
+            </list>
+          </section>
+
+          <section title="V0.9.4">
+            <p>The parser of V 0.9.3 can't parse comment correctry. 
+            This release has only fix of it.
+            </p>
+          </section>
+
+          <section title="V0.9.3">
+            <p> the third beta release. I think next release will be RC1</p>
+            <list>
+              <item>make parser do well with StringScanner_R(ruby version of strscan)
+                 <p>Now, amrita can be used without any extention library installed.
+                    (You only have to put Ruby version of strscan)</p>
+              </item>
+              <item>move tag information of parser.rb to tag.rb and make it customizable
+              </item>
+              <item>make compiler's output to sanitize correctly
+              </item>
+              <item>fixed SingleLineFormatter#initialize: added tagdict parameter
+              </item>
+              <item>fixed bug of AttrArray ( which did not use the context for expanding body )
+              </item>
+            </list>
+          </section>
+
+          <section title="V0.9.2">
+            <p> the second beta release</p>
+            <list>
+              <item>expand_attr can be used with compiler
+              </item>
+              <item>brush up sanitizer
+              </item>
+              <item>fixed minor bugs
+              </item>
+            </list>
+          </section>
+
+          <section title="V0.9.1">
+            <p> the first beta release</p>
+            <list>
+              <item>cgikit interface
+                 <p><link id="cgikit">cgikit</link> is a nice framework for cgi programming.
+                 An interface for it is included in this release.
+                 For detail see <link id="TOURDOC2">Tour2</link>.</p>
+              </item>
+              <item>MergeTemplate
+                <p> You can use two or more templates to generate one output.
+                 For detail see <link id="TOURDOC2">Tour2</link>.</p>
+              </item>
+              <item>aded yaml feature to AmritaScript
+                 <p>You can put a <link id="yaml">yaml</link> format data in AmritaScript.
+                 For detail see sample/tour/amsyaml.ams in the archive. </p>
+              </item>
+            </list>
+          </section>
+
+          <section title="V0.8.5">
+
+             <list>
+               <item>
+                 added amx: Amrita XML extention feature
+                 <p><link id="XMLDOC">amx</link>(AMrita eXtention for XML) is a style-sheet for XML. 
+                    It converts an XML document to HTML. You can use amrita template for specifing the
+                    output format.</p>
+               </item>
+               <item>
+                 added handler and sample for mod_ruby
+               </item>
+               <item>
+                 added ams: AmritaScript feature ( idea by Mr.Beyond )
+                 <p><link id="TOURDOC">ams</link>(AmritaScript) is an experimental feature that packs a template with the
+                    model data for it.
+                 </p>
+               </item>
+             </list>
+          </section>
+          <section>
+            <p>see <link id="ChangeLog">ChangeLog</link> for detail</p>
+          </section>
+        </section>
+      </section>
+    </body>
+</document>

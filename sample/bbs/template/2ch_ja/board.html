@@ -1,0 +1,124 @@
+<HTML id=board>
+<HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+  <TITLE id=title>title</TITLE>
+</HEAD>
+<BODY link=blue alink=red vlink=#660099 background="http://www6.ocn.ne.jp/~mirv/banner/ba2.gif">
+Select Themes => 
+<span id=theme_selecter>
+  <a id=theme>theme</a> |
+</span>
+<div align=center>
+  <a href="http://www.apache.org/" border=0><img src="/icons/apache_pb.gif" border=0></a>
+</div>
+<table border=1 cellspacing=7 cellpadding=3 width=95% bgcolor=#CCFFCC align=center><tr><td align=center><TABLE BORDER=0 CELLPADDING=1 WIDTH=100%>	
+<TR>
+  <TD nowrap COLSPAN=2>
+    <font size=+1><b id=title>title</b></font><br>
+  </TD>
+  <TD nowrap width=5% ALIGN=right VALIGN=top>
+    <a href=#menu>■</a> <a href=#1>▼</a>
+  </TD>
+</TR>
+<TR>
+  <TD COLSPAN=3 id=message>
+  </TD>
+</TR>
+<TR>
+  <TD nowrap COLSPAN=5 ALIGN=center>
+  </TD>
+</TR>
+</TABLE>
+
+</td>
+</tr>
+<tr>
+  <td>
+    <font size=2><Center><a id=to_top Target=_blank>■<b>掲示板一覧</b>■</a></Center></font>
+  </td>
+</tr>
+</table><br>
+<table border=1 cellspacing=7 cellpadding=3 width=95% bgcolor=#CCFFCC align=center>
+  <tr>
+    <td id=advertize1>
+    </td>
+  </tr>
+</table>
+<br>
+<a name="menu"></a>
+<table border=1 cellspacing=7 cellpadding=3 width=95% bgcolor="#CCFFCC"align=center><tr><td><font size=2>
+<span id=threadtitles class=BBSThreadTitle>
+  <a id=link1 target="body">1:</a> 
+  <a id=link2>thread no1</a>  /
+</span>
+<div align="right">
+  <a href=""><b>_</b></a>
+</div>
+</font></td></tr></table><P><center>
+
+<TABLE BORDER=1 cellspacing=0 cellpadding=0 WIDTH=95%><TR bgcolor=black><TD>
+<table width=100%>
+<tr bgcolor=black><td><font color=white id=advertize2>
+</font></td></tr>
+</table>
+</TD></TR></TABLE>
+<P>
+</center>
+
+
+<div id=threadsummary>
+<TABLE border=1 cellspacing=7 cellpadding=3 width=95% bgcolor="#EFEFEF" align=center>
+<TR><TD><DL><a id=label name="1"></a>
+<DIV ALIGN="right">
+<a href ="#menu">■</a>
+<a id=to_prev href="#10">▲</a>
+<a id=to_next href="#2">▼</a>
+</DIV>
+<B>【<span id=num>1</span>:<span id=num_of_article>542</span>】
+<FONT id=title size=5 color="red">thread title</FONT></B>
+
+<span id=summary_articles>
+</span>
+
+<dd>
+<form id=newarticle_form method=POST action="">
+<input id=theme type=hidden name=theme>
+<input id=board_key type=hidden name=board>
+<input id=thread type=hidden name=thread>
+<input type=hidden name=action value=newarticle>
+<input type=submit value="書き込む" name="submit"> 
+名前：	<INPUT TYPE=text NAME=from SIZE=19> 
+E-mail：<INPUT TYPE=text NAME=mail SIZE=19>
+<textarea rows=5 cols=64 wrap=OFF name=message></textarea>
+</form><br>
+<b>
+<a id=navi_all>全部読む</a>
+<a id=navi_l50>最新50</a>
+<a id=navi_100>1-100</a>
+ <a href="#menu">板のトップ</a> 
+<a id=navi_reload href="">リロード</a>
+</b>
+</DL></TD></TR></TABLE><br>
+</div>
+
+<center><table border=1 cellspacing=7 cellpadding=3 width=95% bgcolor=#CCFFCC align=center><tr>
+<td><form id=newthread_form method=POST action="">
+<td nowrap >タイトル：<input type=text name=subject size=40>
+<input type=submit value="新規スレッド作成" name=submit><br>
+名前：<input TYPE=text NAME=from SIZE=19> 
+E-mail：<input TYPE=text NAME=mail SIZE=19><br>
+内容：<textarea rows=5 cols=60 wrap=OFF name=message></textarea>
+<input id=board type=hidden name=board>
+<input type=hidden name=action value=newthread>
+<input id=theme type=hidden name=theme>
+</td>
+</form></table></center>
+
+<br><br>	
+<p id=advertize3></p>
+<br>
+<br>
+<a href="http://www.brain-tokyo.jp/research/amrita/">amrita-bbs</a>
+
+</body>
+</html>

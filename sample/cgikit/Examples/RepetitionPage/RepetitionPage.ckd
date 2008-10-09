@@ -1,0 +1,24 @@
+HeaderFooter : HeaderFooter {
+	title = "Repetition";
+}
+
+List : CKString {
+	value = inspectList;
+}
+
+Repetition : CKRepetition {
+	list = list;
+	item = item;
+	index = index;
+}
+
+Index : CKString {
+	value = index;
+}
+
+Item : CKString {
+	value = item;
+}
+
+AmritaResult : CKAmritaElement {
+}

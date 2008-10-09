@@ -1,0 +1,30 @@
+HeaderFooter : HeaderFooter {
+	title = "Conditional";
+}
+
+ConditionalTrue : CKConditional {
+	condition = isShow;
+	negate    = false;
+}
+
+ConditionalFalse : CKConditional {
+	condition = isShow;
+	negate    = true;
+}
+
+Form : CKForm {
+}
+
+ShowInspect : CKSubmitButton {
+	action = showInspect;
+	value = "Show Inspect";
+}
+
+HideInspect : CKSubmitButton {
+	action = hideInspect;
+	value = "Hide Inspect";
+}
+
+Inspect : CKAmritaElement {
+}
+

@@ -1,0 +1,339 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>Class: Amrita::AttrArray</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+
+<table summary="Information on class" width="100%" border="0" cellspacing="0">
+ <tr class="title-row">
+ <td class="big-title-font">
+   <sup><font color="aqua">Class</font></sup> Amrita::AttrArray
+ </td>
+ <td align="right">
+   <table summary="layout" cellspacing="0" cellpadding="2">
+     <tr valign="top">
+      <td class="small-title-font">In:</td>
+      <td class="small-title-font">
+        <a href="../../files/lib/amrita/node_expand_rb.html" class="aqua">
+lib/amrita/node_expand.rb
+         </a>
+<br />
+        <a href="../../files/lib/amrita/node_rb.html" class="aqua">
+lib/amrita/node.rb
+         </a>
+<br />
+        <a href="../../files/lib/amrita/compiler_rb.html" class="aqua">
+lib/amrita/compiler.rb
+         </a>
+<br />
+      </td>
+     </tr>
+     <tr>
+      <td class="small-title-font">Parent:</td>
+      <td class="small-title-font">
+Object
+      </td>
+     </tr>
+   </table>
+  </td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+<div class="description"><p>
+<a href="../Array.html">Array</a> of <a href="Attr.html">Attr</a> s. It can
+hold <tt>body</tt> part for using as a model data for Node#expand.
+Amrita#a() method is a shortcut for <a href="Attr.html">Attr</a>.new
+</p>
+</div>
+
+
+<table summary="Methods" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Methods</td></tr>
+</table>
+<div class="name-list">
+<a href="#M000091">&lt;&lt;</a>&nbsp; &nbsp;
+<a href="#M000089">==</a>&nbsp; &nbsp;
+<a href="#M000093">[]</a>&nbsp; &nbsp;
+<a href="#M000094">[]=</a>&nbsp; &nbsp;
+<a href="#M000087">amrita_expand_node</a>&nbsp; &nbsp;
+<a href="#M000098">amrita_generate_hint</a>&nbsp; &nbsp;
+<a href="#M000092">clear</a>&nbsp; &nbsp;
+<a href="#M000095">each</a>&nbsp; &nbsp;
+<a href="#M000090">inspect</a>&nbsp; &nbsp;
+<a href="#M000088">new</a>&nbsp; &nbsp;
+<a href="#M000096">size</a>&nbsp; &nbsp;
+<a href="#M000097">to_ruby</a>&nbsp; &nbsp;
+</div>
+
+<table summary="Attributes" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Attributes</td></tr>
+</table>
+<table summary="Attribute details" cellspacing="5">
+     <tr valign="top">
+       <td class="attr-name">:array</td>
+       <td align="center" class="attr-rw">&nbsp;[R]&nbsp;</td>
+       <td><p>
+If you call a() { ... }, block yields to <tt>body</tt>
+</p>
+</td>
+     </tr>
+     <tr valign="top">
+       <td class="attr-name">:body</td>
+       <td align="center" class="attr-rw">&nbsp;[R]&nbsp;</td>
+       <td><p>
+If you call a() { ... }, block yields to <tt>body</tt>
+</p>
+</td>
+     </tr>
+     <tr valign="top">
+       <td class="attr-name">:shared</td>
+       <td align="center" class="attr-rw">&nbsp;[RW]&nbsp;</td>
+       <td><p>
+internal use only, never touch it!
+</p>
+<p>
+true if this instance is shared by two or more elements
+</p>
+</td>
+     </tr>
+</table>
+
+
+<table summary="Included modules" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Included modules</td></tr>
+</table>
+<div class="name-list">
+    <span class="method-name">Enumerable</span>
+</div>
+
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Class methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000088"></a>
+<b>new</b>(*attrs, &amp;block) {|| ...}
+</td></tr>
+</table>
+<div class="description">
+<p>
+Don't use <a href="AttrArray.html">AttrArray</a>.new use a() instead
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 94</span>
+    <span class="kw">def</span> initialize(*attrs, &amp;block)
+      @array = []
+      @shared = <span class="kw">false</span>
+      attrs.each <span class="kw">do</span> |a|
+        <span class="kw">case</span> a
+        <span class="kw">when</span> Array, AttrArray
+          a.each <span class="kw">do</span> |aa|
+            <span class="kw">self</span> &lt;&lt; aa
+          <span class="kw">end</span>
+        <span class="kw">when</span> Hash
+          attrs[0].each <span class="kw">do</span> |k, v|
+            <span class="kw">self</span> &lt;&lt; Attr.new(k, v)
+          <span class="kw">end</span>
+        <span class="kw">else</span>
+          <span class="kw">self</span> &lt;&lt; a
+        <span class="kw">end</span>
+      <span class="kw">end</span>
+
+      <span class="kw">if</span> block_given?
+        @body = <span class="kw">yield</span> 
+      <span class="kw">else</span>
+        @body = Null
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Instance methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000087"></a>
+<b>amrita_expand_node</b>(n, context)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node_expand.rb, line 258</span>
+    <span class="kw">def</span> amrita_expand_node(n, context)
+      raise Amrita::ModelMisMatch(type, n.type)
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000089"></a>
+<b>==</b>(x)
+</td></tr>
+</table>
+<div class="description">
+<p>
+<a href="AttrArray.html">AttrArray</a>#== concerns the order of <a
+href="Attr.html">Attr</a>
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 120</span>
+    <span class="kw">def</span> ==(x)
+      <span class="kw">return</span> <span class="kw">true</span> <span class="kw">if</span> id == x.id
+      <span class="kw">return</span> <span class="kw">false</span> <span class="kw">unless</span> x.kind_of?(AttrArray)
+      each_with_index <span class="kw">do</span> |a, n|
+        <span class="kw">return</span> <span class="kw">false</span> <span class="kw">unless</span> a == x[n]
+      <span class="kw">end</span>
+      <span class="kw">true</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000090"></a>
+<b>inspect</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 129</span>
+    <span class="kw">def</span> inspect
+      to_ruby
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000091"></a>
+<b>&lt;&lt;</b>(a)
+</td></tr>
+</table>
+<div class="description">
+<p>
+add an <a href="Attr.html">Attr</a>
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 134</span>
+    <span class="kw">def</span> &lt;&lt;(a)
+      raise &quot;must be Attr not #{a.class}&quot; <span class="kw">unless</span> a.kind_of?(Attr)
+      @array &lt;&lt; a
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000092"></a>
+<b>clear</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 139</span>
+    <span class="kw">def</span> clear
+      @array.clear
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000093"></a>
+<b>[]</b>(index)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 143</span>
+    <span class="kw">def</span> [](index)
+      @array[index]
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000094"></a>
+<b>[]=</b>(index, val)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 147</span>
+    <span class="kw">def</span> []=(index, val)
+      @array[index] = val
+      val
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000095"></a>
+<b>each</b>(&amp;block)
+</td></tr>
+</table>
+<div class="description">
+<p>
+iterate on each <a href="Attr.html">Attr</a>
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 153</span>
+    <span class="kw">def</span> each(&amp;block)
+      @array.each(&amp;block)
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000096"></a>
+<b>size</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 157</span>
+    <span class="kw">def</span> size
+      @array.size
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000097"></a>
+<b>to_ruby</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 161</span>
+    <span class="kw">def</span> to_ruby
+      ret = <span class="str">&quot;a(&quot;</span> + @array.collect {|a| &quot;:#{a.key}, #{a.value}&quot;}.join(<span class="str">&quot;, &quot;</span>) + <span class="str">&quot;)&quot;</span>
+      <span class="kw">case</span> @body
+      <span class="kw">when</span> <span class="kw">nil</span>, Null
+      <span class="kw">when</span> Node
+        ret += body.to_ruby
+      <span class="kw">else</span>
+        ret += body.inspect
+      <span class="kw">end</span>
+      ret
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000098"></a>
+<b>amrita_generate_hint</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/compiler.rb, line 58</span>
+    <span class="kw">def</span> amrita_generate_hint
+      <span class="kw">if</span> body
+        Amrita::HtmlCompiler::AttrData[body.amrita_generate_hint]
+      <span class="kw">else</span>
+        Amrita::HtmlCompiler::AttrData.new
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+
+</body>

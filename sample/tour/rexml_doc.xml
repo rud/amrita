@@ -1,0 +1,619 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/css"
+href="http://www.germane-software.com/svn/repos/documentation/documentation.css"
+?>
+<?xml-stylesheet type="text/css"
+href="file:/home/ser/Work/documentation/documentation.css"
+?>
+<?xml-stylesheet type="text/xsl"
+href="http://www.germane-software.com/svn/repos/documentation/paged.xsl"
+?>
+<!DOCTYPE documentation SYSTEM "file:/home/ser/Work/documentation/documentation.dtd">
+<documentation
+><head
+><title
+>REXML</title
+><banner
+href="img/rexml.png"
+></banner
+><version
+>2.4.0</version
+><date
+>*2002-184</date
+><home
+>http://www.germane-software.com/software/rexml</home
+><base
+>rexml</base
+><language
+>ruby</language
+><author
+jabber="ser@jabber.com"
+email="ser@germane-software.com"
+href="http://www.germane-software.com/~ser"
+>Sean Russell</author
+></head
+><overview
+><purpose
+lang="en"
+><p
+>REXML is an XML processor for the language Ruby. REXML is conformant (passes 100% of the Oasis non-validating tests), and includes full XPath support. It is reasonably fast, and is implemented in pure Ruby. Best of all, it has a clean, intuitive API.</p
+><p
+>This software is distribute under the <link
+href="LICENSE.txt"
+>Ruby license</link
+>.</p
+></purpose
+><general
+><p
+>Why REXML? There, at the time of this writing, already two XML parsers for Ruby. The first is a Ruby binding to a native XML parser. This is a fast parser, using proven technology. However, it isn&#39;t very portable. The second is a native Ruby implementation, and as useful as it is, it has (IMO) a difficult API.</p
+><p
+>I have this problem: I dislike obfuscated APIs. There are several XML parser APIs for Java. Most of them follow DOM or SAX, and are very similar in philosophy with an increasing number of Java APIs. Namely, they look like they were designed by theorists who never had to use their own APIs. The extant XML APIs, in general, suck. They take a markup language which was specifically designed to be very simple, elegant, and powerful, and wrap an obnoxious, bloated, and large API around it. I was always having to refer to the API documentation to do even the most basic XML tree manipulations; nothing was intuitive, and almost every operation was complex.</p
+><p
+>Then along came Electric XML.</p
+><p
+>Ah, bliss. Look at the Electric XML API. First, the library is small; less than 500K. Next, the API is intuitive. You want to parse a document? <code
+>doc = new Document( some_file )</code
+>. Create and add a new element? <code
+>element = parent.addElement( tag_name )</code
+>. Write out a subtree?? <code
+>element.write( writer )</code
+>. Now how about DOM? To parse some file: <pre
+>parser = new DOMParser();
+parser.parse( new InputSource( new FileInputStream( some_file ) ) )</pre
+> Create a new element? First you have to know the owning document of the to-be-created node (can anyone say &#34;global variables, or obtuse, multi-argument methods&#34;?) and call <pre
+>element = doc.createElement( tag_name )
+parent.appendChild( element )</pre
+> &#34;appendChild&#34;? Where did they get that from? How many different methods do we have in Java in how many different classes for adding children to parents? <code
+>addElement()</code
+>? <code
+>add()</code
+>? <code
+>put()</code
+>? <code
+>appendChild()</code
+>? Heaven forbid that you want to create an Element elsewhere in the code without having access to the owning document. I&#39;m not even going to go into what travesty of code you have to go through to write out an XML sub-tree in DOM.</p
+><p
+>So, I use Electric XML extensively. It is small, fast, and intuitive. IE, the API doesn&#39;t add a bunch of work to the task of writing software. When I started to write more software in Ruby, I needed an XML parser. I wasn&#39;t keen on the native library binding, &#34;XMLParser&#34;, because I try to avoid complex library dependancies in my software, when I can. For a long time, I used NQXML, because it was the only other parser out there. However, the NQXML API can be even more painful than the Java DOM API. Almost all element operations requires accessing some indirect node access... you had to do something like element.node.attr[&#39;key&#39;], and it is never obvious to me when you access the element directly, or the node.. or, really, why they&#39;re two different objects, anyway. This is even more unfortunate since Ruby is so elegent and intuitive, and bad APIs really stand out. I&#39;m not, by the way, trying to insult NQXML; I just don&#39;t like the API.</p
+><p
+>I wrote the people at TheMind (Electric XML... get it?) and asked them if I could do a translation to Ruby. They said yes. After a few weeks of hacking on it for a couple of hours each week, and after having gone down a few blind alleys in the translation, I had a working beta. IE, it parsed, but hadn&#39;t gone through a lot of strenuous testing. Along the way, I had made a few changes to the API, and a lot of changes to the code. First off, Ruby does iterators differently than Java. Java uses a lot of helper classes. Helper classes are exactly the kinds of things that theorists come up with... they look good on paper, but using them is like chewing glass. You find that you spend 50% of your time writing helper classes just to support the other 50% of the code that actually does the job you were trying to solve in the first place. In this case, the Java helper classes are either Enumerations or Iterators. Ruby, on the other hand, uses blocks, which is much more elegant. Rather than:</p
+><example
+>for (Enumeration e=parent.getChildren(); e.hasMoreElements(); ) {
+   Element child = (Element)e.nextElement();
+   // Do something with child
+}</example
+><p
+>you get:</p
+><example
+>parent.each_child{ |child| # Do something with child }</example
+><p
+>Can&#39;t you feel the peace and contentment in this block of code? Ruby is the language Buddha would have programmed in.</p
+><p
+>Anyhoo, I chose to use blocks in REXML directly, since this is more common to Ruby code than <code
+>for x in y ... end</code
+>, which is as orthoganal to the original Java as possible.</p
+><p
+>Also, I changed the naming conventions to more Ruby-esque method names. For example, the Java method <code
+>getAttributeValue()</code
+> becomes in Ruby <code
+>get_attribute_value()</code
+>. This is a toss-up. I actually like the Java naming convention more<footnote
+>This is no longer true. I&#39;m a convert to the Ruby naming scheme, for Ruby. The reason being that Ruby does a superb job of hiding the difference between attributes and methods; in fact, for all intents and purposes, you <em
+>can&#39;t</em
+> access attributes directly; all attribute accessors are methods. What this means in the long run is that there is no reason to have different naming conventions for attributes and methods.</footnote
+>, but the latter is more common in Ruby code, and I&#39;m trying to make things easy for Ruby programmers, not Java programmers.</p
+><p
+>The biggest change was in the code. The Java version of Electric XML did a lot of efficient String-array parsing, character by character. Ruby, however, has ubiquitous, efficient, and powerful regular expression support. All regex functions are done in native code, so it is very fast, and the power of Ruby regex rivals that of Perl. Therefore, a direct conversion of the Java code to Ruby would have been more difficult, and much slower, than using Ruby regexps. I therefore used regexs. In doing so, I cut the number of lines of sourcecode by half.</p
+><p
+>Finally, by this point the API looks almost nothing like the original Electric XML API, and practically none of the code is even vaguely similar. However, even though the actual code is completely different, I did borrow the same process of processing XML as Electric, and am deeply indebted to the Electric XML code for inspiration.</p
+><p
+>One last thing. If you use and like this software, and you feel compelled to make some contribution to the author by way of saying &#34;thanks&#34;, and you happen to know what a tea cozy is and where to get them, then you can send me one. Send those puppies to: <pre
+>Sean Russell
+60252 Rimfire Rd.
+Bend, OR 97702
+USA</pre
+> If you&#39;re outside of the US, make sure you write &#34;gift&#34; on it to avoid the taxes. If you don&#39;t want to send a tea cozy, you can also send money. Or don&#39;t send anything. Offer me a job I can&#39;t refuse, in Western Europe somewhere.</p
+></general
+><features
+lang="en"
+><item
+>Four intuitive parsing APIs.</item
+><item
+>Intuitive, powerful, and reasonably fast tree parsing API (a-la DOM<footnote
+>Be aware, however, that REXML does not have a DOM API.</footnote
+></item
+><item
+>Fast stream parsing API (a-la SAX)<footnote
+>This is not a SAX API.</footnote
+></item
+><item
+>SAX2-based API<footnote
+>In addition to the native REXML streaming API. This is slower than the native REXML API, but does a lot more work for you.</footnote
+></item
+><item
+>Pull parsing API.</item
+><item
+>Small</item
+><item
+>Reasonably fast</item
+><item
+>Native Ruby</item
+><item
+>Full XPath support<footnote
+>Currently only available for the tree API</footnote
+></item
+><item
+>XML 1.0 conformant<footnote
+>REXML passes all of the non-validating OASIS tests. There are probably places where REXML isn&#39;t conformant, but I try to fix them as they&#39;re reported.</footnote
+></item
+><item
+>ISO-8859-1, UNILE, UTF-16 and UTF-8 input and output</item
+><item
+>Documentation</item
+></features
+></overview
+><operation
+lang="en"
+><subsection
+title="Installation"
+><p
+>Run <code
+>ruby bin/install.rb</code
+>. By the way, you really should look at these sorts of files before you run them as root. They could contain anything, and since (in Ruby, at least) they tend to be mercifully short, it doesn&#39;t hurt to glance over them. If you want to uninstall REXML, run <code
+>ruby bin/install.rb -u</code
+>.</p
+></subsection
+><subsection
+title="Unit tests"
+><p
+>If you have Test::Unit installed, you can run the unit test cases. You can run both installed and not installed tests; to run the tests before installing REXML, run <code
+>ruby -I. bin/suite.rb</code
+>. To run them with an installed REXML, use <code
+>ruby bin/suite.rb</code
+>.</p
+></subsection
+><subsection
+title="Benchmarks"
+><p
+>There is a benchmark suite in <code
+>benchmarks/</code
+>. To run the benchmarks, change into that directory and run <code
+>ruby comparison.rb</code
+>. If you have nothing else installed, only the benchmarks for REXML will be run. However, if you have any of the following installed, benchmarks for those tools will also be run:</p
+><list
+><item
+>NQXML</item
+><item
+>XMLParser</item
+><item
+>Electric XML (you must copy <code
+>EXML.jar</code
+> into the <code
+>benchmarks</code
+> directory and compile <code
+>flatbench.java</code
+> before running the test)</item
+></list
+><p
+>The results will be written to <code
+>index.html</code
+>.</p
+></subsection
+><subsection
+title="General Usage"
+><p
+>Please see <link
+href="docs/tutorial.html"
+>the Tutorial</link
+>.</p
+><p
+>The API documentation is available <link
+href="http://www.germane-software.com/software/XML/rexml/doc"
+>on-line</link
+>, or it can be downloaded as an archive <link
+href="http://www.germane-software.com/software/archives/rexml_api_2.4.0.tbz2"
+>in tbz2 format (~40Kb)</link
+>, <link
+href="http://www.germane-software.com/software/archives/rexml_api_2.4.0.tgz"
+>in tgz format (~70Kb)</link
+>, or (if you&#39;re a masochist) <link
+href="http://www.germane-software.com/software/archives/rexml_api_2.4.0.zip"
+>in zip format (~280Kb)</link
+>. The best solution is to download and install Dave Thomas&#39; most excellent <link
+href="http://rdoc.sourceforge.net"
+>rdoc</link
+> and generate the API docs yourself; then you&#39;ll be sure to have the latest API docs and won&#39;t have to keep downloading the doc archive.</p
+><p
+>The unit tests in <code
+>test/</code
+> and the benchmarking code in <code
+>benchmark/</code
+> provide additional examples of using REXML. The Tutorial provides examples with commentary. The documentation unpacks into <link
+href="doc/index.html"
+><code
+>rexml/doc</code
+></link
+>.</p
+><p
+>Kouhei Sutou maintains a <link
+href="http://www.germane-software.com/software/rexml_doc_ja/current/index.html"
+>Japanese version</link
+> of the REXML 2.2.2 API docs. The Japanese API documentation is also available for download as a <link
+href="http://www.germane-software.com/software/archives/rexml_api_ja_2_2_2.tar.gz"
+>gzipped tarball</link
+>, a <link
+href="http://www.germane-software.com/software/archives/rexml_api_ja_2_2_2.tar.bz2"
+>bzipped tarball (smallest)</link
+>, or a <link
+href="http://www.germane-software.com/software/archives/rexml_api_ja_2_2_2.zip"
+>zip file (largest)</link
+>.</p
+></subsection
+></operation
+><status
+><subsection
+title="Speed and Completeness"
+><p
+>Unfortunately, NQXML is the only package REXML can be compared against; XMLParser uses expat, which is a native library, and really is a different beast altogether. So in comparing NQXML and REXML you can look at four things: speed, size, completeness, and API.</p
+><p
+><link
+href="benchmarks/index.html"
+>Benchmarks</link
+></p
+><p
+>REXML is faster than NQXML in some things, and slower than NQXML in a couple of things. You can see this for yourself by running the supplied benchmarks. Most of the places where REXML are slower are because of the convenience methods<footnote
+>For example, <code
+>element.elements[index]</code
+> isn&#39;t really an array operation; index can be an Integer or an XPath, and this feature is relatively time expensive.</footnote
+>. On the positive side, most of the convenience methods can be bypassed if you know what you are doing. Check the <link
+href="benchmarks/index.html"
+> benchmark comparison page</link
+> for a <em
+>general</em
+> comparison. You can look at the benchmark code yourself to decide how much salt to take with them.</p
+><p
+>The sizes of the XML parsers are close<footnote
+>As measured with <code
+>ruby -nle &#39;print unless /^\s*(#.*|)$/&#39; *.rb | wc -l</code
+> </footnote
+>. NQXML 1.1.3 has 1580 non-blank, non-comment lines of code; REXML 2.0 has 2340<footnote
+>REXML started out with about 1200, but that number has been steadily increasing as features are added. XPath accounts for 541 lines of that code, so the core REXML has about 1800 LOC.</footnote
+>.</p
+><p
+>REXML is a conformant XML 1.0 parser. It supports multiple language encodings, and internal processing uses the required UTF-8 and UTF-16 encodings. It passes 100% of the Oasis non-validating tests. Furthermore, it provides a full implementation of XPath, a SAX2 and a PullParser API.</p
+><p
+>The last thing is the API, and this is where I think REXML wins. The core API is clean and intuitive, and things work the way you would expect them to. Convenience methods abound, and you can code for either convenience or speed. REXML code is terse, and readable, like Ruby code should be. The best way to decide which you like more is to write a couple of small applications in each, then use the one you&#39;re more comfortable with.</p
+></subsection
+><subsection
+title="XPath"
+><p
+>As of release 2.0, XPath 1.0 is fully implemented.</p
+><p
+>I fully expect bugs to crop up from time to time, so if you see any bogus XPath results, please let me know. That said, since I&#39;m now following the XPath grammar and spec fairly closely, I suspect that you won&#39;t be surprised by REXML&#39;s XPath very often, and it should become rock solid fairly quickly.</p
+><p
+>Check the &#34;bugs&#34; section for known problems; there are little bits of XPath here and there that are not yet implemented, but I&#39;ll get to them soon.</p
+><p
+>Namespace support is rather odd, but it isn&#39;t my fault. I can only do so much and still conform to the specs. In particular, XPath attempts to help as much as possible. Therefore, in the trivial cases, you can pass namespace prefixes to Element.elements[...] and so on -- in these cases, XPath will use the namespace environment of the base element you&#39;re starting your XPath search from. However, if you want to do something more complex, like pass in your own namespace environment, you have to use the XPath first(), each(), and match() methods. Also, default namespaces <em
+>force</em
+> you to use the XPath methods, rather than the convenience methods, because there is no way for XPath to know what the mappings for the default namespaces should be. This is exactly why I loath namespaces -- a pox on the person(s) who thought them up!</p
+></subsection
+><subsection
+title="Namespaces"
+><p
+>Namespace support is now fairly stable. One thing to be aware of is that REXML is not (yet) a validating parser. This means that some invalid namespace declarations are not caught.</p
+></subsection
+><subsection
+title="Mailing list"
+><p
+>There is a low-volume mailing list dedicated to REXML. To subscribe, send an empty email to <link
+href="mailto:ser-rexml-subscribe@germane-software.com"
+>ser-rexml-subscribe@germane-software.com</link
+>. This list is more or less spam proof. To unsubscribe, similarly send a message to <link
+href="mailto:ser-rexml-unsubscribe@germane-software.com"
+>ser-rexml-unsubscribe@germane-software.com</link
+>.</p
+></subsection
+><subsection
+title="RSS"
+><p
+>An <link
+href="http://www.germane-software.com/software/rexml/rss.xml"
+>RSS file</link
+> for REXML is now being generated from the change log. This allows you to be alerted of upgrades via &#39;pull&#39; as they become available, if you have an RSS browser. This is an abuse of the RSS mechanism, which was intended to be a distribution system for headlines linked back to full articles, but it works. The headline for REXML is the version number, and the description is the change log. The links all link back to the REXML home page. The URL for the RSS itself is http://www.germane-software.com/software/rexml/rss.xml</p
+><p
+>For those who are interested, there&#39;s a <link
+href="docs/sloccount.txt"
+>SLOCCount</link
+> (by David A. Wheeler) file with stats on the REXML sourcecode. Note that the SLOCCount output includes the files in the test/, benchmarks/, and bin/ directories, as well as the main sourcecode for REXML itself.</p
+></subsection
+><subsection
+title="Applications that use REXML"
+><list>
+	<item>Ned Konz's <link href="http://www.bikenomad.microship.com/ruby/">ruby-htmltools</link> uses REXML</item>
+	<item
+>Hiroshi NAKAMURA&#39;s <link
+href="http://www.ruby-lang.org/en/raa-list.rhtml?name=SOAP4R"
+>SOAP4R</link
+> package can use REXML as the XML processor.</item
+><item
+>Chris Morris&#39; <link
+href="http://clabs.org/clxmlserial.htm"
+>XML Serializer</link
+>. XML Serializer provides a serialization mechanism for Ruby that provides a bidirectional mapping between Ruby classes and XML documents.</item
+><item
+>Much of the <link
+href="http://www.rubyxml.com"
+>RubyXML</link
+> site is generated with scripts that use REXML. RubyXML is a great place to find information about th intersection between Ruby and XML.</item
+><item
+><link
+href="http://www.pinkjuice.com/ruby/jelly/"
+>Jelly</link
+> is a generic utility for generating Ruby libs (XML writers) from W3C XML schemas.</item
+></list
+></subsection
+><changelog>
+	<item version="2.4.0">
+		<list>
+			<item>
+				Internal entities weren't being (recursively) expanded.  
+			</item>
+			<item>PullParser text() method now returns two arguments; normalized text, and unnormalized text.  That means that users have access to the raw text, without entity replacement, and processed text, with entities replaced.  Existing applications using PullParser don't need to be changed; the behavior is backwards compatible.  I can't do it for SAX2 yet, because I don't know whether text should be passed to SAX2 listeners normalized or not.</item>
+			<item>Hannes Wyss noticed a bug involving whitespace before the root document element.</item>
+		</list>
+	</item>
+<item
+version="2.3.7"
+>This is also the 2.4.0 FRC release.<list
+><item
+>REXML is now in the RPKG database, and is a Gentoo package as well.</item
+><item
+>The root node of an XML document is the document, not the document element. Make sense? Well, it&#39;s true. &#39;/&#39; of &#34;&#60;a/&#62;&#34; in XPath gives you the parent of &#39;a&#39;, which is a Document object, not &#39;a&#39;. REXML&#39;s XPath has been correct in this for a while. However, REXML always gave that Document node a name: &#34;UNDEFINED&#34;. This was not correct. Document::name and Document::expanded_name now return an empty string, which is more in line with the XPath spec.</item
+><item
+>Mike fixed up Functions::tr to handle Unicode better.</item
+><item
+>Fixed a bug in Functions::number.</item
+><item
+>Added some more good diffs from Mike, cleaning up some Ruby 1.7 warnings. Mike also pointed me to a regexp optimization and sent me the most awesome tea cozy -- pictures will be posted.</item
+><item
+>Changed the behaviour of XPath. <em
+>Please notice this</em
+>, because it is important. By popular demand, the XPath axe <code
+>attribute::</code
+> (and the shortcut <code
+>@</code
+>) now return an <code
+>Attribute</code
+> node, not the attribute value. This means that you have to specifically fetch the attribute value if that is what you want. Additionally, to do this without incurring a massive speed penalty, I had to change the behavior of <code
+>Attribute::to_s().</code
+> It now returns just the attribute value, not the key=&#39;value&#39; attribute string. If you want that formatted string, you have to use <code
+>Attribute::to_string()</code
+>, which is a new method.</item
+><item
+>The distribution mechanism that I use to make releasing versions of REXML easy has been completely revamped, and now seems to have most of the bugs worked out. One of the hard drives on the server died, and we took the opportunity to install a new version of Linux; the sourcecode repository seems to have settled down, and jitterbug is back to working. Sorry for any inconveniences during the changeover.</item
+><item
+>Kouhei found a bug in XPath WRT processing instructions. I&#39;ve fixed it.</item
+><item
+>Kouhei also found a bug in XPath numeric comparisons. Fixed.</item
+></list
+></item
+><item
+version="2.3.6"
+><list
+><item
+>attribute::* and @* now works</item
+><item
+>If node()[@x] matched a non-Element node, XPath would throw an exception.</item
+><item
+>Upgraded the install.rb file; fixed a couple of bugs, added redirection and a --noop mode. This was for Portage support.</item
+></list
+></item
+><item
+version="2.3.5"
+><list
+><item
+>Fixed a bug that caused text containing &#62; to be split into two text nodes. This incurred a speed penalty, but I&#39;ll try to improve that later.</item
+><item
+>Added a bug tracking system.</item
+><item
+>Fixed a comment parsing bug.</item
+><item
+>Mike Stok fixed Functions#translate and cleaned up some cruft that slipped through in Functions#substring.</item
+><item
+>Fixed a bug in Element#prefixes, and fixed Attributes#prefixes to use DOCTYPE declared namespaces. Added DocType#attributes_of(Element).</item
+><item
+>Fixed a bug in writing Attlist declarations.</item
+><item
+>Added AttlistDecl#each; AttlistDecl now includes Enumerable</item
+><item
+>Fixed Functions#name and Functions#local_name; fixed unit test.</item
+><item
+>Fixed a bug re. functions w/in predicates in XPath</item
+><item
+>Fixes for Child#parent=()</item
+><item
+>Fixes and speed improvement for creating Text nodes</item
+><item
+>SAX2Parser bug fixes</item
+><item
+>Added dist.xml and an ant build file</item
+><item
+>Tom sent a new version of his pretty printer</item
+><item
+>Kouhei has a new version of his Japanese API documentation translation online</item
+></list
+></item
+><item
+version="2.3.4"
+>Fixed a bug in XPath that kept non-Element nodes from being returned from recursive paths. This had a side effect of speeding up XPath recursions. Fixed a bug in Document WRT text outside of the document. Added peek and unshift methods to the PullParser API. XPath methods now accept an array of nodes in addition to a single node. Fixed a bug in Functions::string(). Changed the unit tests to the Test::Unit platform. This allows the unit tests to be run under a GUI. More Function fixes (substring) by Mike Stok. There was a major bug in XPath handling of math operations, which is fixed. Strings pulled from IO streams are now tainted. Lots of bug fixes in PullParser -- it now passes 100% of the Oasis tests. Bug fix for stream parsing in Entity. Bug fixes in DocType -- SAX2Parser now passes 100% of Oasis tests. REXML now processes internal ATTLIST declarations in the doctype. This includes processing of XML namespaces in the doctype. Changed pretty printing. Whitespace is now never added around Text nodes, and there&#39;s a new context property, :ignore_whitespace_nodes. There&#39;s also a new transitive pretty printer, obtained by passing &#39;true&#39; as the third argument to write().</item
+><item
+version="2.3.3"
+>Added an alternate pretty printer by Thomas Sawyer; it is in the contrib/ directory. Speed optimizations; REXML is noticably faster now. In particular, PullParser is now just as fast as Stream parsing (10x speed increase over first version). Fixed a bug in Element.add_namespace. Fixed a problem that occurred on some systems with Entities. <em
+>News:</em
+> Kouhei Sutou has done a Japanese translation of the REXML API docs. See the section in the main REXML page about the API documentation for links. Mike Stock fixed a bug in the starts_with XPath function. Added, on request, methods to Element to filter children on type. cdatas(), instructions(), comments(), and texts() now return immutable arrays of only those child nodes.</item
+><item
+version="2.3.2"
+>Added a (more or less) SAX2 conforming parser. Really, this and the pull parser are just a thin layer over the legacy REXML stream parser, and you&#39;ll get better results with the original API. The best thing about this (and the primary reason I did it this way) is that REXML maintains backward compatibility with the old Stream API. After I play with pure pull parsing some more, I may decide to reimplement stream parsing on top of pull parsing, but it shouldn&#39;t affect SAX2 in any way. The SAX2 parser is slower primarily because SAX2 requires the parser to do a lot more work -- resolving namespaces and so on -- so while I know I can improve the speed some, SAX2 will <em
+>never</em
+> be as fast as REXML vanilla stream parsing. That said, the SAX2 API is pretty nice, and includes all of those stream API changes I wanted to get in, except for filter parsing. Check out the tutorial for usage information.</item
+><item
+version="2.3.1"
+>Added a pull parser. This is VERY experimental, and the API is likely to change.</item
+><item
+version="2.3.0"
+>Internal entities are now handled<footnote
+>Please note that entity handling complicates text manipulation. See the note in the tutorial</footnote
+>. Speed has been further improved for most operations, but especially for stream parsing, writing, and large document parsing.</item
+><item
+version="2.2.1"
+>Fixed a bug in benchmark/bench.rb that kept it from running. Added stand_alone?() to XMLDecl as an alias for the standalone accessor. Improvements to the streaming API; in particular, pulling data from non-closing streams doesn&#39;t require passing a block size of 1 to the IOSource class any longer; in fact, the block size is ignored. Added a user-supplied patch to fix the fact that not all of the DTD events were getting passed to the listener. Improved entity parsing. Better test suite; you can now pass <code
+>--help</code
+> to the main test suite to get a list of the new options, which include listing the available suites and listing methods in the suites, as well as instructions on how to run only certain suites or methods in suites.</item
+><item
+version="2.1.3"
+>Fixed broken links in documentation. Added new documentation layout; the old format -- everything on one page -- was getting a bit overwhelming. Added RSS for changelog. Bugfix for element cloning namespace loss. The Streaming API wasn&#39;t normalizing input strings; this has been fixed. Added support for deep cloning via Parent.deep_clone(). Fixed some streaming issues for SOAP4RUBY. In particular, text normalization is now also done for the Streaming API. &#39;\r&#39; handling is now correct, as per the XML spec, and entities are handled better. &#38;#13; is now converted to &#39;\r&#39; internally, and then translated back to &#39;\r&#39; on output. All other numeric entities (&#38;#nnn; and &#38;#xnnn;) are now converted to unicode on input, but are only converted back to entities if they don&#39;t fit in the requested encoding.</item
+><item
+version="2.1.2"
+>Fixed a bug with reading ISO-8859-1 encoded documents, and Document now includes Output, which it always should have.</item
+><item
+version="2.1.1"
+>Forgot to add output.rb to the repository.</item
+><item
+version="2.1.0"
+>IO optimizations, and support for ISO-8859-1 output. Fixed up pretty-printing a little. Now, if pretty-printing is turned on, text nodes are stripped before printing. This, obviously, can mess up what you&#39;d expect from :respect_whitespace, but pretty printing, by definition, must change your formatting. Updated the tutorial a bit. Please see the section on adding text for a warning, if you&#39;re using a non-UTF-8 compatable encoding. Changed behavior of <code
+>Element.attributes.each</code
+>. It now itterates over key, value pairs, rather than attributes. This was a feature request. Expanded the unit tests and subsequently fixed a number of obscure bugs. I&#39;m distributing the API documentation seperately from the main distribution now, because the API docs constitute nearly 50% of the total distribution size. FIxed a bug in namespace handling in attributes. Completely updated the API documentation for Element, Element.Elements, and Element.Attributes; the rest of the classes to follow. I&#39;m seriously contemplating removing the examples from the API documentation, because most of them are practically duplicates of the unit tests in <code
+>test/</code
+>.</item
+><item
+version="2.0.4"
+>2.0 munged the encoding value in output. This is fixed. I left debugging turned on in XPath in 2.0.2 :-/</item
+><item
+version="2.0.2"
+>Added grouping &#39;(...)&#39; and preceding:: and following:: axis. This means that, aside from functional bugs, XPath should have no missing functionality bugs. Keep in mind that not all Functions are tested, though.</item
+><item
+version="2.0.1"
+>Added some unit tests, and fixed a namespace XPath bug WRT attribute default NS&#39;s. Unicode support was screwing up the upper end of ASCII support; chars between 0xF0 and 0xFD were getting munged. This has been fixed, at the cost of a small amount of speed. Optimized the descendant axes of XPath; it should be significantly faster for &#39;//&#39; and other descendant operations. Added several user contributed unit tests. Re-added QuickPath, the old, non-fully-XPath compliant, yet much faster, XPath processor. Everything is being converted to UTF8 now, and the XML declaration reflects this. See the bugs for more information.</item
+><item
+version="2.0"
+>True XPath support. Finally. XPath is fully implemented now, and passes all of the tests I can throw at it, including complex XPaths such as <code
+>&#39;*[* and not(*/node()) and not(*[not(@style)]) and not(*/@style != */@style)]&#39;</code
+>. It may be slower than it was, but it should be reasonably efficient for what it is doing. The XPath spec doesn&#39;t help, and thwarts most attempts at optimization. Please see the notes on XPath for more information. Oh, and some minor bugs were fixed in the XML parser.</item
+><item
+version="1.2.8"
+>Fixed a bug pointed out by Peter Verhage where the element names weren&#39;t being properly parsed if a namespace was involved.</item
+><item
+version="1.2.7"
+>Fixing problems with the 1.2.6 distribution :-/. Added an &#34;applications using REXML&#34; section in this document -- send me those links! Added rdoc documentation. I&#39;m not using API2XML anymore. I think API2XML was the right model, generating XML rather than HTML (which is what rdoc does), but rdoc does a much better job at parsing Ruby source, and I really didn&#39;t want to go there in the first place. Also, I had forgotten to generate the Tutorial HTML.</item
+><item
+version="1.2.6"
+>Documentation fix (TR). Fixed a bug in Element.add (and, therefore, Element.add_element). Added Robert Feldt&#39;s terse xml constructor to contrib/ (check it out; it&#39;s handy). Tobias discovered a terrible bug, whereby ENTITY wasn&#39;t printing out a final &#39;&#62;&#39;. After a long discussion with a couple of users, and some review of the XML spec, I decided to reverse the default handling of whitespace and pretty printing. REXML now no longer defaults to pretty printing, and preserves whitespace unless otherwise directed. Added provisional namespace support to XPath. XPath is going to require another rewrite.</item
+><item
+version="1.2.5"
+>Bug fixes: doctypes that had spaces between the closing ] and &#62; generated errors. There was a small bug that caused too many newlines to be generated in some output. Eelis van der Weegen (what a great name!) pointed out one of the numerous API errors. Julian requested that add_attributes take both Hash (original) and array of arrays (as produced by StreamListener). I killed the mailing list, accidentally, and fixed it again. Fixed a bug in next_sibling, caused by a combination of mixing overriding &#60;=&#62;() and using Array.index().</item
+><item
+version="1.2.4"
+>Changes since 1.1b: 100% OASIS valid tests passed. UTF-8/16 support. Many bug fixes. to_a() added to Parent and Element.elements. Updated tutorial. Added variable IOSource buffer size, for stream parsing. delete() now fails silently rather than throwing an exception if it can&#39;t find the elemnt to delete. Added a patch to support REXMLBuilder. Reorganized file layout in distribution; added a repackaging program; added the logo.</item
+><item
+version="1.1b"
+>Changes since 1.1a: Stream parsing added. Bug fixes in entity parsing. New XPath implementation, fixing many bugs and making feature complete. Completed whitespace handling, adding much functionality and fixing several bugs. Added convenience methods for inserting elememnts. Improved error reporting. Fixed attribute content to correctly handle quotes and apostrophes. Added mechanisms for handling raw text. Cleaned up utility programs (profile.rb, comparison.rb, etc.). Improved speed a little. Brought REXML up to 98.9% OASIS valid source compliance.</item
+></changelog
+><bugs
+lang="en"
+><p
+>You can submit bug reports and feature requests, and view the list of known bugs, at the <link
+href="http://www.germane-software.com/cgi-bin/rexml"
+>REXML bug report page.</link
+> Please do submit bug reports. If you really want your bug fixed fast, include an runit or Test::Unit method (or methods) that illustrates the problem. At the very least, send me some XML that REXML doesn&#39;t process properly.</p
+><p
+>You don&#39;t have to send an entire test suite -- just the unit test methods. If you don&#39;t send me a unit test, I&#39;ll have to write one myself, which will mean that your bug will take longer to fix.</p
+><p
+>When submitting bug reports, please include the version of Ruby and of REXML that you&#39;re using, and the operating system you&#39;re running on. Just run: <code
+>ruby -vrrexml/rexml -e &#39;p REXML::Version,PLATFORM&#39;</code
+> and paste the results in your bug report.</p
+><item
+>Attributes are not handled internally as nodes, so you can&#39;t perform node functions on them. This will have to change. It&#39;ll also probably mean that, rather than returning attribute values, XPath will return the Attribute nodes.</item
+><item
+>Some of the XPath <em
+>functions</em
+> are untested<footnote
+>Mike Stok has been testing, debugging, and implementing some of these Functions (and he&#39;s been doing a good job) so there&#39;s steady improvement in this area.</footnote
+>. Any XPath functions that don&#39;t work are also bugs... please report them. If you send a unit test that illustrates the problem, I&#39;ll try to fix the problem within a couple of days (if I can) and send you a patch, personally.</item
+><item
+>Accessing prefixes for which there is no defined namespace in an XPath should throw an exception. It currently doesn&#39;t -- it just fails to match.</item
+></bugs
+><todo
+lang="en"
+><item
+>True XML character support</item
+><item
+>RelaxNG support</item
+><item
+>XPath optimizations</item
+><item
+status="request"
+>Japanese encoding support for REXML</item
+><item
+>Add XPath support for streaming APIs</item
+><item
+status="request"
+>XQuery support</item
+><item
+status="request"
+>XUpdate support</item
+><item
+>Make sure namespaces are supported in pull parser</item
+><item
+	>Namespace support in SAX2</item
+><item
+status="request"
+>Add document start and entity replacement events in pull parser</item
+><item
+>Better stream parsing exception handling</item
+><item
+>I&#39;d like to hack XMLRPC4R to use REXML, for my own purposes.</item
+><item
+status="fixed"
+>RPM-ify REXML.  Someone has already done this.</item
+><item
+status="fixed"
+>True DTD handling (in progress).  I&#39;ve given up on this.  DTDs suck.  I&#39;m going straight to RelaxNG support.</item
+><item
+status="fixed"
+>I had a dream the other night about how to speed up XPath considerably; I&#39;ll have to do some testing to see if it would actually work, but I have high hopes. (depends on absolute XPaths).  My dream lied.  This had some interesting possibilities as an optimization for some cases, but was basically unworkable.</item
+><item
+status="fixed"
+>Absolute XPaths attribute for nodes. NOTE: This idea bombed. There is no way (AFAICS) to simplify XPath parsing.</item
+><item
+status="fixed"
+>It looks like people want XPath to return attribute nodes rather than attribute values. Since I haven&#39;t had anyone strongly voting for keeping it the way it is, this will probably change to the requested method.</item
+><item
+status="fixed"
+>Bug report submission mechanism</item
+><item
+status="fixed"
+>RFC/RCR on the REXML page</item
+><item
+status="fixed"
+>Allow the user to add entity conversions</item
+><item
+status="fixed"
+>Support internal DocType ATTLIST processing (required)</item
+><item
+status="fixed"
+>Run the streaming and pull parsing APIs against the OASIS tests</item
+><item
+status="fixed"
+>Link to Kouhei&#39;s translated documentation.</item
+><item
+status="fixed"
+>Extend pretty printing. First, make transitive pretty printing an option. Second, make sure that whitespace isn&#39;t added around/to Text nodes. Third, add :ignore_whitespace_nodes.</item
+><item
+status="fixed"
+>Taint the strings pulled from files.</item
+><item
+status="fixed"
+>Process entity declarations in DocType.</item
+></todo
+></status
+></documentation
+>

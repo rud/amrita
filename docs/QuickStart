@@ -1,0 +1,236 @@
+
+= Amrita quick start guide
+
+== 1. hello world
+
+Amrita has two level APIs.  This sample shows how to use Amrita's high
+level API: Amrita::TemplateFile and Amrita::TemplateText.  They both
+are derived from Amrita::Template which wraps Amrita's low level
+API.
+
+The sample codes in this document use only high level API.
+
+=== HTML template
+
+This is the simplest template for Amrita
+
+  :include: sample/hello/template.html
+
+Amrita treats an element with +id+ attribute as a dynamic element and
+will get the data for it from model data by +id+ attribute's value as
+key.
+
+=== code
+
+This is the code that use the template above and
+produce an output to STDOUT.
+
+  :include: sample/hello/hello.rb
+
+Amrita::Template mixes template with model data and produces output
+html document.
+
+=== output
+
+The output of this code is ...
+
+  <html>
+    <body>
+      <h1>hello world</h1>
+      <p>Amrita is a html template library for Ruby</p>
+    </body>
+  </html>
+
+The text "hello world" is picked up from model data by the key +title+
+and inserted into <tt><h1></tt> which has <tt>id="title"</tt>
+attribute.  And <tt><p id="body">...</p></tt> was modified in the same
+way.
+
+== description
+
+You can use Amrita in these steps.
+
+1. Generate a Amrita::TemplateFile object with the path to template file.
+
+      tmpl = TemplateFile.new("template.html")
+
+2. Make a model data for template expansion
+
+      data = {
+        :title => "hello world",
+        :body => "Amrita is a html template library for Ruby"
+      }
+
+   Model data can be various form but should be fit template's ID
+   structure.  In this case, template has two +id+s and they has value
+   "title" and "body". So model data must provide data for "title" and
+   "body".
+
+3.  call Amrita::Template#expand
+   
+      tmpl.expand(STDOUT, data)
+
+    The first parameter of +expand+ is the _stream_: amrita will put
+    the output to it by << method. _stream_ can be IO including File,
+    or String or Array or any objects that has << method.
+
+---
+
+== 2 list 
+
+This sample show how to make iteration with amrita.
+
+To copy a HTML element, mark it and give an Array to it.
+
+=== code and output
+
+code:
+
+  :include: sample/hello/list.rb
+
+output:
+
+  <ul>        
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>       
+
+
+=== description
+
+   tmpl = TemplateText.new <<END
+   <ul>                         
+     <li id=list1>              
+   </ul>                        
+   END                          
+
+This example uses Amrita::TemplateText class. This class accepts
+template as String instead of File, but can be used in same way to
+Amrita::TemplateFile.
+
+    data = {                 
+       :list1=>[ 1, 2, 3 ]   
+    }
+
+Model data is a Hash who contains an Array as :list1's value. If model
+data of some HTML element is an Array (or an Enumerable object),
+amrita copies that element and expand each by each element of the
+Array.
+                        
+    tmpl.prettyprint = true  
+    tmpl.expand(STDOUT, data)
+
+If prettyprint is set to true, the output is pretty-printed.
+
+---
+== 3. table 
+
+== code and output
+
+code:
+
+  :include: sample/hello/table.rb
+
+output:
+
+  <table>                    
+    <tr>                     
+    <th>name</th>            
+    <th>author</th>          
+    </tr>                    
+    <tr>                     
+    <td>Ruby</td>            
+    <td>matz</td>            
+    </tr>                    
+    <tr>                     
+    <td>perl</td>            
+    <td>Larry Wall</td>      
+    </tr>                    
+    <tr>                     
+    <td>python</td>          
+    <td>Guido van Rossum</td>
+    </tr>                    
+  </table>                   
+
+=== description
+
+   <table border="1">                      
+     <tr><th>name</th><th>author</th></tr> 
+     <tr id="table1">                        
+       <td id="name"><td id="author">      
+     </tr>                                 
+   </table>                                
+   
+
+   data = {                                               
+      :table1=>[                                          
+         { :name=>"Ruby", :author=>"matz" },              
+         { :name=>"perl", :author=>"Larry Wall" },        
+         { :name=>"python", :author=>"Guido van Rossum" },
+      ]                                                   
+   }                                                      
+
+<tt><tr id="table1">...</tr></tt> is copied three times because the
+model data for <tt>:table1</tt> is an Array. And for each iteration,
+the child elements modified by the data <tt>{ :name=>"...",
+:author=>"..." }</tt>
+
+The model data can be complicated object like Array of Hash of Array
+of String....
+
+Amrita applys each structure of model data to HTML template's ID
+structure recursively. So any HTML can be produced by amrita.
+
+---
+
+== 4. conditional
+
+If model data of some element is +nil+ or +false+, it will be deleted.
+Using this, you can select the part of template to be printed.
+
+== code and output
+
+code:
+
+  :include: sample/hello/conditional.rb
+
+output:
+
+  <html>                                                     
+    <body>                                                   
+      <div>                                                  
+        <h1>Group A</h1>                                     
+        <div> This group has only one data: "only_one".      
+        </div>                                               
+      </div>                                                 
+      <div>                                                  
+        <h1>Group B</h1>                                     
+        <div> Here's the list of this group's data.          
+          <ul>                                               
+            <li>one</li>                                     
+            <li>two</li>                                     
+            <li>three</li>                                   
+          </ul>                                              
+        </div>                                               
+      </div>                                                 
+      <div>                                                  
+        <h1>Group C</h1>                                     
+        <div>                                                
+          <em>This group has no data.</em>                   
+        </div>                                               
+      </div>                                                 
+    </body>                                                  
+  </html>                                                    
+
+=== description
+
+There are three <tt><div id=...>...</div></tt> parts in this
+template. Only one of those will be used. This sample sets only one
+key of +no_data+, +one_data+, +many_data+. Hash will be return +nil+
+for the key not set.So the part for +nil+ is deleted.
+
+If +true+ was given as model data for some element, it will be printed
+unmodified.
+
+---

@@ -1,0 +1,199 @@
+
+= Using Amrita with cgi
+
+== summary
+
+This document describes how to use amrita with cgi programing using
+series of sample code.
+
+The sample is a web bookmark system.
+You can see the demo at...
+
+  http://www.walrus-ruby.org/amrita/
+
+
+== The model class
+
+At first, we make the model class. 
+
+  :include: sample/cgi/bmmodel.rb
+
+The class +Item+ is the bookmark items. It has three attributes:
+group, name, url.
+
+The class + BookmarkList is collaction of +Item+. It contains +Item+ s
+separated by groups and is able to save and load the list to/from a
+file.
+
+The model class has nothing to do with HTML. So, it can be unit-tested
+easily.
+
+
+== bookmark.cgi
+
+bookmark.cgi displays bookmark list. And it accepts new bookmark entry.
+
+=== html template file
+
+bookmark.cgi uses this template.
+
+  :include: sample/cgi/bookmark.html
+
+=== code
+
+This is the code of bookmark.cgi
+
+  :include: sample/cgi/bookmark.cgi
+
+=== use a model class object for amrita's model data
+
+  class Item
+    include Amrita::ExpandByMember
+
+    def link
+      e(:a, :href=>url) { url } # <a href="http://www.xxx.com/">http://www.xxx.com/</a>
+    end
+  end
+
+Ruby's class is an open class: it can be edited by user without
+modifing the original code. The class +Item+ is defined in other
+source file.
+
+We make this class include Amrita::ExpandByMember and add a method
+named +link+ so that it's method can be used directly by template.
+
+      <tr id=items>                        
+        <td id="name"></td>                
+        <td id="link"></td>                
+      </tr>                                
+
+We will provide +Item+ objects for id +items+ and because +Item+
+object is a Amrita::ExpandByMember object,id +name+ and +link+ will be
+used as method names.
+
++url+ is a method related to MODEL so it should be defined in model
+class (bmmodel.rb). And +link+ contains information about VIEW (HTML
+presentation) so it's better to put it to the view related
+source(bookmark.cgi).
+
+=== make a forms element
+
+If you add a new item, the next page displayed contains the selection
+of groups with default of the selected group.
+
+The model data here....
+
+    :form => {
+      :group_sel=>e(:select, :name=>"group_sel") {
+        groups.collect do |g|
+          if g == selected_group
+            e(:option, :value=>g, :selected=>"selected") { g }
+          else
+            e(:option, :value=>g) { g }
+          end
+        end
+      },
+    }
+
+generates this html.
+
+   <td>
+     <select name="group_sel">
+       <option value="BBS">BBS</option>
+       <option value="Script Languages" selected="selected">Script Languages</option>
+       <option value="TestXSS">TestXSS</option>
+     </select>
+   </td>
+
+And this HTML is inserted to the element with id +group_sel+.
+
+=== using the compiled code
+
+  Amrita::TemplateFileWithCache::set_cache_dir(CACHE_PATH)
+  tmpl = Amrita::TemplateFileWithCache[TEMPLATE_PATH]
+  tmpl.use_compiler = true
+  tmpl.expand($stdout, make_model_data(bm,group))
+
+Amrita::TemplateFileWithCache is a kind of Amrita::TemplateFile that
+can reuse compiled code stored in cache file.
+
+If there is the cache data matches to +TEMPLATE_PATH+ in +CACHE_PATH+
+and it is younger than template itself, amrita reuse the compiled code
+automatically.
+
+<em>CAUTION: be careful to prevent users to edit the cache file.</em>
+
+Currently, amrita does not check the cache file weather it was created
+by amrita nor unmodified . So if someone can edit it, he or she can
+insert any dangerous code into it to be executed by amrita.
+
+It's *YOUR* resposibility to protect the cache files from
+crackers. Don't use <tt>TemplateFileWithCache::set_cache_dir</tt> if
+you don't understand this.
+
+---
+
+== using amrita script as cgi
+
+This is a viewer of bookmark written in amrita-script.
+
+  :include: sample/cgi/bookmark.ams
+
+How to run in apache.
+
+* set <tt>AllowOverride FileInfo</tt> and <tt>Options ExecCGI</tt> to
+  some +cgi-bin+ Directory directive in httpd.conf
+
+* put bin/amshandler to that directory
+
+* put .htaccess to that directory
+
+    AddHandler amrita-script ams
+    Action amrita-script /amrita/cgi-bin/amshandler
+
+---
+
+== using bookmark.rb under mod_ruby
+
+sample/cgi/bookmark.rb is a script can run under mod_ruby.
+
+  LoadModule ruby_module /usr/lib/apache/mod_ruby.so
+  RubyRequire apache/ruby-run
+
+  Alias /amrita/cgi-bin/ /home/tnaka/cvswork/amrita/sample/cgi/
+
+  <Location /amrita/cgi-bin>
+    Options ExecCGI
+    SetHandler ruby-object
+    RubyHandler Apache::RubyRun.instance
+
+    SetEnv AmritaCacheDir /tmp/bookmark # be careful
+  </Location>
+
+---
+
+== using amrita-script under mod_ruby
+
+   LoadModule ruby_module /usr/lib/apache/mod_ruby.so
+   Alias /amrita/cgi-bin/ /home/tnaka/cvswork/amrita/sample/cgi/
+   RubyRequire amrita/handlers
+   SetEnv AmritaCacheDir /tmp/bookmark
+   <Files *.ams>
+     Options ExecCGI
+     SetHandler ruby-object
+     RubyHandler Amrita::AmsHandler.instance
+   </Files>
+
+
+---
+
+== X
+
+=== code and output
+
+code:
+
+output:
+
+=== description
+

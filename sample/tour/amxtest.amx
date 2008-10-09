@@ -1,0 +1,28 @@
+<amx>
+  <template> 
+    <html>
+      <body>
+        <h1 id="title">title will be inserted here</h1>
+        <span id="body">
+          <p id="paragraph">body text will be inserted here</p>
+        </span>
+        <hr />
+        <span id="time" />
+      </body>
+    </html>
+  </template>
+
+  <method id="get_model">
+    <method_body>
+      {
+         :title => doc.elements['document/head/title'],
+         :body => { 
+           :paragraph => doc.elements.to_a('document/body/paragraph').collect do |n|
+             n.get_text
+           end
+         },
+         :time => Time.now
+      }
+    </method_body>
+  </method>
+</amx>

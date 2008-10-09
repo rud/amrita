@@ -1,0 +1,16 @@
+Title : CKString {
+	value = title;
+	empty = "Elements";
+}
+
+Content : CKContent {}
+
+Link : CKHyperlink {
+	href = "http://www.spice-of-life.net";
+}
+
+Source : CKHyperlink {
+	action = sourcePage;
+	target = "top";
+	query = query;
+}

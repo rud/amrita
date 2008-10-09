@@ -1,0 +1,9 @@
+Index : CKFrame {
+	name = "Index";
+	page = "IndexPage";
+}
+
+Contents : CKFrame {
+	name = "Contents";
+	page = "IntroductionPage";
+}

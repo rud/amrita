@@ -1,0 +1,35 @@
+<CGIKIT NAME=HeaderFooter>
+
+<p><strong>Elements:</strong> CKForm, CKTextField</p>
+
+<p>
+This is a sample for CKForm and CKTextField.<br>
+Request data from form will be binded to instance variable of component automatically.<br>
+</p>
+
+<p>
+CKTextField has 3 types of text field.
+These are "Text Field", "Password" and "Hidden".
+You can select one of types with "type" attribute.
+</p>
+<br>
+
+<p><strong>Example:</strong></p>
+
+<CGIKIT NAME=Form>
+Text Field: <CGIKIT NAME=TextField></CGIKIT><br>
+Password: <CGIKIT NAME=Password></CGIKIT><br>
+Hidden(Can't show, see html source): <CGIKIT NAME=Hidden></CGIKIT><br><br>
+
+<CGIKIT NAME=Submit></CGIKIT>
+</CGIKIT>
+<br>
+
+<p><strong>Result:</strong></p>
+<CGIKIT NAME=Result>
+Text Field: <span id=value1></span><br>
+Password: <span id=value2></span><br>
+Hidden: <span id=value3></span><br>
+</CGIKIT>
+
+</CGIKIT>

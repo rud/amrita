@@ -1,0 +1,153 @@
+= amrita -  html/xhtml テンプレートライブラリ
+
+== 概略
+
+amritaは html/xhtml 用のテンプレートライブラリです。
+テンプレートとモデルデータから html ドキュメントを生成します。
+
+特色
+
+* amritaのテンプレートは <?...?> や <% .. %> のような特殊なタグを含まない
+  純粋な html/xhtml 文書です。
+
+* テンプレートは、ほとんどのHTMLエディタで作成することができます。
+
+* 出力の動的な部分を修正しても、Rubyコードには修正が不要です。
+
+* モデルデータは、 Hash Array 文字列のような標準のRubyのデータです。
+  また、自作のクラスのオブジェクトをそのままモデルデータにすることも可能です。
+
+* 出力はロジックでなくデータでコントロールされます。
+  ですから、テストやデバッグが楽です。(eXtreamProgramingにも向いていると思います)
+
+* 簡単にHTMLテンプレートをRubyのコードにコンパイルすることもできます。
+
+amrita は テンプレートとモデルデータを +id+ 属性によってマッチさせて、
+HTML文書を出力します。
+
+
+テンプレート:
+
+   <table border="1">                      
+     <tr><th>name</th><th>author</th></tr> 
+     <tr id="table1">                        
+       <td id="name"><td id="author">      
+     </tr>                                 
+   </table>                                
+   
+データ:
+
+   data = {                                               
+      :table1=>[                                          
+         { :name=>"Ruby", :author=>"matz" },              
+         { :name=>"perl", :author=>"Larry Wall" },        
+         { :name=>"python", :author=>"Guido van Rossum" },
+      ]                                                   
+   }                                                      
+
+テンプレート + データ = 文書:
+ 
+  <table>                    
+    <tr>                     
+    <th>name</th>            
+    <th>author</th>          
+    </tr>                    
+    <tr>                     
+    <td>Ruby</td>            
+    <td>matz</td>            
+    </tr>                    
+    <tr>                     
+    <td>perl</td>            
+    .......
+
+
+
+== インストール
+
+amritaは strscan 0.6.5以降を必要とします。
+
+amrita は 全てRubyで書かれています。
+三種類のインストール方法があります。
+
+* Makefileを修正してからmake install
+
+    $ make 
+    # make install
+
+* install.rb 使用
+
+    # ruby install.rb
+
+* lib/* を Rubyのライブラリパスにコピーする
+
+== ドキュメントとサンプル
+
+[docs/QuickStart_ja]
+   クイックスタートガイド
+
+[docs/Tour_ja]
+   amritaのさまざまな機能の紹介
+
+[docs/Tour2_ja]
+   実験的な機能の紹介
+
+[docs/XML_ja]
+   XML サポート
+
+[docs/Cgi_ja]
+   amritaをcgiで使用する
+
+[sample/hello/*]
+   docs/QuickStart_ja で紹介している基本的なサンプル
+
+[sample/tour/*]
+   docs/Tour_ja で紹介しているサンプル
+
+[sample/cgi/*]
+   cgi で使用するサンプル
+
+[sample/cgikit/*]
+   CGIKit と amritaを一緒に使う例
+ 
+[sample/bbs/*]
+   テーマ機能を持ったBBS
+
+== 謝辞
+
+* 白井さんの貢献とアドバイスに感謝します。
+
+* amrita の htmlパーサーは MoonWolfさんのコードを参考に作成しました。
+
+* sample/tour/rexml_doc.xml は rexmlのドキュメントから作成しました。
+
+* ams(AmritaScript)は Beyondさんのアイディアを元に作成しました。
+
+== ライセンス
+
+amritaはフリーソフトウエアです。Ruby本体と同様のライセンスで配布しています。
+
+別のライセンス形態が必要な場合は、個別に商用ライセンスを発行することを
+検討しています。詳しくはメールしてください。
+
+Amrita is Copyright (c) 2002 Taku Nakajima.  It is free software, and
+may be redistributed under the terms specified in the README file of
+the Ruby distribution.
+
+If you want to use Amrita in other license form, I will give you a
+BSD-like special license for only specified person and specified
+purpose. Please mail me about it in JAPANESE for detail.
+
+== ToDo と 予定
+
+* AnyData と他のHintの混在を許すようにしたい
+* 出力フォーマットの柔軟性を無くせば、もっと速くなるかも
+
+
+= まとめ
+
+Author::   Taku Nakajima <tnakajima@brain-tokyo.jp>
+Requires:: Ruby 1.6.7 or later
+           strscan 0.6.5 or later
+License::  Copyright (c) 2002 Taku Nakajima
+           Released under Ruby's License
+ LocalWords:  xhtml

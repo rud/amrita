@@ -1,0 +1,133 @@
+
+= amritaをCGIで使う
+
+== 概略
+
+このドキュメントは、いくつかのサンプルを示してamritaをCGIで使う方法を説明します。
+サンプルとしてブックマークのシステムを使います。
+
+このサンプルは下記のURLでデモしています。
+
+http://www.walrus-ruby.org/amrita/
+
+== モデルクラス
+
+最初にモデルクラスを作成します。
+
+  :include: sample/cgi/bmmodel.rb
+
++Item+ というクラスはブックマークの項目に対応します。
+このクラスには、group, name, url. という3つのアトリビュートが存在します。
+
++BookmarkList+ は +Item+ の集まりです。
+グループごとにいくつかの +Item+ を保持していて、
+ファイルに保存したりロードしたりできます。
+
+このモデルクラスはHTMLに関する処理を含んでいません。
+そのため、添付のテストスクリプトのように簡単にユニットテストをすることができます。
+
+== bookmark.cgi
+
+bookmark.cgi はブックマークを表示して、新しいエントリーの入力を受けつけます。
+
+=== テンプレートファイル
+
+bookmark.cgi はこのテンプレートを使用します。
+
+  :include: sample/cgi/bookmark.html
+
+=== コード
+
+これが bookmark.cgi のコードです。
+
+  :include: sample/cgi/bookmark.cgi
+
+=== フォームの要素を作成する
+
+新しい項目を入力した後のグループの選択肢は、
+最後に入力したグループ名がデフォルトに設定されています。
+その処理を行なっているのはここです。
+
+    :form => {
+      :group_sel=>e(:select, :name=>"group_sel") {
+        groups.collect do |g|
+          if g == selected_group
+            e(:option, :value=>g, :selected=>"selected") { g }
+          else
+            e(:option, :value=>g) { g }
+          end
+        end
+      },
+    }
+
+このコードが以下のHTMLを生成します。
+
+   <td>
+     <select name="group_sel">
+       <option value="BBS">BBS</option>
+       <option value="Script Languages" selected="selected">Script Languages</option>
+       <option value="TestXSS">TestXSS</option>
+     </select>
+   </td>
+
+このHTMLがテンプレート内の +group_sel+ に対応する所に挿入されます。
+
+=== コンパイラを使用する
+
+  Amrita::TemplateFileWithCache::set_cache_dir(CACHE_PATH)
+  tmpl = Amrita::TemplateFileWithCache[TEMPLATE_PATH]
+  tmpl.use_compiler = true
+  tmpl.expand($stdout, make_model_data(bm,group))
+
+Amrita::TemplateFileWithCache は Amrita::TemplateFile に
+コンパイルされたコードをキャッシュして再利用する機能を追加したものです。
+
++CACHE_PATH+ の中に+TEMPLATE_PATH+ に対応するキャッシュデータが存在し、
+テンプレートより新しければ、そのコンパイルされたコードを自動的に再利用します。
+
+<em>注意： このディレクトリは他のユーザが修正できないように確実に設定してください。</em>
+
+現状のバージョンでは、amritaはキャッシュの内容をチェックしません。
+もし、ここを修正されるとamritaに任意のコードを実行させることが可能になって非常に危険です。
+
+ここの記述が理解できない場合は、<tt>TemplateFileWithCache::set_cache_dir</tt>は使用しないでください。
+
+---
+
+== Amrita Script をCGIで使用する
+
+これはAmritaScriptで書かれたブックマークの表示プログラムです。
+
+  :include: sample/cgi/bookmark.ams
+
+apache配下で実行するには
+
+  * httpd.confを修正して<tt>AllowOverride FileInfo</tt> と <tt>Options ExecCGI</tt> を+cgi-bin+ ディレクトリに設定してください
+
+  * bin/amshandlerをそのディレクトリにコピーしてください
+
+  * .htaccess に以下の記述を追加します。
+
+    AddHandler amrita-script ams
+    Action amrita-script /amrita/cgi-bin/amshandler
+
+---
+
+== bookmark.cgi を mod_ruby で使用する
+
+bookmark.cgi は mod_ruby配下で実行することもできます。
+httpd.confに下記の指定を行なってください。
+
+  LoadModule ruby_module /usr/lib/apache/mod_ruby.so
+  RubyRequire apache/ruby-run
+
+  Alias /amrita/cgi-bin/ /home/tnaka/cvswork/amrita/sample/cgi/
+
+  <Location /amrita/cgi-bin>
+    Options ExecCGI
+    SetHandler ruby-object
+    RubyHandler Apache::RubyRun.instance
+
+    SetEnv AmritaCacheDir /tmp/bookmark # be careful
+  </Location>
+

@@ -1,0 +1,38 @@
+<%
+
+$title = 'amrita benchmark'
+
+$data = File::open("bench.dat").collect do |line|
+  line.chomp.split('|')
+end
+
+cnt = ENV["CNT"].to_i
+cnt.times do
+%>
+
+<html>
+<head>
+<title><%= $title %></title>
+</head>
+<body>
+<h1><%= $title %></h1>
+<table border="1">
+  <tr><th>name</th><th>author</th><th>webpage</tr>
+<%
+  $data.each do |items|
+%>
+  <tr>
+    <td><%= items[0] %></td>
+    <td><%= items[1] %></td>
+    <td><a href="<%= items[2]%>"><%= items[3] %></a></td>
+  </tr>
+<%
+end
+%>
+</table>
+</body>
+</html>
+
+<%
+end
+%>

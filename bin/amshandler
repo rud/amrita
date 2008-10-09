@@ -1,0 +1,15 @@
+#!/usr/bin/ruby
+
+require "amrita/ams"
+
+fname = ENV["PATH_TRANSLATED"] || ARGV.shift
+exit unless fname
+
+$amrita_template_path = fname
+
+puts "content-type: text/html"
+puts ""
+
+t = Amrita::AmsTemplate[fname]
+t.use_compiler = true
+t.expand(STDOUT)

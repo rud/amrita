@@ -1,0 +1,216 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>Class: Amrita::TagInfo::TagInfoItem</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+
+<table summary="Information on class" width="100%" border="0" cellspacing="0">
+ <tr class="title-row">
+ <td class="big-title-font">
+   <sup><font color="aqua">Class</font></sup> Amrita::TagInfo::TagInfoItem
+ </td>
+ <td align="right">
+   <table summary="layout" cellspacing="0" cellpadding="2">
+     <tr valign="top">
+      <td class="small-title-font">In:</td>
+      <td class="small-title-font">
+        <a href="../../../files/lib/amrita/tag_rb.html" class="aqua">
+lib/amrita/tag.rb
+         </a>
+<br />
+      </td>
+     </tr>
+     <tr>
+      <td class="small-title-font">Parent:</td>
+      <td class="small-title-font">
+Object
+      </td>
+     </tr>
+   </table>
+  </td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+
+
+<table summary="Methods" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Methods</td></tr>
+</table>
+<div class="name-list">
+<a href="#M000172">freeze</a>&nbsp; &nbsp;
+<a href="#M000171">new</a>&nbsp; &nbsp;
+<a href="#M000173">set_url_attr</a>&nbsp; &nbsp;
+<a href="#M000174">url_attr?</a>&nbsp; &nbsp;
+</div>
+
+<table summary="Attributes" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Attributes</td></tr>
+</table>
+<table summary="Attribute details" cellspacing="5">
+     <tr valign="top">
+       <td class="attr-name">:can_be_empty</td>
+       <td align="center" class="attr-rw">&nbsp;[RW]&nbsp;</td>
+       <td><p>
+If true, it will be printed &lt;hr&gt; not &lt;hr&gt;&lt;/hr&gt;
+</p>
+</td>
+     </tr>
+     <tr valign="top">
+       <td class="attr-name">:pptype</td>
+       <td align="center" class="attr-rw">&nbsp;[RW]&nbsp;</td>
+       <td><p>
+pptype specfies pretty print type. This value should be one of these.
+</p>
+<pre>
+       FORMAT 1
+          |.....
+          |&lt;tag&gt;
+          |.....
+          |&lt;/tag&gt;
+          |......
+       FORMAT 2
+          |.....
+          |&lt;tag&gt;......&lt;/tag&gt;
+          |.....
+       FORMAT 3
+          |.....&lt;tag&gt;......&lt;/tag&gt;.....
+          |
+
+ Default is 3
+</pre>
+</td>
+     </tr>
+     <tr valign="top">
+       <td class="attr-name">:tag_class</td>
+       <td align="center" class="attr-rw">&nbsp;[RW]&nbsp;</td>
+       <td><p>
+pptype specfies pretty print type. This value should be one of these.
+</p>
+<pre>
+       FORMAT 1
+          |.....
+          |&lt;tag&gt;
+          |.....
+          |&lt;/tag&gt;
+          |......
+       FORMAT 2
+          |.....
+          |&lt;tag&gt;......&lt;/tag&gt;
+          |.....
+       FORMAT 3
+          |.....&lt;tag&gt;......&lt;/tag&gt;.....
+          |
+
+ Default is 3
+</pre>
+</td>
+     </tr>
+     <tr valign="top">
+       <td class="attr-name">:tagname</td>
+       <td align="center" class="attr-rw">&nbsp;[R]&nbsp;</td>
+       <td></td>
+     </tr>
+</table>
+
+
+
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Class methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000171"></a>
+<b>new</b>(tagname, pptype=3)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/tag.rb, line 70</span>
+      <span class="kw">def</span> initialize(tagname, pptype=3)
+        @pptype = pptype
+        @url_attributes = <span class="kw">nil</span>
+        @can_be_empty = <span class="kw">false</span>
+        @tag_class = <span class="kw">nil</span>
+      <span class="kw">end</span>
+</pre>
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Instance methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000172"></a>
+<b>freeze</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/tag.rb, line 77</span>
+      <span class="kw">def</span> freeze
+        @pptype.freeze
+
+        @url_attributes.freeze
+        @can_be_empty.freeze
+        <span class="kw">super</span>
+        <span class="kw">self</span>
+      <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000173"></a>
+<b>set_url_attr</b>(*names)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/tag.rb, line 86</span>
+      <span class="kw">def</span> set_url_attr(*names)
+        @url_attributes ||= {}
+        names.each <span class="kw">do</span> |n|
+          @url_attributes[n] = <span class="kw">true</span>
+        <span class="kw">end</span>
+      <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000174"></a>
+<b>url_attr?</b>(attr_name)
+</td></tr>
+</table>
+<div class="description">
+<p>
+check if this attribute can have url as value.
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/tag.rb, line 94</span>
+      <span class="kw">def</span> url_attr?(attr_name)
+        <span class="kw">return</span> <span class="kw">false</span> <span class="kw">unless</span> @url_attributes
+        <span class="kw">case</span> attr_name
+        <span class="kw">when</span> <span class="kw">nil</span> 
+          <span class="kw">return</span> <span class="kw">false</span>
+        <span class="kw">when</span> Symbol
+        <span class="kw">when</span> String
+          attr_name = attr_name.intern
+        <span class="kw">else</span>
+          attr_name = attr_name.to_s.intern
+        <span class="kw">end</span>
+        @url_attributes[attr_name]
+      <span class="kw">end</span>
+</pre>
+
+</body>

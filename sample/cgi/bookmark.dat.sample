@@ -1,0 +1,9 @@
+BBS|2ch|http://www.2ch.net/
+BBS|kari|http://kari.to/
+BBS|slashdot|http://slashdot.jp/
+Script Languages|Ruby|http://www.ruby-lang.org/
+Script Languages|Perl|http://www.perl.com/
+Script Languages|Python|http://www.python.org/
+TestXSS|XSS1|http://www.ruby-lang.org/'><script>alert('hello')</script>
+TestXSS|XSS2|http://www.ruby-lang.org/"><script>alert('hello')</script>
+TestXSS|XSS2|javascript:alert('hello')

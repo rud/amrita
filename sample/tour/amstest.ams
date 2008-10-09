@@ -1,0 +1,19 @@
+<html>
+  <amritascript> <!--
+    data = {
+       :title => "hello world",
+       :body => "Amrita is a html template libraly for Ruby",
+       :time => Time.now,
+       :modified => File::stat($amrita_template_path).mtime
+    }
+   //--></amritascript>
+
+   <body>
+      <h1 id=title>title will be inserted here</h1>
+      <p id=body>body text will be inserted here</p>
+      <hr>
+      <span id=time></span>/
+      last-modified <span id=modified></span>
+   </body>
+</html>
+

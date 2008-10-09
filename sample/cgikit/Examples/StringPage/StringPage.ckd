@@ -1,0 +1,7 @@
+HeaderFooter : HeaderFooter {
+	title  = "String";
+}
+
+Amrita : CKAmritaElement {
+}
+

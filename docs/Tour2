@@ -1,0 +1,379 @@
+
+= Amrita tour2
+
+This document describes features not fixed until V1.0.
+So these features may be modified later.
+---
+== parts tempalte (experimental)
+
+=== code and output
+
+code:
+
+  :include: sample/tour/parts1.rb
+
+output:
+
+    <html> 
+      <body>  
+        <h1>Scripting Languages</h1>   
+        <ul> 
+          <li>Ruby</li>
+          <li>Perl</li>
+          <li>Python</li>
+        </ul>  
+        <table>  
+          <tr> 
+          <td>Ruby</td>
+          <td>matz</td>
+          <td><a href="http://www.ruby-lang.org/">http://www.ruby-lang.org/</a></td>
+          </tr>  
+          <tr> 
+          <td>perl</td>
+          <td>Larry Wall</td>
+          <td><a href="http://www.perl.com/">http://www.perl.com/</a></td>
+          </tr>  
+          <tr> 
+          <td>python</td>
+          <td>Guido van Rossum</td>
+          <td><a href="http://www.python.org/">http://www.python.org/</a></td>
+          </tr>  
+        </table> 
+      </body> 
+    </html>
+
+=== description
+
+If you want to add a presentation to a Class like this,
+
+  class Header
+    attr_reader :title
+    def initialize(title)
+      @title = title
+    end
+  end
+
+write a template for it and install the template to the Class.
+
+  <span class=Header>
+    <h1 id=title></h1>  
+  </span>
+
+Now, the Header object has the ability to show itself as a HTML data
+
+   h = Header.new("Scripting Languages")
+
+   puts h.to_s # => <h1>Scripting Languages</h1>   
+
+And if it was used as a part of model data, it will be embeded in the
+HTML document.
+
+You can install the parts template in another module and select
+view-module at runtime. For detail see sample/tour/parts2.rb
+
+---
+
+
+== attribute expand (experimental)
+
+=== code and output
+
+code:
+
+  :include: sample/tour/makeurl2.rb
+
+output:
+  
+   <table border="1">                                                    
+     <tr>                                                                
+     <th>name</th>                                                       
+     <th>author</th>                                                     
+     <th>webpage</th>                                                    
+     </tr>                                                               
+     <tr>                                                                
+     <td>Ruby</td>                                                       
+     <td>matz</td>                                                       
+     <td><a href="http://www.ruby-lang.org/">Ruby Home Page</a></td>     
+     </tr>                                                               
+     <tr>                                                                
+     <td>perl</td>                                                       
+     <td>Larry Wall</td>                                                 
+     <td><a href="http://www.perl.com/">Perl.com</a></td>                
+     </tr>                                                               
+     <tr>                                                                
+     <td>python</td>                                                     
+     <td>Guido van Rossum</td>                                           
+     <td><a href="http://www.python.org/">Python Language Website</a></td>
+     </tr>                                                               
+   </table>                                                              
+
+
+=== description
+
+   tmpl.expand_attr = true
+
+If this attribute was set, then amrita checks all attribute values and
+convert it with model data if the value in template begins "@" like
+"@url".
+
+
+---
+
+== merge two template (experimental)
+
+You can merge template with Amrita::MergeTemplate
+
+=== code and output
+
+code:
+
+  :include: sample/tour/merge_template.rb
+
+output:
+
+  <html>
+    <head>
+      <title>Insertion MockUp</title>
+    </head>
+    <body>
+      This comes from a template fragment:
+      <b>Hello World!</b>
+    </body>
+  </html>
+
+
+=== description
+
+    <body id="data">
+      This comes from a template fragment:
+      <span id="another_template.html#insert_me">This will be replaced.</span>
+    </body>
+
+    model_data = { :data => MergeTemplate.new}
+    tmpl.expand(STDOUT, model_data)
+
+MergeTemplate is a special model object that takes
+<tt>id="filename#tag"</tt> as template insertion.
+
+MergeTemplate read from +filename+ and search +id+ with +tag+ and
+insert it to the original temaplte.
+
+You can recursive expansion to the merged template. For detail see
+sample/tour/merge_tempalte2.rb
+
+---
+
+== cgikit interface (experimental)
+
+CGIKit(http://www.spice-of-life.net/download/cgikit/index_en.html) is
+a CGI application framework with Ruby. This framework bases component
+for development, you will develop CGI application speedy and
+efficiency.
+
+amrita has an interface to cgikit. You can use CKAmritaElement with
+other standard componet of cgikt.
+
+=== code and output
+
+HelloWorld.cgi:
+
+    require 'amrita/cgikit' 
+
+    app = CKApplication.instance
+    app.run
+
+MainPage/MainPage.html
+
+    <html>
+    <head>
+    <title>Hello World</title>
+    </head>
+    <body>
+
+    <h1>
+    <CGIKIT NAME=HelloWorld>
+      <span id="hello"></span>
+    </CGIKIT>
+    </h1>
+
+    </body>
+    </html>
+
+MainPage/MainPage.ckd
+
+    HelloWorld : CKAmritaElement {
+      hello = sayHello;
+    }
+
+MainPage/MainPage.rb
+
+    class MainPage < CKComponent
+	def sayHello
+		"Hello World!"
+	end
+    end
+
+
+output:
+
+    Hello World!
+
+=== description 
+
+The html source between <CGIKIT>...</CGIKIT> is provided as the
+template for amrita if the NAME for it is assined to CKAmritaElement
+in ckd file.
+
+Other source is treated by cgikit as usual. So you can use amrita
+(CKAmritaElement: a cgikit componet with amrita template engine) with
+other cgikit's standard componets.
+
+CKAmritaElement gets the model data from cgikit. 
+
+  * the method of main page object ( parent componet )
+
+    the +id+ attribute value is use for method search.
+    you can assign different name for it in ckd file.
+
+  * a value assigned in ckd file
+
+  * a value dynamically assinged by other componets
+
+I think it's better to use cgikit for FORM and action ( a button can
+be binded to a Ruby method easily) and use amrita for displaying the
+result.
+
+see sample/cgikit/Examples for detail.
+
+---
+
+== Amrita Script (experimental)
+
+AmritaScript is an experimental feature that packs a template with the
+model data for it.
+
+=== code and output
+
+code:
+
+  :include: sample/tour/amstest.ams
+
+output:
+
+  $ ams amstest.ams
+
+  <html>
+    <body>
+      <h1>hello world</h1>
+      <p>Amrita is a html template libraly for Ruby</p>
+      <hr>
+      Wed Aug 07 18:12:38 JST 2002/
+      last-modified Wed Aug 07 08:44:33 JST 2002
+     </body>
+  </html>
+
+=== description
+
+The command +ams+ (provided at bin/ams with amrita) extracts text in
+<tt><amritascript> <!-- ...  //--></amritascript></tt> and +eval+ as a
+Ruby code to use it as a model data for amrita.
+
+
+---
+
+== amx: yet anothor style-sheet for XML (experimental)
+
+amx(AMrita eXtention for XML) is a style-sheet for XML. It converts an
+XML document to HTML. You can use amrita template for specifing the
+output format.
+
+=== code and output
+
+source document:
+
+  :include: sample/tour/amxtest.xml
+  
+template:
+
+  :include: sample/tour/amxtest.amx
+
+output:
+
+   <html>
+      <body>
+        <title>amx sample</title>
+        
+          <p>
+      amx is a XML document.
+      It contains model data as well-formed XML, HTML template 
+      and a small Ruby code map both.
+    </p><p>
+      This is a sample AMX document.
+    </p>
+        
+        <hr />
+        Fri Aug 23 13:35:02 JST 2002
+      </body>
+    </html>
+
+=== description
+
+To use amx, type this command from command line
+
+   $ amx amxtest.xml
+
+The source document can be any well-formed XML document with an
+instruction
+
+  <?amx href="index.amx" ?>
+
+href attribute is the path for amx-template.
+
+amx loads the template file and generate a template object from it.
+The template file is a special XML document and has two parts
+
+* <template> element
+
+  this is a normal amrita template
+
+* <method> element
+
+  by this element, you can define a method in the template
+  object. 
+
+the template object is a Amx::Template object. It will make a model
+data from source document loaded as a REXML DOM tree.
+
+=== more information
+
+The top page of amrita is generated by amx. 
+
+[docs/index.xml] source document
+[docs/index.amx] template document
+[docs/amritadoc.rb] additional Ruby code
+
+detail spec of amx is not fixed yet.
+
+If you want to use amx, feel free to mail me. I will make a sample for
+you if you gave me ....
+
+* source XML document
+* desired output HTML document 
+
+These samples will be attached to the next release of amrita archive.
+
+I will fix the spec and write a document for this feature after I've
+got enough requests and samples.
+
+---
+
+== X
+
+=== code and output
+
+code:
+
+output:
+
+=== description
+

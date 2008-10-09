@@ -1,0 +1,285 @@
+
+= Amrita and XML
+
+== summary
+
+amrita can be used with XML as well as HTML.
+
+* amrita has REXML-based XML parser
+
+  amrita's HTML parser was developed very ad hoc way.  I have found no
+  major problem with it yet , but I think it's good idea to have an
+  option for XML: a strictly defined standard.
+
+* amrita can generate XHTML documents as well as HTML.
+
+  amrita produces xhtml output from xhtml template.
+
+* amrita can treat XML documents as a template.
+  
+  amrita has a little code depend upon HTML's DTD(tag structure), and
+  they can be detached easily. So any XML(not XHTML) document can be
+  used as a template with amrita.
+
+* amrita can get model data from XML documents
+
+  REXML has very natural API for ruby. And it is easy to make model
+  datas for amrita from XML documents read by REXML.
+
+* amx: yet anothor style-sheet for XML
+
+  see docs/Tour2
+
+---
+
+== XHTML Document
+
+=== code and output
+
+code:
+
+  :include: sample/tour/xhtml.rb
+
+output:
+
+   <?xml version="1.0"?>                                           
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+   <html xmlns="http://www.w3.org/1999/xhtml">                     
+     <head>                                                        
+       <title>xhtml sample</title>                                 
+     </head>                                                       
+     <body>                                                        
+       <h1>SAMPLE1</h1>                                            
+       <p>members of this HASH will be inserted here and title</p> 
+       <hr />                                                      
+     </body>                                                       
+   </html>                                                         
+
+
+=== description
+
+Basicaly amrita produce xhtml output from xhtml template, html4.0 from
+html4.0 template.So programers don't need tobother about comformation
+for some paticular standards or browser or devices. Only designers
+(template writers) do.
+
+The only thing programers should do is set asxml flag to Template
+object.If this was set a single tag like <tt><hr></tt> will be printed
+like <tt><hr /></tt>.
+
+---
+
+== XML template
+
+=== code and output
+
+code:
+
+   data = {                                                                                                    
+      :table1=>[                                                                                               
+         { :name=>"Ruby In A Nutshell", :author=>"Yukihiro Matsumoto, David L. Reynolds", :isbn=>"0596002149" }
+         { :name=>"Programming Ruby", :author=>"David Thomas, Andrew Hunt", :isbn=>"0201710897" },             
+         { :name=>"The Ruby Way", :author=>"Hal Fulton", :isbn=>"0672320835" },                                
+      ]                                                                                                        
+   }                                                                                                           
+                                                                                                               
+   xml_tmpl = TemplateText.new <<END                                                                           
+   <booklist>                                                                                                  
+     <book id="table1">                                                                                        
+        <title id="name" />                                                                                    
+        <author id="author" />                                                                                 
+        <isbn id="isbn" />                                                                                     
+     </book>                                                                                                   
+   </booklist>                                                                                                 
+   END                                                                                                         
+                                                                                                               
+   xml_tmpl.xml = true # use REXML-based parser
+   puts "------------XML output ----------------------"                                                        
+   xml_tmpl.expand(STDOUT, data)                                                                               
+                                                                                                               
+output:
+
+   <booklist>
+     <book>
+       <title>Ruby In A Nutshell</title>
+       <author>Yukihiro Matsumoto, David L. Reynolds</author>
+       <isbn>0596002149</isbn>
+     </book><book>
+       <title>Programming Ruby</title>
+       <author>David Thomas, Andrew Hunt</author>
+       ..........
+
+=== description
+
+   xml_tmpl.xml = true # use REXML-based parser
+   puts "------------XML output ----------------------"                                                        
+   xml_tmpl.expand(STDOUT, data)                                                                               
+
+amrita loads templates on demand. If +xml+ flag is set when +expand+
+is called, amrita uses REXML based parser.
+
+You can use single model data for two templates. So single code with
+amrita produce both XML output and HTML output.For detail see
+sample/tour/xml1.rb .
+
+
+---
+
+== Use XML document as a model data
+
+XML document(data) + HTML template ==> HTML document
+
+This may be some kind of style-sheet.
+
+=== code and output
+
+code:
+
+  :include: sample/tour/xml2.rb
+
+output:
+
+   <table border="1">                                                                      
+     <tr>                                                                                  
+     <th>title</th>                                                                        
+     <th>author</th>                                                                       
+     <th>ISBN</th>                                                                         
+     </tr>                                                                                 
+     <tr>                                                                                  
+     <td>Ruby In A Nutshell</td>                                                           
+     <td>Yukihiro Matsumoto<br>David L. Reynolds                                           
+     <br>                                                                                  
+     </td>                                                                                 
+     <td><a href="http://www.amazon.com/exec/obidos/ASIN/0596002149">0596002149</a></td>   
+     </tr>                                                                                 
+     <tr>                                                                                  
+     <td>Programming Ruby</td>                                                             
+     <td>David Thomas<br>Andrew Hunt                                                       
+     <br>                                                                                  
+     </td>                                                                                 
+     <td><a href="http://www.amazon.com/exec/obidos/ASIN/0201710897">0201710897</a></td>   
+     </tr>                                                                                 
+     <tr>                                                                                  
+     <td>The Ruby Way</td>                                                                 
+     <td>Hal Fulton<br>                                                                    
+     </td>                                                                                 
+     <td><a href="http://www.amazon.com/exec/obidos/ASIN/0672320835">0672320835</a></td>   
+     </tr>                                                                                 
+   </table>                                                                                
+
+
+=== description
+
+   table = doc.elements.to_a("booklist/book").collect do |book|                                  
+     {
+       :xxx=>.....
+     }                                                                                           
+   end                                                                                           
+
+This code generate an Array of Hash on <tt><book></tt> element.
+<tt><book></tt> element is a REXML::Element data. So you can get any
+node or attribute you need by REXML's API.
+
+       :title=>book.elements['title'],
+
+<tt>book.elements['title']</tt> is the first <tt><title></tt> element
+of <tt><book></tt> element.
+
+       :authors=>book.elements.to_a('author').collect do |a|                                     
+         { :name=>a }                                                                            
+       end,                               
+
+In this sample, a book has one title but can have many authors. So
+authors shuold be treated as an Array with +to_a+, generate Array
+of Hash by Ruby's standard method +collect+.
+
+       :isbn=>e(:a, :href=>"http://www.amazon.com/exec/obidos/ASIN/#{book.attributes['isbn']}") {
+         book.attributes['isbn']                                                                 
+       }                                                                                         
+
+I want to insert a direct link to amazon.
+e(...) { ... } generate a <tt><a><tt>tag like
+
+    <a href="http://www.amazon.com/exec/obidos/ASIN/0596002149">0596002149</a>
+
+and insert it into template.
+
+
+This idea was extended for document processing in sample/tour/xml3.rb
+and reached to amx. See docs/Tour2 for detaile.
+
+---
+
+== convert a Ruby object to a XML entry
+
+When you map a ruby object to XML entry, some members are mapped to
+attribute and others are to sub elements.
+
+This sample shows how to do it by generate <tt>ls -l</tt> information
+as an XML. 
+
+=== code and output
+
+code:
+
+  :include: sample/tour/filelist.rb
+
+output:
+
+  <file name="CVS" type="directory">
+     <mode>drwxr-xr-x</mode>
+     <times>
+       <ctime>Tue Sep 03 11:07:10 JST 2002</ctime>
+       <mtime>Tue Sep 03 11:07:10 JST 2002</mtime>
+       <atime>Thu Sep 05 07:30:39 JST 2002</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>652250</inode>
+     </unix_inf>
+  </file>
+  <file name="precompile.rb" type="file">
+     <size>2596</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Mon Aug 26 09:12:11 JST 2002</ctime>
+       <mtime>Mon Aug 26 09:12:11 JST 2002</mtime>
+       <atime>Thu Sep 05 09:26:48 JST 2002</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>310411</inode>
+     </unix_inf>
+  </file>
+  <file name="amstest.ams" type="file">
+  .....
+
+
+=== description
+
+    def entry(name)
+      a(:name=>name, :type=>ftype) { self }
+    end
+
+This method generate an AttrArray that put some value of self to XML
+attribute and make sub-elements with itself.
+
+    def size_or_nil
+      size if ftype == "file"
+    end
+
+If the file is not a normal file, this method returns nil and The
+<tt><size></tt> element will be deleted
+
+
+---
+
+== X
+
+=== code and output
+
+code:
+
+output:
+
+=== description
+

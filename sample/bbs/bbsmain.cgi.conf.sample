@@ -1,0 +1,16 @@
+#  $amritabbs_config[:data_dir] = 'data_ja'
+#  $amritabbs_config[:template_dir] = 'template'
+#  $amritabbs_config[:static_contents_dir] = nil
+#  $amritabbs_config[:default_theme] = 'simple'
+#  $amritabbs_config[:default_template] = 'top'
+#  $amritabbs_config[:advertize_html] = 'advertize_sample.html'
+#  $amritabbs_config[:script_name] = ENV['SCRIPT_NAME']
+#  $amritabbs_config[:themes] = %w(simple 2ch_ja 2ch_en slash_en kari_ja)
+
+#  $amritabbs_config[:max_thread_title] = 100
+#  $amritabbs_config[:max_thread_summary] = 5
+
+#  $amritabbs_config[:debug_bbs] = false
+#  $amritabbs_config[:use_compiler] = true
+#  $amritabbs_config[:compiler_cache] = nil
+

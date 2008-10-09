@@ -1,0 +1,179 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>Class: Amrita::PreFormatter</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+
+<table summary="Information on class" width="100%" border="0" cellspacing="0">
+ <tr class="title-row">
+ <td class="big-title-font">
+   <sup><font color="aqua">Class</font></sup> Amrita::PreFormatter
+ </td>
+ <td align="right">
+   <table summary="layout" cellspacing="0" cellpadding="2">
+     <tr valign="top">
+      <td class="small-title-font">In:</td>
+      <td class="small-title-font">
+        <a href="../../files/lib/amrita/format_rb.html" class="aqua">
+lib/amrita/format.rb
+         </a>
+<br />
+      </td>
+     </tr>
+     <tr>
+      <td class="small-title-font">Parent:</td>
+      <td class="small-title-font">
+Object
+      </td>
+     </tr>
+   </table>
+  </td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+
+
+<table summary="Methods" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Methods</td></tr>
+</table>
+<div class="name-list">
+<a href="#M000161">&lt;&lt;</a>&nbsp; &nbsp;
+<a href="#M000159">new</a>&nbsp; &nbsp;
+<a href="#M000160">pre_format</a>&nbsp; &nbsp;
+<a href="#M000162">result</a>&nbsp; &nbsp;
+<a href="#M000163">result_as_top</a>&nbsp; &nbsp;
+</div>
+
+<table summary="Attributes" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Attributes</td></tr>
+</table>
+<table summary="Attribute details" cellspacing="5">
+     <tr valign="top">
+       <td class="attr-name">:expand_attr</td>
+       <td align="center" class="attr-rw">&nbsp;[R]&nbsp;</td>
+       <td></td>
+     </tr>
+     <tr valign="top">
+       <td class="attr-name">:formatter</td>
+       <td align="center" class="attr-rw">&nbsp;[R]&nbsp;</td>
+       <td></td>
+     </tr>
+</table>
+
+
+
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Class methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000159"></a>
+<b>new</b>(formatter, expand_attr=false)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/format.rb, line 465</span>
+    <span class="kw">def</span> initialize(formatter, expand_attr=<span class="kw">false</span>)
+      @formatter = formatter
+      @expand_attr = expand_attr
+      @result_str = <span class="str">&quot;&quot;</span>
+      @result_array = []
+    <span class="kw">end</span>
+</pre>
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Instance methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000160"></a>
+<b>pre_format</b>(node)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/format.rb, line 472</span>
+    <span class="kw">def</span> pre_format(node)
+      @formatter.with_stream(<span class="kw">self</span>) <span class="kw">do</span>
+        node.pre_format1(<span class="kw">self</span>)
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000161"></a>
+<b>&lt;&lt;</b>(x)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/format.rb, line 478</span>
+    <span class="kw">def</span> &lt;&lt;(x)
+      <span class="kw">case</span> x
+      <span class="kw">when</span> Element
+        @result_array &lt;&lt; SanitizedString[@result_str] <span class="kw">unless</span> @result_str == <span class="str">&quot;&quot;</span>
+        @result_array &lt;&lt; x
+        @result_str = <span class="str">&quot;&quot;</span>
+      <span class="kw">when</span> String
+        @result_str &lt;&lt; x
+      <span class="kw">when</span> NodeArray
+        x.array.each <span class="kw">do</span> |n|
+          n.pre_format1(<span class="kw">self</span>)
+        <span class="kw">end</span>
+      <span class="kw">when</span> Node
+        @formatter.format(x)
+      <span class="kw">else</span>
+        @result_str &lt;&lt; x.to_s
+      <span class="kw">end</span>
+      <span class="kw">self</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000162"></a>
+<b>result</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/format.rb, line 498</span>
+    <span class="kw">def</span> result
+      @result_array &lt;&lt; SanitizedString[@result_str] <span class="kw">unless</span> @result_str == <span class="str">&quot;&quot;</span>
+      <span class="kw">case</span> @result_array.size
+      <span class="kw">when</span> 0
+        Null
+      <span class="kw">when</span> 1
+        @result_array[0]
+      <span class="kw">else</span>
+        @result_array
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000163"></a>
+<b>result_as_top</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/format.rb, line 510</span>
+    <span class="kw">def</span> result_as_top
+      Node::to_node(result)
+    <span class="kw">end</span>
+</pre>
+
+</body>

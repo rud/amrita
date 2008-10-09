@@ -1,0 +1,27 @@
+HeaderFooter : HeaderFooter {
+	title = "TextField";
+}
+
+Form : CKForm {
+}
+
+Submit : CKSubmitButton {
+}
+
+TextField : CKTextField {
+	value = value1;
+}
+
+Password : CKTextField {
+	type = "password";
+	value = value2;
+}
+
+Hidden : CKTextField {
+	type = "hidden";
+	value = value3;
+}
+
+Result : CKAmritaElement {
+}
+

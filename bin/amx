@@ -1,0 +1,10 @@
+#!/usr/bin/ruby -Ke
+
+require "amrita/amx"
+
+fname = ARGV.shift
+exit unless fname
+
+doc = Amx::Document.new(REXML::File.new(fname))
+tmpl = Amx::Template[doc]
+tmpl.expand(STDOUT, doc)

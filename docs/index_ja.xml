@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="euc-jp"?>
+<?amx href="index.amx" ?>
+<document>
+    <head>
+      <title>amrita ホームページ</title>
+      <navigation>
+        <link url="index.html">English</link>
+        <link url="http://www.walrus-ruby.org/amrita/cgi-bin/aswiki/aswiki.cgi">amrita-Wiki</link>
+        <link url="http://amrita.s14.xrea.com/amrita-bbs/bbsmain.cgi?&theme=kari_ja&template=board&board=amrita">amrita-bbs(Japanese)</link>
+        <link url="http://amrita.s14.xrea.com/amrita-bbs/bbsmain_en.cgi?&theme=slash_en&template=board&board=amrita">amrita-bbs(English)</link>
+      </navigation>
+      <links>
+        <ref id="stable" url="amrita-1.0.2.tar.gz" />
+        <ref id="documents" url="rdocs/" />
+        <ref id="sources" url="sources/" />
+        <ref id="ChangeLog" url="sources/ChangeLog" />
+        <ref id="QuickStart" url="rdocs/files/docs/QuickStart_ja.html" />
+        <ref id="Tour" url="rdocs/files/docs/Tour_ja.html" />
+        <ref id="Tour2" url="rdocs/files/docs/Tour2_ja.html" />
+        <ref id="XML" url="rdocs/files/docs/XML_ja.html" />
+        <ref id="Cgi" url="rdocs/files/docs/Cgi_ja.html" />
+        <ref id="ML" url="http://www.walrus-ruby.org/amrita/cgi-bin/aswiki/aswiki.cgi?c=v;p=walrus-users" />
+      </links>
+    </head>
+
+    <body>
+
+<section title="amrita ホームページ">
+<section title="amrita とはなにか？">
+
+<p>
+
+
+amrita(アムリタ)は Ruby用のhtml/xhtmlテンプレートライブラリーです。
+テンプレートとモデルデータをかけあわせてHTMLドキュメントを出力します。
+</p>
+
+<p>
+特色
+
+<list>
+<item> アムリタのテンプレートは特殊なタグを含まない普通のHTML文書です。</item>
+
+<item> テンプレートは一般的なHTMLエディタを使用して作成、修正することができます。
+</item>
+
+<item>
+静的なパートだけでなく、動的なパートの見ためを変更してもRubyのコードを変更する必要はありません。
+</item>
+
+<item> モデルデータは、Hash, Array, String等のRubyの標準データです。自作のクラスをモデルデータにすることもできます。</item>
+
+<item> 出力はロジックでなくデータによって制御されます。そのため、テストが非常しやすく、eXtreamProgramingに向いています。</item>
+
+<item> 必要ならば実行の前にテンプレートをRubyのコードにコンパイルすることもできます</item>
+
+</list>
+</p>
+
+</section>
+<section title="ダウンロード">
+<p>amrita V1.0.1以前にはXSS脆弱性があります。pre_formatオプションを使用している場合には、至急 V1.0.2以降にアップデートしてください。</p>
+
+<list>
+
+<item> <link id="stable">stable version</link>
+
+</item>
+
+<item> cvs repository
+
+
+<code>
+    $ cvs -d ":pserver:guest@cvs.walrus-ruby.org:/var/lib/cvs" login 
+     password: (no password type just return)
+    $ cvs -d ":pserver:guest@cvs.walrus-ruby.org:/var/lib/cvs" co amrita
+</code>
+
+</item>
+
+<item><link id="sources">ソースを見る</link></item>
+
+<item><link id="ChangeLog">更新記録</link></item>
+
+</list>
+
+</section>
+
+</section>
+
+<section title="ドキュメント">
+  <list>
+    <item><link id="QuickStart">クィックスタートガイド</link></item>
+    <item><link id="Tour">各機能の紹介</link></item>
+    <item><link id="Tour2">実験的機能の紹介</link></item>
+    <item><link id="XML">amritaをXMLドキュメントで使用する</link></item>
+    <item><link id="Cgi">amritaをCGIで使用する</link></item>
+    <item><link id="documents">APIドキュメント(英語)</link></item>
+    <item><link id="sources">ソース</link></item>
+  </list>
+</section>
+
+<section title="メーリングリスト">
+<p>
+<link id="ML">こちら</link>を参照してください。
+</p>
+</section>
+
+
+</body>
+</document>

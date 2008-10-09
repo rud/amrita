@@ -1,0 +1,506 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>Module: Amrita::Node</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+
+<table summary="Information on class" width="100%" border="0" cellspacing="0">
+ <tr class="title-row">
+ <td class="big-title-font">
+   <sup><font color="aqua">Module</font></sup> Amrita::Node
+ </td>
+ <td align="right">
+   <table summary="layout" cellspacing="0" cellpadding="2">
+     <tr valign="top">
+      <td class="small-title-font">In:</td>
+      <td class="small-title-font">
+        <a href="../../files/lib/amrita/node_expand_rb.html" class="aqua">
+lib/amrita/node_expand.rb
+         </a>
+<br />
+        <a href="../../files/lib/amrita/node_rb.html" class="aqua">
+lib/amrita/node.rb
+         </a>
+<br />
+        <a href="../../files/lib/amrita/format_rb.html" class="aqua">
+lib/amrita/format.rb
+         </a>
+<br />
+        <a href="../../files/lib/amrita/compiler_rb.html" class="aqua">
+lib/amrita/compiler.rb
+         </a>
+<br />
+      </td>
+     </tr>
+   </table>
+  </td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+<div class="description"><p>
+Base module for HTML elements
+</p>
+</div>
+
+
+<table summary="Methods" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Methods</td></tr>
+</table>
+<div class="name-list">
+<a href="#M000044">*</a>&nbsp; &nbsp;
+<a href="#M000043">+</a>&nbsp; &nbsp;
+<a href="#M000034">amrita_expand_node</a>&nbsp; &nbsp;
+<a href="#M000035">apply_to_children</a>&nbsp; &nbsp;
+<a href="#M000037">body</a>&nbsp; &nbsp;
+<a href="#M000039">children</a>&nbsp; &nbsp;
+<a href="#M000052">compile</a>&nbsp; &nbsp;
+<a href="#M000046">each_element</a>&nbsp; &nbsp;
+<a href="#M000047">each_element_with_id</a>&nbsp; &nbsp;
+<a href="#M000045">each_node</a>&nbsp; &nbsp;
+<a href="#M000032">expand</a>&nbsp; &nbsp;
+<a href="#M000033">expand1</a>&nbsp; &nbsp;
+<a href="#M000053">generate_hint_from_template</a>&nbsp; &nbsp;
+<a href="#M000048">has_id_element?</a>&nbsp; &nbsp;
+<a href="#M000041">hid</a>&nbsp; &nbsp;
+<a href="#M000036">init_body</a>&nbsp; &nbsp;
+<a href="#M000042">inspect</a>&nbsp; &nbsp;
+<a href="#M000038">no_child?</a>&nbsp; &nbsp;
+<a href="#M000050">pre_format</a>&nbsp; &nbsp;
+<a href="#M000051">pre_format1</a>&nbsp; &nbsp;
+<a href="#M000040">to_node</a>&nbsp; &nbsp;
+<a href="#M000049">to_s</a>&nbsp; &nbsp;
+</div>
+
+
+
+<table summary="Included modules" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Included modules</td></tr>
+</table>
+<div class="name-list">
+    <span class="method-name">Enumerable</span>
+</div>
+
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Instance methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000032"></a>
+<b>expand</b>(data, context=DefaultContext.clone)
+</td></tr>
+</table>
+<div class="description">
+<p>
+expand self as a template with a model <tt>data</tt>.
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node_expand.rb, line 267</span>
+    <span class="kw">def</span> expand(data, context=DefaultContext.clone)
+      <span class="kw">case</span> data
+      <span class="kw">when</span> <span class="kw">true</span>
+        <span class="kw">self</span>
+      <span class="kw">when</span> <span class="kw">nil</span>, <span class="kw">false</span>
+        Null
+      <span class="kw">when</span> DictionaryData
+        expand1(data, context)
+      <span class="kw">else</span>
+        raise &quot;Amrita::Node#expand accepts only Hash or ExpandByMember as model data (#{data.type} was passed)&quot;
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000033"></a>
+<b>expand1</b>(data, context=DefaultContext.clone)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node_expand.rb, line 280</span>
+    <span class="kw">def</span> expand1(data, context=DefaultContext.clone)
+      data.amrita_expand_node(<span class="kw">self</span>, context)
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000034"></a>
+<b>amrita_expand_node</b>(n, context)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node_expand.rb, line 288</span>
+    <span class="kw">def</span> amrita_expand_node(n, context)
+      <span class="kw">self</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000035"></a>
+<b>apply_to_children</b>(&amp;block)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node_expand.rb, line 292</span>
+    <span class="kw">def</span> apply_to_children(&amp;block)
+      <span class="kw">self</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000036"></a>
+<b>init_body</b>(&amp;block) {|| ...}
+</td></tr>
+</table>
+<div class="description">
+<p>
+set the <tt>block</tt> 's result to <tt>body</tt>
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 179</span>
+    <span class="kw">def</span> init_body(&amp;block)
+      <span class="kw">if</span> block_given?
+        @body = to_node(<span class="kw">yield</span>)
+      <span class="kw">else</span>
+        @body = Null
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000037"></a>
+<b>body</b>()
+</td></tr>
+</table>
+<div class="description">
+<p>
+a <a href="Node.html">Node</a> has NullNode as body before <a
+href="Node.html#M000036">init_body</a> was called.
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 188</span>
+    <span class="kw">def</span> body
+      <span class="kw">if</span> <span class="kw">defined?</span> @body
+        @body
+      <span class="kw">else</span>
+        Null
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000038"></a>
+<b>no_child?</b>()
+</td></tr>
+</table>
+<div class="description">
+<p>
+test if it has any children
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 197</span>
+    <span class="kw">def</span> no_child?
+      body.kind_of?(NullNode)
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000039"></a>
+<b>children</b>()
+</td></tr>
+</table>
+<div class="description">
+<p>
+return an <a href="../Array.html">Array</a> of child <a
+href="Node.html">Node</a> or an empty <a href="../Array.html">Array</a> if
+it does not have a body
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 202</span>
+    <span class="kw">def</span> children
+      <span class="kw">if</span> no_child?
+        []
+      <span class="kw">else</span>
+        [ body ]
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000040"></a>
+<b>to_node</b>(n)
+</td></tr>
+</table>
+<div class="description">
+<p>
+generate a <a href="Node.html">Node</a> object
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 211</span>
+    <span class="kw">def</span> to_node(n)
+      <span class="kw">case</span> n
+      <span class="kw">when</span> <span class="kw">nil</span>, <span class="kw">false</span>
+        Null
+      <span class="kw">when</span> Node
+        n
+      <span class="kw">when</span> Array
+        <span class="kw">case</span> n.size()
+        <span class="kw">when</span> 0
+          Null
+        <span class="kw">when</span> 1
+          to_node(n[0])
+        <span class="kw">else</span>
+          NodeArray.new(*n)
+        <span class="kw">end</span>
+      <span class="kw">else</span>
+        TextElement.new(n.to_s) 
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000041"></a>
+<b>hid</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 232</span>
+    <span class="kw">def</span> hid 
+      <span class="kw">nil</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000042"></a>
+<b>inspect</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 236</span>
+    <span class="kw">def</span> inspect
+      to_ruby
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000043"></a>
+<b>+</b>(node)
+</td></tr>
+</table>
+<div class="description">
+<p>
+<a href="Node.html">Node</a> can be added and they become <a
+href="NodeArray.html">NodeArray</a>
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 241</span>
+    <span class="kw">def</span> +(node)
+      NodeArray.new(<span class="kw">self</span>, to_node(node))
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000044"></a>
+<b>*</b>(n)
+</td></tr>
+</table>
+<div class="description">
+<p>
+Copy a <a href="Node.html">Node</a> n times and generate <a
+href="NodeArray.html">NodeArray</a>
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 246</span>
+    <span class="kw">def</span> *(n)
+      raise &quot;can't #{self.class} * #{n}(#{n.class})&quot; <span class="kw">unless</span> n.kind_of?(Integer)
+      a = (0...n).collect { |i| <span class="kw">self</span> }
+      NodeArray.new(*a)
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000045"></a>
+<b>each_node</b>(&amp;block) {|self| ...}
+</td></tr>
+</table>
+<div class="description">
+<p>
+iterate on self and children
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 253</span>
+    <span class="kw">def</span> each_node(&amp;block)
+      c = children <span class="cmt"># save children before yield</span>
+      <span class="kw">yield</span>(<span class="kw">self</span>)
+      c.each <span class="kw">do</span> |n|
+        n.each_node(&amp;block)
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000046"></a>
+<b>each_element</b>(&amp;block) {|node| ...}
+</td></tr>
+</table>
+<div class="description">
+<p>
+iterate on child Elements
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 262</span>
+    <span class="kw">def</span> each_element(&amp;block)
+      each_node <span class="kw">do</span> |node|
+        <span class="kw">yield</span>(node) <span class="kw">if</span> node.kind_of?(Element)
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000047"></a>
+<b>each_element_with_id</b>(recursive=false, &amp;block)
+</td></tr>
+</table>
+<div class="description">
+<p>
+iterate on child Elements with id. If recursive == false, don't go to
+children of an <a href="Element.html">Element</a> with id.
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 271</span>
+    <span class="kw">def</span> each_element_with_id(recursive=<span class="kw">false</span>, &amp;block)
+      children.each <span class="kw">do</span> |node|
+        node.each_element_with_id(recursive, &amp;block)
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000048"></a>
+<b>has_id_element?</b>()
+</td></tr>
+</table>
+<div class="description">
+<p>
+test if an <a href="Element.html">Element</a> or children has any id
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 278</span>
+    <span class="kw">def</span> has_id_element?
+      each_node <span class="kw">do</span> |n|
+        <span class="kw">next</span> <span class="kw">unless</span> n.kind_of?(Element)
+        <span class="kw">next</span> <span class="kw">unless</span> n.hid
+        <span class="kw">return</span> <span class="kw">true</span>
+      <span class="kw">end</span>
+      <span class="kw">false</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000049"></a>
+<b>to_s</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/format.rb, line 516</span>
+    <span class="kw">def</span> to_s
+      ret = <span class="str">&quot;&quot;</span>
+      SingleLineFormatter.new(ret).format(<span class="kw">self</span>)
+      ret
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000050"></a>
+<b>pre_format</b>(formatter, expand_attr=false)
+</td></tr>
+</table>
+<div class="description">
+<p>
+converts an <a href="Element.html">Element</a> without <tt>id</tt> to
+TextElement to make tree low for performance.
+</p>
+<p>
+A pre-formatted <a href="Node.html">Node</a> tree will be expanded faster
+than original. But, it produces the same output .
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/format.rb, line 527</span>
+    <span class="kw">def</span> pre_format(formatter, expand_attr=<span class="kw">false</span>)
+      raise <span class="str">&quot;pre_format dose not suport pretty-print&quot;</span> <span class="kw">if</span> formatter.kind_of?(PrettyPrintFormatter)
+      prf = PreFormatter.new(formatter, expand_attr)
+      prf.pre_format(<span class="kw">self</span>)
+      prf
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000051"></a>
+<b>pre_format1</b>(prf)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/format.rb, line 534</span>
+    <span class="kw">def</span> pre_format1(prf)
+      prf &lt;&lt; <span class="kw">self</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000052"></a>
+<b>compile</b>(compiler)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/compiler.rb, line 68</span>
+    <span class="kw">def</span> compile(compiler)
+      compiler &lt;&lt; to_s
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000053"></a>
+<b>generate_hint_from_template</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/compiler.rb, line 72</span>
+    <span class="kw">def</span> generate_hint_from_template
+      hash = {}
+      each_element_with_id <span class="kw">do</span> |e|
+        hash[e.hid.intern] = HtmlCompiler::AnyData
+      <span class="kw">end</span>
+      HtmlCompiler::DictionaryHint.new(hash)
+    <span class="kw">end</span>
+</pre>
+
+</body>

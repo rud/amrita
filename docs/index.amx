@@ -1,0 +1,35 @@
+<amx require ="amritadoc" class="AmritaDocumentTemplate">
+
+  <template> 
+    <html>
+      <head>
+        <title id="header_title" />
+      </head>
+      <body>
+        <span id="navigations" />
+        <hr />
+        <div id="sections">
+          <h1 id="title" />
+          <span id="paragraphs" />
+          <div id="sections">
+             <h2 id="title" />
+             <span id="paragraphs" />
+             <div id="sections">
+               <h3 id="title" />
+               <span id="paragraphs" />
+             </div>
+             <hr />
+          </div>
+        </div>
+      </body>
+    </html>
+  </template>
+
+  <method id="navigations">
+    <method_body>
+       doc_root.elements.to_a('head/navigation/link').collect do |x|
+         e(:a, :href=>x.attributes['url']) { x.get_text } + "/"
+       end
+    </method_body>
+  </method>
+</amx>

@@ -1,0 +1,33 @@
+<html>
+<amritascript type="yaml"> <!--
+title:  
+  hello world
+body:   
+  Amrita is a html template libraly for Ruby
+list:
+ - one
+ - two
+ - three
+yaml:
+  description:
+   YAML is a natural fit for object serialization and general datastorage.
+  url:
+    http://yaml4r.sf.net/
+
+//--></amritascript>
+
+   <body>
+      <h1 id=title>title will be inserted here</h1>
+      <p id=body>body text will be inserted here</p>
+      <hr>
+      <ul>
+         <li id=list>
+      </ul>
+      <hr>
+      <div id=yaml>
+         <p id=description></p>
+         for detail see <a href="@url"><span id=url></span></a>
+      </div>
+   </body>
+</html>
+

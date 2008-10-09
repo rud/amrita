@@ -1,0 +1,617 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>File: Tour2_ja</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+<table summary="Information on file" width="100%">
+ <tr class="title-row">
+ <td><table summary="layout" width="100%"><tr>
+   <td class="big-title-font" colspan="2">Tour2_ja</td>
+   <td align="right"><table summary="layout" cellspacing="0" cellpadding="2">
+         <tr>
+           <td  class="small-title-font">Path:</td>
+           <td class="small-title-font">docs/Tour2_ja</td>
+         </tr>
+         <tr>
+           <td class="small-title-font">Modified:</td>
+           <td class="small-title-font">Thu Nov 07 14:53:24 JST 2002</td>
+         </tr>
+        </table>
+    </td></tr></table></td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+<div class="description"><h1>amritaツアー2</h1>
+<p>
+このドキュメントで説明している機能は、V1.0ではFIXしてないものです。
+今後、変更される可能性があります。
+</p>
+<hr size="1"></hr><h2>パーツテンプレート(実験的機能)</h2>
+<h3>コードと出力</h3>
+<p>
+コード:
+</p>
+<pre>
+  require 'amrita/parts'
+  include Amrita
+
+  module Elements
+    class Header
+      attr_reader :title
+      def initialize(title)
+        @title = title
+      end
+    end
+</pre>
+<pre>
+    class List
+      attr_reader :list
+      def initialize(list)
+        @list = list
+      end
+    end
+
+    class RowData
+      attr_reader :lang, :author, :url
+      def initialize(lang, author, url)
+        @lang, @author, @url = lang, author, url
+      end
+</pre>
+<pre>
+      def url_with_link
+        e(:a, :href=&gt;url) { url }
+      end
+    end
+  end
+  include Elements
+
+  parts_template = TemplateText.new &lt;&lt;END
+  &lt;span class=Header&gt;
+    &lt;h1 id=title&gt;&lt;/h1&gt;
+  &lt;/span&gt;
+</pre>
+<pre>
+  &lt;span class=List&gt;
+    &lt;ul&gt;
+      &lt;li id=list&gt;
+    &lt;/ul&gt;
+  &lt;/span&gt;
+
+  &lt;span class=RowData&gt;
+    &lt;tr&gt;
+      &lt;td id=lang&gt;&lt;td id=author&gt;&lt;td id=url_with_link&gt;
+    &lt;/tr&gt;
+  &lt;/span&gt;
+  END
+</pre>
+<pre>
+  parts_template.install_parts_to(Elements)
+
+  document_template = TemplateText.new &lt;&lt;END
+  &lt;html&gt;
+  &lt;body&gt;
+    &lt;span id=header&gt;&lt;/span&gt;
+    &lt;span id=list&gt;&lt;/span&gt;
+</pre>
+<pre>
+    &lt;table&gt;
+      &lt;span id=tabledata&gt;&lt;/span&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+  END
+
+  data = {
+    :header=&gt;Header.new(&quot;Scripting Languages&quot;),
+    :list=&gt;List.new(%w(Ruby Perl Python)),
+    :tabledata=&gt; [
+      RowData.new(&quot;Ruby&quot;, &quot;matz&quot;, &quot;http://www.ruby-lang.org/&quot;),
+      RowData.new(&quot;perl&quot;, &quot;Larry Wall&quot;, &quot;http://www.perl.com/&quot;),
+      RowData.new(&quot;python&quot;, &quot;Guido van Rossum&quot;, &quot;http://www.python.org/&quot;)
+    ]
+  }
+</pre>
+<pre>
+  document_template.prettyprint = true
+  document_template.expand(STDOUT, data)
+</pre>
+<p>
+出力:
+</p>
+<pre>
+    &lt;html&gt;
+      &lt;body&gt;
+        &lt;h1&gt;Scripting Languages&lt;/h1&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Ruby&lt;/li&gt;
+          &lt;li&gt;Perl&lt;/li&gt;
+          &lt;li&gt;Python&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;table&gt;
+          &lt;tr&gt;
+          &lt;td&gt;Ruby&lt;/td&gt;
+          &lt;td&gt;matz&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&quot;http://www.ruby-lang.org/&quot;&gt;http://www.ruby-lang.org/&lt;/a&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+          &lt;td&gt;perl&lt;/td&gt;
+          &lt;td&gt;Larry Wall&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&quot;http://www.perl.com/&quot;&gt;http://www.perl.com/&lt;/a&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr&gt;
+          &lt;td&gt;python&lt;/td&gt;
+          &lt;td&gt;Guido van Rossum&lt;/td&gt;
+          &lt;td&gt;&lt;a href=&quot;http://www.python.org/&quot;&gt;http://www.python.org/&lt;/a&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+</pre>
+<h3>description</h3>
+<p>
+このようなクラスがあったとします。
+</p>
+<pre>
+  class Header
+    attr_reader :title
+    def initialize(title)
+      @title = title
+    end
+  end
+</pre>
+<p>
+次のようなテンプレートを書いて、
+クラスにテンプレートを「インストール」すると…
+</p>
+<pre>
+  &lt;span class=Header&gt;
+    &lt;h1 id=title&gt;&lt;/h1&gt;
+  &lt;/span&gt;
+</pre>
+<p>
+Headerクラスは、このテンプレートに従って、自分自身を展開して表示するこ
+とができるようになります。
+</p>
+<pre>
+   h = Header.new(&quot;Scripting Languages&quot;)
+
+   puts h.to_s # =&gt; &lt;h1&gt;Scripting Languages&lt;/h1&gt;
+</pre>
+<p>
+もし、このオブジェクトをモデルデータの一部分として使用すると、
+HTMLドキュメントに埋めこまれます。
+</p>
+<p>
+別のモジュールにテンプレートをインストールして、
+実行時に使用するモジュールを選択することも可能です。
+</p>
+<p>
+詳細は下記を参照してください。
+</p>
+<pre>
+  sample/tour/parts2.rb
+</pre>
+<hr size="2"></hr><h2>属性展開(実験的機能)</h2>
+<h3>コードと出力</h3>
+<p>
+コード:
+</p>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new &lt;&lt;END
+  &lt;table border=&quot;1&quot;&gt;
+    &lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;author&lt;/th&gt;&lt;th&gt;webpage&lt;/tr&gt;
+    &lt;tr id=table1&gt;
+      &lt;td id=&quot;name&quot;&gt;&lt;/td&gt;
+      &lt;td id=&quot;author&quot;&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a id=&quot;title&quot; href=&quot;@url&quot;&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  END
+</pre>
+<pre>
+  data = {
+     :table1=&gt;[
+      {
+        :name=&gt;&quot;Ruby&quot;,
+        :author=&gt;&quot;matz&quot; ,
+        :url=&gt;&quot;http://www.ruby-lang.org/&quot;,
+        :title=&gt;&quot;Ruby Home Page&quot;
+      },
+      {
+        :name=&gt;&quot;perl&quot;,
+        :author=&gt;&quot;Larry Wall&quot; ,
+        :url=&gt;&quot;http://www.perl.com/&quot;,
+        :title=&gt;&quot;Perl.com&quot;
+      },
+      {
+        :name=&gt;&quot;python&quot;,
+        :author=&gt;&quot;Guido van Rossum&quot; ,
+        :url=&gt;&quot;http://www.python.org/&quot;,
+        :title=&gt;&quot;Python Language Website&quot;
+      },
+     ]
+  }
+  tmpl.prettyprint = true
+  tmpl.use_compiler = true
+  tmpl.expand_attr = true
+  tmpl.set_hint_by_sample_data(data)
+  tmpl.expand(STDOUT, data)
+</pre>
+<p>
+出力:
+</p>
+<pre>
+   &lt;table border=&quot;1&quot;&gt;
+     &lt;tr&gt;
+     &lt;th&gt;name&lt;/th&gt;
+     &lt;th&gt;author&lt;/th&gt;
+     &lt;th&gt;webpage&lt;/th&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+     &lt;td&gt;Ruby&lt;/td&gt;
+     &lt;td&gt;matz&lt;/td&gt;
+     &lt;td&gt;&lt;a href=&quot;http://www.ruby-lang.org/&quot;&gt;Ruby Home Page&lt;/a&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+     &lt;td&gt;perl&lt;/td&gt;
+     &lt;td&gt;Larry Wall&lt;/td&gt;
+     &lt;td&gt;&lt;a href=&quot;http://www.perl.com/&quot;&gt;Perl.com&lt;/a&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+     &lt;td&gt;python&lt;/td&gt;
+     &lt;td&gt;Guido van Rossum&lt;/td&gt;
+     &lt;td&gt;&lt;a href=&quot;http://www.python.org/&quot;&gt;Python Language Website&lt;/a&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/table&gt;
+</pre>
+<h3>説明</h3>
+<pre>
+   tmpl.expand_attr = true
+</pre>
+<p>
+このアトリビュートが設定されていると、
+&quot;@url&quot;のような&quot;@&quot;で始まる文字が設定された属性をチェックします。
+</p>
+<p>
+If this attribute was set, then amrita checks all attribute values and
+convert it with model data if the value in template begins &quot;@&quot;
+like &quot;@url&quot;.
+</p>
+<hr size="1"></hr><h2>CGIKitインターフェース(実験的機能)</h2>
+<p>
+CGIKit(<a
+href="http://www.spice-of-life.net/download/cgikit/index_en.html">www.spice-of-life.net/download/cgikit/index_en.html</a>)
+は RubyによってCGI アプリケーションを開発するためのフレームワークです。
+</p>
+<p>
+amritaには、CGIKitとのインターフェースがあります。<a
+href="../../classes/CKAmritaElement.html">CKAmritaElement</a> を他
+の標準のコンポーネントと同様に使用することで、CGIアプリケーションを手早く開発することができます。
+</p>
+<h3>コード と出力</h3>
+<p>
+HelloWorld.cgi:
+</p>
+<pre>
+    require 'amrita/cgikit'
+
+    app = CKApplication.instance
+    app.run
+</pre>
+<p>
+MainPage/MainPage.html
+</p>
+<pre>
+    &lt;html&gt;
+    &lt;head&gt;
+    &lt;title&gt;Hello World&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+
+    &lt;h1&gt;
+    &lt;CGIKIT NAME=HelloWorld&gt;
+      &lt;span id=&quot;hello&quot;&gt;&lt;/span&gt;
+    &lt;/CGIKIT&gt;
+    &lt;/h1&gt;
+</pre>
+<pre>
+    &lt;/body&gt;
+    &lt;/html&gt;
+</pre>
+<p>
+MainPage/MainPage.ckd
+</p>
+<pre>
+    HelloWorld : CKAmritaElement {
+      hello = sayHello;
+    }
+</pre>
+<p>
+MainPage/MainPage.rb
+</p>
+<pre>
+    class MainPage &lt; CKComponent
+        def sayHello
+                &quot;Hello World!&quot;
+        end
+    end
+</pre>
+<p>
+output:
+</p>
+<pre>
+    Hello World!
+</pre>
+<h3>説明</h3>
+<p>
+ckdファイルで<a
+href="../../classes/CKAmritaElement.html">CKAmritaElement</a>に割りあてられた&lt;CGIKIT&gt;...&lt;/CGIKIT&gt;の間のHTMLソースは、
+amritaにテンプレートとして渡されます。
+</p>
+<p>
+それ以外のHTMLソースはCGIKitが普通通りに処理します。
+ですから、CGIKitの標準コンポーネントと amrita(<a
+href="../../classes/CKAmritaElement.html">CKAmritaElement</a>:
+amritaのテンプレートエンジンを含むCGIKitのコンポーネント)を混在させることが可能になります。
+</p>
+<p>
+<a href="../../classes/CKAmritaElement.html">CKAmritaElement</a> は
+モデルデータをCGIKitのコンポーネントから取り出します。
+具体的には以下のデータを使用します。
+</p>
+<pre>
+  * メインページオブジェクト(親コンポーネント)のメソッド
+
+    +id+ 属性はメソッドサーチに使用されます。
+    ckdファイルで指定することにより他のメソッド名を使用することもできます。
+</pre>
+<pre>
+  * ckdファイルで静的に設定された値
+
+  * 他のコンポーネントによって動的に設定された値
+</pre>
+<p>
+FORMやアクションにはCGIKitを使用して、結果表示にamritaを使うのがよいと思います。
+(CGIKitではフォーム内のボタンをRubyメソッドにバインドできます)
+</p>
+<p>
+詳細は sample/cgikit/Examples を参照してください。
+</p>
+<hr size="1"></hr><h2><a href="../../classes/Amrita.html">Amrita</a> Script (実験的機能)</h2>
+<p>
+<a href="../../classes/Amrita.html">Amrita</a> Script は
+テンプレートの中にモデルデータを含める実験的な機能です。
+</p>
+<h3>コードと出力</h3>
+<p>
+コード:
+</p>
+<pre>
+  &lt;html&gt;
+    &lt;amritascript&gt; &lt;!--
+      data = {
+         :title =&gt; &quot;hello world&quot;,
+         :body =&gt; &quot;Amrita is a html template libraly for Ruby&quot;,
+         :time =&gt; Time.now,
+         :modified =&gt; File::stat($amrita_template_path).mtime
+      }
+     //--&gt;&lt;/amritascript&gt;
+
+     &lt;body&gt;
+        &lt;h1 id=title&gt;title will be inserted here&lt;/h1&gt;
+        &lt;p id=body&gt;body text will be inserted here&lt;/p&gt;
+        &lt;hr&gt;
+        &lt;span id=time&gt;&lt;/span&gt;/
+        last-modified &lt;span id=modified&gt;&lt;/span&gt;
+     &lt;/body&gt;
+  &lt;/html&gt;
+</pre>
+<p>
+出力:
+</p>
+<pre>
+  $ ams amstest.ams
+
+  &lt;html&gt;
+    &lt;body&gt;
+      &lt;h1&gt;hello world&lt;/h1&gt;
+      &lt;p&gt;Amrita is a html template libraly for Ruby&lt;/p&gt;
+      &lt;hr&gt;
+      Wed Aug 07 18:12:38 JST 2002/
+      last-modified Wed Aug 07 08:44:33 JST 2002
+     &lt;/body&gt;
+  &lt;/html&gt;
+</pre>
+<h3>説明</h3>
+<p>
+<tt>ams</tt>
+というコマンド(bin/amsとしてamritaのアーカイブに含まれています)は
+<tt>&lt;amritascript&gt; &lt;!-- ... //--&gt;&lt;/amritascript&gt;</tt>
+の中のテキストを抜き出して、 Rubyのコードとして評価します。
+そして、その評価結果をモデルデータとしてamritaが使用します。
+</p>
+<hr size="1"></hr><h2>amx: もうひとつのXML用スタイルシート(実験的機能)</h2>
+<p>
+amx(AMrita eXtention for XML)はXML用スタイルシートです。
+XMLドキュメントをHTMLに変換します。
+出力の形式を指定するのにamritaのテンプレートが使用できます。
+</p>
+<h3>コードと出力</h3>
+<p>
+source document:
+</p>
+<pre>
+  &lt;?xml version=&quot;1.0&quot; ?&gt;
+  &lt;?amx href=&quot;amxtest.amx&quot; ?&gt;
+  &lt;document&gt;
+    &lt;head&gt;
+      &lt;title&gt;amx sample&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;paragraph&gt;
+        amx is a XML document.
+        It contains model data as well-formed XML, HTML template
+        and a small Ruby code map both.
+      &lt;/paragraph&gt;
+      &lt;paragraph&gt;
+        This is a sample AMX document.
+      &lt;/paragraph&gt;
+    &lt;/body&gt;
+  &lt;/document&gt;
+</pre>
+<p>
+template:
+</p>
+<pre>
+  &lt;amx&gt;
+    &lt;template&gt;
+      &lt;html&gt;
+        &lt;body&gt;
+          &lt;h1 id=&quot;title&quot;&gt;title will be inserted here&lt;/h1&gt;
+          &lt;span id=&quot;body&quot;&gt;
+            &lt;p id=&quot;paragraph&quot;&gt;body text will be inserted here&lt;/p&gt;
+          &lt;/span&gt;
+          &lt;hr /&gt;
+          &lt;span id=&quot;time&quot; /&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    &lt;/template&gt;
+
+    &lt;method id=&quot;get_model&quot;&gt;
+      &lt;method_body&gt;
+        {
+           :title =&gt; doc.elements['document/head/title'],
+           :body =&gt; {
+             :paragraph =&gt; doc.elements.to_a('document/body/paragraph').collect do |n|
+               n.get_text
+             end
+           },
+           :time =&gt; Time.now
+        }
+      &lt;/method_body&gt;
+    &lt;/method&gt;
+  &lt;/amx&gt;
+</pre>
+<p>
+output:
+</p>
+<pre>
+   &lt;html&gt;
+      &lt;body&gt;
+        &lt;title&gt;amx sample&lt;/title&gt;
+
+          &lt;p&gt;
+      amx is a XML document.
+      It contains model data as well-formed XML, HTML template
+      and a small Ruby code map both.
+    &lt;/p&gt;&lt;p&gt;
+      This is a sample AMX document.
+    &lt;/p&gt;
+</pre>
+<pre>
+        &lt;hr /&gt;
+        Fri Aug 23 13:35:02 JST 2002
+      &lt;/body&gt;
+    &lt;/html&gt;
+</pre>
+<h3>説明</h3>
+<p>
+amxを使用するには、下記のコマンドを使用してください。
+</p>
+<pre>
+   $ amx amxtest.xml
+</pre>
+<p>
+ソースドキュメントは、整形式(well-formed)のXMLなら、どんなXML文書でもかまいません。
+ただし、先頭に以下の指示を含む必要があります。
+</p>
+<pre>
+  &lt;?amx href=&quot;index.amx&quot; ?&gt;
+</pre>
+<p>
+href属性で、amxテンプレートへのパスを指定します。
+</p>
+<p>
+amxは指定されたテンプレートファイルを読みこみ、そこからテンプレートオブジェクトを生成します。
+テンプレートファイルは特別なXML文書で、以下の二つのパートに分かれています。
+</p>
+<ul>
+<li>&lt;template&gt; 要素
+
+<p>
+これは(XHTMLで記述された)普通のamritaのテンプレートです
+</p>
+</li>
+<li>&lt;method&gt; 要素
+
+<p>
+この要素を使用すると、テンプレートオブジェクトにメソッドを追加できます。
+</p>
+</li>
+</ul>
+<p>
+テンプレートオブジェクトは、<a
+href="../../classes/Amx/Template.html">Amx::Template</a>
+クラスのオブジェクトです。 <a
+href="../../classes/REXML.html">REXML</a>のDOMツリーとしてロードされたソースドキュメントからモデルデータを作成します。
+</p>
+<h3>補足</h3>
+<p>
+amritaホームページのトップページはamxで生成されています。
+</p>
+<dl>
+<dt>docs/index.xml</dt><dd>ソースドキュメント
+
+</dd>
+<dt>docs/index.amx</dt><dd>テンプレートドキュメント
+
+</dd>
+<dt>docs/amritadoc.rb</dt><dd>Rubyコード
+
+</dd>
+</dl>
+<p>
+amxの詳細な使用はまだ決定していません。
+</p>
+<p>
+もし、amxを使おうと思ったら、気軽に私にメールしてください。
+</p>
+<pre>
+  * ソースXML文書
+  * HTML文書(こういうふうに変換したいというもの)
+</pre>
+<p>
+をもらえたら、どうやったらいいかわかるようなサンプルを作成して、次のリリースに含めます。
+</p>
+<p>
+サンプルがたくさん集まったら、ちゃんとamxのドキュメントを書いて仕様を決定します。
+</p>
+</div>
+
+
+
+
+
+
+
+</body>

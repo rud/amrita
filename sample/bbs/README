@@ -1,0 +1,37 @@
+
+== setup
+
+  1. create directories and make them writable by cgi-script
+
+   data :  bbs data
+   cache:  cache for compiled templates
+
+  2. cp bbsmain.cgi.conf.sample bbsmain.cgi.conf
+
+  3. edit bbsmain.cgi.conf
+  
+
+== data directory structure
+
+
+  1. data/board.txt
+
+     three lines make a group
+       first line     name of board
+       second line    space (reseaved)
+       third line     name of sub-directory
+
+
+  2. data/(boardname)/subject.txt
+
+     empty file writable from cgi-script
+
+     bbs-script will write threads here
+
+
+  3. data/(boardname)/XXXXXXXXXX.dat
+
+     article data file
+
+
+     

@@ -1,0 +1,91 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>Module: Amrita::XMLParser</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+
+<table summary="Information on class" width="100%" border="0" cellspacing="0">
+ <tr class="title-row">
+ <td class="big-title-font">
+   <sup><font color="aqua">Module</font></sup> Amrita::XMLParser
+ </td>
+ <td align="right">
+   <table summary="layout" cellspacing="0" cellpadding="2">
+     <tr valign="top">
+      <td class="small-title-font">In:</td>
+      <td class="small-title-font">
+        <a href="../../files/lib/amrita/xml_rb.html" class="aqua">
+lib/amrita/xml.rb
+         </a>
+<br />
+      </td>
+     </tr>
+   </table>
+  </td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+
+
+<table summary="Methods" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Methods</td></tr>
+</table>
+<div class="name-list">
+<a href="#M000057">parse_file</a>&nbsp; &nbsp;
+<a href="#M000056">parse_text</a>&nbsp; &nbsp;
+</div>
+
+
+
+
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Class methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000056"></a>
+<b>parse_text</b>(text, fname=&quot;&quot;, lno=0, dummy=nil, &amp;block)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/xml.rb, line 93</span>
+    <span class="kw">def</span> XMLParser.parse_text(text, fname=<span class="str">&quot;&quot;</span>, lno=0, dummy=<span class="kw">nil</span>, &amp;block)
+      l = Listener.new(&amp;block) 
+      REXML::Document.parse_stream(text, l)
+      l.result
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000057"></a>
+<b>parse_file</b>(fname, dummy=nil, &amp;block)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/xml.rb, line 99</span>
+    <span class="kw">def</span> XMLParser.parse_file(fname, dummy=<span class="kw">nil</span>, &amp;block)
+      l = Listener.new(&amp;block) 
+      REXML::Document.parse_stream(REXML::File.new(fname), l)
+      l.result
+    <span class="kw">end</span>
+</pre>
+
+</body>

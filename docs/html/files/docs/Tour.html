@@ -1,0 +1,491 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>File: Tour</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+<table summary="Information on file" width="100%">
+ <tr class="title-row">
+ <td><table summary="layout" width="100%"><tr>
+   <td class="big-title-font" colspan="2">Tour</td>
+   <td align="right"><table summary="layout" cellspacing="0" cellpadding="2">
+         <tr>
+           <td  class="small-title-font">Path:</td>
+           <td class="small-title-font">docs/Tour</td>
+         </tr>
+         <tr>
+           <td class="small-title-font">Modified:</td>
+           <td class="small-title-font">Wed Nov 06 15:02:26 JST 2002</td>
+         </tr>
+        </table>
+    </td></tr></table></td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+<div class="description"><h1><a href="../../classes/Amrita.html">Amrita</a> tour</h1>
+<h2>modify attributes of HTML element</h2>
+<h3>code and output</h3>
+<p>
+code:
+</p>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new &lt;&lt;END
+  &lt;table border=&quot;1&quot;&gt;
+    &lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;author&lt;/th&gt;&lt;th&gt;webpage&lt;/tr&gt;
+    &lt;tr id=table1&gt;
+      &lt;td id=&quot;name&quot;&gt;&lt;/td&gt;
+      &lt;td id=&quot;author&quot;&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a id=&quot;webpage&quot;&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  END
+</pre>
+<pre>
+  data = {
+     :table1=&gt;[
+      {
+        :name=&gt;&quot;Ruby&quot;,
+        :author=&gt;&quot;matz&quot; ,
+        :webpage=&gt; a(:href=&gt;&quot;http://www.ruby-lang.org/&quot;) { &quot;Ruby Home Page&quot; },
+      },
+      {
+        :name=&gt;&quot;perl&quot;,
+        :author=&gt;&quot;Larry Wall&quot; ,
+        :webpage=&gt; a(:href=&gt;&quot;http://www.perl.com/&quot;) { &quot;Perl.com&quot; },
+      },
+      {
+        :name=&gt;&quot;python&quot;,
+        :author=&gt;&quot;Guido van Rossum&quot; ,
+        :webpage=&gt; a(:href=&gt;&quot;http://www.python.org/&quot;) { &quot;Python Language Website&quot; },
+      },
+     ]
+  }
+  tmpl.prettyprint = true
+  tmpl.use_compiler = true
+  tmpl.expand(STDOUT, data)
+</pre>
+<p>
+output:
+</p>
+<pre>
+   &lt;table border=&quot;1&quot;&gt;
+     &lt;tr&gt;
+     &lt;th&gt;name&lt;/th&gt;
+     &lt;th&gt;author&lt;/th&gt;
+     &lt;th&gt;webpage&lt;/th&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+     &lt;td&gt;Ruby&lt;/td&gt;
+     &lt;td&gt;matz&lt;/td&gt;
+     &lt;td&gt;&lt;a href=&quot;http://www.ruby-lang.org/&quot;&gt;Ruby Home Page&lt;/a&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+     &lt;td&gt;perl&lt;/td&gt;
+     &lt;td&gt;Larry Wall&lt;/td&gt;
+     &lt;td&gt;&lt;a href=&quot;http://www.perl.com/&quot;&gt;Perl.com&lt;/a&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+     &lt;td&gt;python&lt;/td&gt;
+     &lt;td&gt;Guido van Rossum&lt;/td&gt;
+     &lt;td&gt;&lt;a href=&quot;http://www.python.org/&quot;&gt;Python Language Website&lt;/a&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/table&gt;
+</pre>
+<h3>description</h3>
+<p>
+The Amrita#a() method produce a <a
+href="../../classes/Amrita/AttrArray.html">Amrita::AttrArray</a> object.
+</p>
+<pre>
+    a(:href=&gt;&quot;http://www.ruby-lang.org/&quot;) { &quot;Ruby Home Page&quot; },
+</pre>
+<p>
+When this special object is used for a model data, it modifies HTML
+element's attributes and set text. So if template for this data is ...
+</p>
+<pre>
+    &lt;td&gt;&lt;a id=&quot;webpage&quot;&gt;&lt;/a&gt;&lt;/td&gt;
+</pre>
+<p>
+The output will be....
+</p>
+<pre>
+    &lt;td&gt;&lt;a href=&quot;http://www.ruby-lang.org/&quot;&gt;Ruby Home Page&lt;/a&gt;&lt;/td&gt;
+</pre>
+<p>
+filelist.rb described in <a href="XML.html">docs/XML</a> uses AttrArray
+object too.
+</p>
+<p>
+There is another way to do this, see expand attribute expand in <a
+href="Tour2.html">docs/Tour2</a>
+</p>
+<hr size="1"></hr><h2>proc</h2>
+<p>
+You can give a <tt>proc</tt> as model data to edit element manualy.
+</p>
+<h3>code and output</h3>
+<p>
+code:
+</p>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new &lt;&lt;END
+  &lt;ul&gt;
+    &lt;li id=list&gt;&lt;font id=data&gt;&lt;/font&gt;
+  &lt;/ul&gt;
+  END
+</pre>
+<pre>
+  languages = %w(java Ruby perl python c++ c sml cobol fortran ada lisp)
+  i = 0
+  data = {
+    :list =&gt; languages.collect do |l|
+      {
+        :data =&gt; proc do |elem|
+          if l == &quot;Ruby&quot; # Ruby is special language to me!
+            # use Amrita::Element's methods to edit
+            elem[:color] = &quot;red&quot;
+            elem[:size] = &quot;big&quot;
+            elem.set_text(&quot;I love Ruby!&quot;)
+            # e() is Amrita's method that generates Element
+            e(:em) { elem }
+          else
+            i = i + 1 # i is shared by all procs
+            elem[:color] = i%2 == 0 ? &quot;blue&quot; : &quot;black&quot;
+            elem.set_text(l)
+            elem
+          end
+        end
+      }
+    end
+  }
+
+  tmpl.prettyprint = true
+  tmpl.expand(STDOUT, data)
+</pre>
+<p>
+output:
+</p>
+<pre>
+   &lt;ul&gt;
+     &lt;li&gt;&lt;font color=&quot;black&quot;&gt;java&lt;/font&gt; &lt;/li&gt;
+     &lt;li&gt;&lt;em&gt;&lt;font color=&quot;red&quot; size=&quot;big&quot;&gt;I love Ruby!&lt;/font&gt;&lt;/em&gt; &lt;/li&gt;
+     &lt;li&gt;&lt;font color=&quot;blue&quot;&gt;perl&lt;/font&gt; &lt;/li&gt;
+     ...
+   &lt;/ul&gt;
+</pre>
+<h3>description</h3>
+<p>
+If model data is a Proc object, <a
+href="../../classes/Amrita.html">Amrita</a> calls it with <a
+href="../../classes/Amrita/Element.html">Amrita::Element</a> object that
+represents the HTML element.Amrita will replace the element by result of
+<tt>proc</tt>.
+</p>
+<p>
+In that proc, you can edit Element freely.
+</p>
+<p>
+setting an attribute
+</p>
+<pre>
+     elem[:color] = &quot;red&quot;
+</pre>
+<p>
+setting the text of element
+</p>
+<pre>
+     elem.set_text(&quot;I love Ruby!&quot;)
+</pre>
+<p>
+generate a new Element with Amrita#e method
+</p>
+<pre>
+     e(:em) { elem }
+</pre>
+<p>
+In this case <tt>elem</tt> is <tt>&lt;font color...&gt;I love
+Ruby!&lt;/font&gt;</tt>. The output is wrapped by
+<tt>&lt;em&gt;....&lt;/em&gt;</tt> by e(<tt>:em) { .... }</tt>.
+</p>
+<hr size="1"></hr><h2>use custom classes for model data</h2>
+<h3>code and output</h3>
+<p>
+code:
+</p>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new &lt;&lt;END
+  &lt;span id=&quot;time&quot;&gt;
+    &lt;span id=&quot;year&quot;&gt;&lt;/span&gt;/&lt;span id=&quot;month&quot;&gt;&lt;/span&gt;/&lt;span id=&quot;day&quot;&gt;&lt;/span&gt;
+  &lt;/span&gt;
+  END
+</pre>
+<pre>
+  t = Time.now
+  t.extend Amrita::ExpandByMember
+
+  data = { :time=&gt;t }
+  tmpl.compact_space = true
+  tmpl.expand(STDOUT, data)
+</pre>
+<p>
+output:
+</p>
+<pre>
+  2002/7/17
+</pre>
+<h3>description</h3>
+<p>
+If the model data is <tt>kind_of</tt> <a
+href="../../classes/Amrita/ExpandByMember.html">Amrita::ExpandByMember</a>,
+amrita uses <tt>id</tt> value as a method and call method of that name.
+</p>
+<p>
+In this example, the data for +:time+ is a Ruby's standard Time object but
+it <tt>extend</tt> ExpandByMember. So <tt>id</tt>'s value <tt>year</tt> is
+treated as a method name and amrita calls that method of <tt>t</tt>.
+</p>
+<p>
+So output for tempalte <tt>&lt;span
+id=&quot;year&quot;&gt;&lt;/span&gt;</tt> get result of method call
+<tt>t.yera</tt>: &quot;2002&quot; . Thus the produces the output...
+</p>
+<pre>
+  &lt;span&gt;&lt;span&gt;2002&lt;/span&gt;/&lt;span&gt;7&lt;/span&gt;/&lt;span&gt;17&lt;/span&gt;&lt;/span&gt;
+</pre>
+<p>
+<a href="../../classes/Amrita.html">Amrita</a> deletes
+<tt>&lt;span&gt;</tt> element if there is no attributes after deleteing
+<tt>id</tt> attribute.So last output is
+</p>
+<pre>
+  2002/7/17
+</pre>
+<hr size="1"></hr><h2>precompile</h2>
+<p>
+<a href="../../classes/Amrita.html">Amrita</a> can compile HTML template to
+Ruby code before <tt>expand</tt>.
+</p>
+<h3>code and output</h3>
+<p>
+code(the added code to table.rb) :
+</p>
+<pre>
+  tmpl = TemplateText.new(TEMPLATE)
+  tmpl.use_compiler = true
+  tmpl.set_hint_by_sample_data(data) # optional: optimization to that data
+  tmpl.expand(STDOUT, data)  # with compiled code
+  puts &quot;----code generated by Amrita -----------&quot;
+  puts tmpl.src
+  puts &quot;----code generated by Amrita end -------&quot;
+</pre>
+<p>
+The output is same as table.rb with the benchmark report added. Here's my
+data on a Crusoe TM5600.
+</p>
+<pre>
+  43.068354 seconds for 1000 times without compiling
+  5.078764 seconds for 1000 times with pre-compiled code
+</pre>
+<h3>description</h3>
+<p>
+You only add one line for compiling
+</p>
+<pre>
+  tmpl.use_compiler = true
+</pre>
+<p>
+After this, <tt>expand</tt> method will be executed by compiled code that
+produce (almost) same output.
+</p>
+<p>
+And optionally give a sample data to amrita.
+</p>
+<pre>
+  tmpl.set_hint_by_sample_data(data)
+</pre>
+<p>
+Amrita::HTMLCompiler uses this sample data for optimizing the output code.
+So, if data structure changes after it, you must call <tt><a
+href="../../classes/Amrita/Template.html#M000178">set_hint_by_sample_data</a></tt>
+again.
+</p>
+<p>
+Amrita::HTMLCompiler can produce a code that include interpreter mode
+partially. If you need to compile and some part of model may change
+dynamically, you can give <tt>nil</tt> for data that may change.
+</p>
+<p>
+Amrita::Compiler call Element::expand method in compiled code at that
+point.
+</p>
+<p>
+You can take trade off of speed and flexibility at any point you like.
+</p>
+<hr size="1"></hr><h2>Sanitizing -- anti XSS attack</h2>
+<p>
+<a href="../../classes/Amrita.html">Amrita</a> has a built in <a
+href="../../classes/Amrita/Sanitizer.html">Amrita::Sanitizer</a> to protect
+against XSS(cross site scripting) attacks. <a
+href="../../classes/Amrita/Formatter.html">Amrita::Formatter</a> uses this
+module automaticaly.
+</p>
+<h3>code and output</h3>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new %q[&lt;p id=body&gt;xxx&lt;/p&gt;]
+</pre>
+<pre>
+  data = {
+     :body=&gt;&quot;I want to insert new line.&lt;br&gt;But I can't&quot;
+  }
+
+  tmpl.expand(STDOUT, data) # &lt;p&gt;I want to insert new line.&amp;lt;br&amp;gt;But I can't&lt;/p&gt;
+  puts
+</pre>
+<pre>
+  data = {
+      :body=&gt;noescape { &quot;I can insert new line &lt;br&gt;with escape { ... } &lt;br&gt;But it may be dangerous&quot; }
+  }
+
+  tmpl.expand(STDOUT, data) # &lt;p&gt;I can insert new line &lt;br&gt;with escape { ... } &lt;br&gt;But it may be dangerous&lt;/p&gt;
+  puts
+</pre>
+<pre>
+  data = {
+      # The attacker expected amrita to print &lt;p yyy=&quot;&quot;&gt;&lt;/p&gt;XSS attack&lt;p&gt;But amrita sanitize it!&lt;/p&gt;
+      :body=&gt;a(:yyy=&gt;%q[&quot;&gt;&lt;/p&gt;XSS attack here&lt;p]) { &quot;But amrita sanitize it!&quot; }
+  }
+  tmpl.expand(STDOUT, data) # &lt;p yyy=&quot;&amp;quot;&amp;gt;&amp;lt;/p&amp;gt;XSS attack here&amp;lt;p&quot;&gt;But amrita sanitize it!&lt;/p&gt;
+  puts
+
+  tmpl = TemplateText.new %q[&lt;a id=body&gt;href is treated in a special way&lt;/a&gt;]
+</pre>
+<pre>
+  data = {
+      :body=&gt;a(:href=&gt;%q[javascript:alert('hello')])
+  }
+  tmpl.expand(STDOUT, data) # &lt;a href=&quot;&quot;&gt;href is treated in a special way&lt;/a&gt;
+  puts
+</pre>
+<h3>description</h3>
+<h4>text</h4>
+<p>
+The dangerous characters for xhtml/html text (&lt;&gt;&amp;) are escaped.
+</p>
+<pre>
+    &quot;&lt;abc&gt;&quot; =&gt; &quot;&amp;lt;abc&amp;gt;&quot;
+</pre>
+<h4>attribute value</h4>
+<p>
+The dangerous characters for attribute value (&lt;&gt;&amp;&quot;') are
+escaped.
+</p>
+<h4>special attribute value for URL</h4>
+<p>
+These attribute should be treated in another way because they would have a
+URL value
+</p>
+<ul>
+<li><tt>href</tt> attribute of &lt;a&gt; element
+
+</li>
+<li><tt>src</tt> attribute of &lt;img&gt; element
+
+</li>
+<li><tt>action</tt> attribute of &lt;form&gt; element
+
+</li>
+</ul>
+<p>
+for detail see tag.rb.
+</p>
+<p>
+The value for them will be checked in more strict rule.
+</p>
+<ul>
+<li>They can't have any characters that is not allowd
+
+</li>
+<li>They can't have any schemes that is not allowd
+
+</li>
+</ul>
+<p>
+The values that dose not match to these rules are replaced with nil and
+printed like <tt>&lt;a href=&quot;&quot;&gt;....&lt;/a&gt;</tt>
+</p>
+<p>
+You can confiture which attribute should be treated as URL by defineing
+<tt>setup_taginfo</tt> method like this.
+</p>
+<pre>
+    t = TemplateFile.new ...
+
+    def t.setup_taginfo
+      ret = TagInfo.new
+      ret[:aaa].set_url_attr(:bbb)
+      ret
+    end
+</pre>
+<p>
+Then <tt>bbb</tt> attribute of <tt>aaa</tt> element (&lt;aaa bbb='...'&gt;)
+is sanitized as url.
+</p>
+<h4>turn sanitizing off</h4>
+<p>
+You can turn this feature off by providing a <a
+href="../../classes/Amrita/SanitizedString.html">Amrita::SanitizedString</a>
+object as model data.
+</p>
+<pre>
+    t = TemplateText.new '&lt;p id=&quot;a&quot;&gt;sample_text&lt;/p&gt;'
+    t.expand(STDOUT, { :a=&gt;&quot;&lt;xxx&gt;&quot; })                  # =&gt; &lt;p&gt;&amp;lt;xxx&amp;gt;&lt;/p&gt;
+    t.expand(result, { :a=&gt;SanitizedString[&quot;&lt;xxx&gt;&quot;] }) # =&gt; &lt;p&gt;&lt;xxx&gt;&lt;/p&gt;
+</pre>
+<p>
+You should be careful to sanitize it in your own way when you pass it to
+amrita as SanitizedString.
+</p>
+<p>
+There is another way to disable this feature. If you wrapped model data by
+<tt>escape {...} </tt>, text will be keeped with no change. *USE THIS AT
+YOUR OWN RISK!!!*
+</p>
+<hr size="1"></hr></div>
+
+
+
+
+
+
+
+</body>

@@ -1,0 +1,1 @@
+HeaderFooter : HeaderFooter {	title  = "Checkbox";	source = "CheckboxPage";}Form : CKForm {}Submit : CKSubmitButton {}Button1 : CKCheckbox {	checked = button1;}Button2 : CKCheckbox {	checked = button2;}Button3 : CKCheckbox {	checked = button3;}Result : CKAmritaElement {}

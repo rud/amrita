@@ -1,0 +1,42 @@
+<html id=thread>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+  <title id=title></title>
+</head>
+<body bgcolor=#efefef text=black link=blue alink=red vlink=#660099>
+<span id=theme_selecter></span>
+<a id=navi_board>掲示板へ戻る</a> 
+<a id=navi_all>全部</a> 
+<a id=navi_by100>1-</a> 
+<a id=navi_l50>最新50</a>
+<p><font size=+1 color=red id=title>Rubyについて Part 2 </font>
+<dl>
+<span id=articles>
+<dt><span id=num>1</span> ：<span id=name></span> ：<span id=date></span>
+<dd id=text></dd>
+<br><br>
+</span>
+</dl>
+<font color=red face="Arial"><b>KB</b></font>&nbsp;&nbsp;
+<hr>
+<center><a id=navi_new>新着レスの表示</a></center>
+<hr>
+<a id=navi_board>掲示板へ戻る</a> 
+<a id=navi_all>全部</a> 
+<a id=navi_prev>前100</a> 
+<a id=navi_next>次100</a> 
+<a id=navi_l50>最新50</a>
+
+<form id=newarticle_form method=POST action="">
+<input id=board_key type=hidden name=board>
+<input id=thread type=hidden name=thread>
+<input type=hidden name=action value=newarticle>
+<input type=submit value="書き込む" name="submit"> 
+名前：	<INPUT TYPE=text NAME=from SIZE=19> 
+E-mail<font size=1> (省略可) </font>：<INPUT TYPE=text NAME=mail SIZE=19><br>
+<textarea rows=5 cols=64 wrap=OFF name=message></textarea>
+</form><br>
+
+<p>amrita bbs </p>
+</body>
+</html>

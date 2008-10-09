@@ -1,0 +1,422 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>File: QuickStart</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+<table summary="Information on file" width="100%">
+ <tr class="title-row">
+ <td><table summary="layout" width="100%"><tr>
+   <td class="big-title-font" colspan="2">QuickStart</td>
+   <td align="right"><table summary="layout" cellspacing="0" cellpadding="2">
+         <tr>
+           <td  class="small-title-font">Path:</td>
+           <td class="small-title-font">docs/QuickStart</td>
+         </tr>
+         <tr>
+           <td class="small-title-font">Modified:</td>
+           <td class="small-title-font">Thu Jul 18 09:08:15 JST 2002</td>
+         </tr>
+        </table>
+    </td></tr></table></td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+<div class="description"><h1><a href="../../classes/Amrita.html">Amrita</a> quick start guide</h1>
+<h2>1. hello world</h2>
+<p>
+<a href="../../classes/Amrita.html">Amrita</a> has two level APIs. This
+sample shows how to use <a href="../../classes/Amrita.html">Amrita</a>'s
+high level API: <a
+href="../../classes/Amrita/TemplateFile.html">Amrita::TemplateFile</a> and
+<a href="../../classes/Amrita/TemplateText.html">Amrita::TemplateText</a>.
+They both are derived from <a
+href="../../classes/Amrita/Template.html">Amrita::Template</a> which wraps
+<a href="../../classes/Amrita.html">Amrita</a>'s low level API.
+</p>
+<p>
+The sample codes in this document use only high level API.
+</p>
+<h3>HTML template</h3>
+<p>
+This is the simplest template for <a
+href="../../classes/Amrita.html">Amrita</a>
+</p>
+<pre>
+  &lt;html&gt;
+     &lt;body&gt;
+        &lt;h1 id=title&gt;title will be inserted here&lt;/h1&gt;
+        &lt;p id=body&gt;body text will be inserted here&lt;/p&gt;
+     &lt;/body&gt;
+  &lt;/html&gt;
+</pre>
+<p>
+<a href="../../classes/Amrita.html">Amrita</a> treats an element with
+<tt>id</tt> attribute as a dynamic element and will get the data for it
+from model data by <tt>id</tt> attribute's value as key.
+</p>
+<h3>code</h3>
+<p>
+This is the code that use the template above and produce an output to
+STDOUT.
+</p>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateFile.new(&quot;template.html&quot;)
+  data = {
+     :title =&gt; &quot;hello world&quot;,
+     :body =&gt; &quot;Amrita is a html template libraly for Ruby&quot;
+  }
+  tmpl.expand(STDOUT, data)
+</pre>
+<p>
+<a href="../../classes/Amrita/Template.html">Amrita::Template</a> mixes
+template with model data and produces output html document.
+</p>
+<h3>output</h3>
+<p>
+The output of this code is ...
+</p>
+<pre>
+  &lt;html&gt;
+    &lt;body&gt;
+      &lt;h1&gt;hello world&lt;/h1&gt;
+      &lt;p&gt;Amrita is a html template library for Ruby&lt;/p&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+</pre>
+<p>
+The text &quot;hello world&quot; is picked up from model data by the key
+<tt>title</tt> and inserted into <tt>&lt;h1&gt;</tt> which has
+<tt>id=&quot;title&quot;</tt> attribute. And <tt>&lt;p
+id=&quot;body&quot;&gt;...&lt;/p&gt;</tt> was modified in the same way.
+</p>
+<h2>description</h2>
+<p>
+You can use <a href="../../classes/Amrita.html">Amrita</a> in these steps.
+</p>
+<ol>
+<li>Generate a <a
+href="../../classes/Amrita/TemplateFile.html">Amrita::TemplateFile</a>
+object with the path to template file.
+
+<pre>
+   tmpl = TemplateFile.new(&quot;template.html&quot;)
+</pre>
+</li>
+<li>Make a model data for template expansion
+
+<pre>
+   data = {
+     :title =&gt; &quot;hello world&quot;,
+     :body =&gt; &quot;Amrita is a html template library for Ruby&quot;
+   }
+</pre>
+<p>
+Model data can be various form but should be fit template's ID structure.
+In this case, template has two +id+s and they has value &quot;title&quot;
+and &quot;body&quot;. So model data must provide data for &quot;title&quot;
+and &quot;body&quot;.
+</p>
+</li>
+<li>call Amrita::Template#expand
+
+<pre>
+  tmpl.expand(STDOUT, data)
+</pre>
+<p>
+The first parameter of <tt>expand</tt> is the <em>stream</em>: amrita will
+put the output to it by &lt;&lt; method. <em>stream</em> can be IO
+including File, or String or <a href="../../classes/Array.html">Array</a>
+or any objects that has &lt;&lt; method.
+</p>
+</li>
+</ol>
+<hr size="1"></hr><h2>2 list</h2>
+<p>
+This sample show how to make iteration with amrita.
+</p>
+<p>
+To copy a HTML element, mark it and give an <a
+href="../../classes/Array.html">Array</a> to it.
+</p>
+<h3>code and output</h3>
+<p>
+code:
+</p>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new &lt;&lt;END
+  &lt;ul&gt;
+    &lt;li id=list1&gt;
+  &lt;/ul&gt;
+  END
+</pre>
+<pre>
+  data = {
+     :list1=&gt;[ 1, 2, 3 ]
+  }
+  tmpl.prettyprint = true
+  tmpl.expand(STDOUT, data)
+</pre>
+<p>
+output:
+</p>
+<pre>
+  &lt;ul&gt;
+    &lt;li&gt;1&lt;/li&gt;
+    &lt;li&gt;2&lt;/li&gt;
+    &lt;li&gt;3&lt;/li&gt;
+  &lt;/ul&gt;
+</pre>
+<h3>description</h3>
+<pre>
+   tmpl = TemplateText.new &lt;&lt;END
+   &lt;ul&gt;
+     &lt;li id=list1&gt;
+   &lt;/ul&gt;
+   END
+</pre>
+<p>
+This example uses <a
+href="../../classes/Amrita/TemplateText.html">Amrita::TemplateText</a>
+class. This class accepts template as String instead of File, but can be
+used in same way to <a
+href="../../classes/Amrita/TemplateFile.html">Amrita::TemplateFile</a>.
+</p>
+<pre>
+    data = {
+       :list1=&gt;[ 1, 2, 3 ]
+    }
+</pre>
+<p>
+Model data is a Hash who contains an <a
+href="../../classes/Array.html">Array</a> as :list1's value. If model data
+of some HTML element is an <a href="../../classes/Array.html">Array</a> (or
+an Enumerable object), amrita copies that element and expand each by each
+element of the <a href="../../classes/Array.html">Array</a>.
+</p>
+<pre>
+    tmpl.prettyprint = true
+    tmpl.expand(STDOUT, data)
+</pre>
+<p>
+If prettyprint is set to true, the output is pretty-printed.
+</p>
+<hr size="1"></hr><h2>3. table</h2>
+<h2>code and output</h2>
+<p>
+code:
+</p>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new &lt;&lt;END
+  &lt;table border=&quot;1&quot;&gt;
+    &lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;author&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr id=table1&gt;
+      &lt;td id=&quot;name&quot;&gt;&lt;td id=&quot;author&quot;&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  END
+</pre>
+<pre>
+  data = {
+     :table1=&gt;[
+        { :name=&gt;&quot;Ruby&quot;, :author=&gt;&quot;matz&quot; },
+        { :name=&gt;&quot;perl&quot;, :author=&gt;&quot;Larry Wall&quot; },
+        { :name=&gt;&quot;python&quot;, :author=&gt;&quot;Guido van Rossum&quot; },
+     ]
+  }
+  tmpl.prettyprint = true
+  tmpl.expand(STDOUT, data)
+</pre>
+<p>
+output:
+</p>
+<pre>
+  &lt;table&gt;
+    &lt;tr&gt;
+    &lt;th&gt;name&lt;/th&gt;
+    &lt;th&gt;author&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;Ruby&lt;/td&gt;
+    &lt;td&gt;matz&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;perl&lt;/td&gt;
+    &lt;td&gt;Larry Wall&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+    &lt;td&gt;python&lt;/td&gt;
+    &lt;td&gt;Guido van Rossum&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+</pre>
+<h3>description</h3>
+<pre>
+   &lt;table border=&quot;1&quot;&gt;
+     &lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;author&lt;/th&gt;&lt;/tr&gt;
+     &lt;tr id=&quot;table1&quot;&gt;
+       &lt;td id=&quot;name&quot;&gt;&lt;td id=&quot;author&quot;&gt;
+     &lt;/tr&gt;
+   &lt;/table&gt;
+
+   data = {
+      :table1=&gt;[
+         { :name=&gt;&quot;Ruby&quot;, :author=&gt;&quot;matz&quot; },
+         { :name=&gt;&quot;perl&quot;, :author=&gt;&quot;Larry Wall&quot; },
+         { :name=&gt;&quot;python&quot;, :author=&gt;&quot;Guido van Rossum&quot; },
+      ]
+   }
+</pre>
+<p>
+<tt>&lt;tr id=&quot;table1&quot;&gt;...&lt;/tr&gt;</tt> is copied three
+times because the model data for <tt>:table1</tt> is an <a
+href="../../classes/Array.html">Array</a>. And for each iteration, the
+child elements modified by the data <tt>{ :name=&gt;&quot;...&quot;,
+:author=&gt;&quot;...&quot; }</tt>
+</p>
+<p>
+The model data can be complicated object like <a
+href="../../classes/Array.html">Array</a> of Hash of <a
+href="../../classes/Array.html">Array</a> of String....
+</p>
+<p>
+<a href="../../classes/Amrita.html">Amrita</a> applys each structure of
+model data to HTML template's ID structure recursively. So any HTML can be
+produced by amrita.
+</p>
+<hr size="1"></hr><h2>4. conditional</h2>
+<p>
+If model data of some element is <tt>nil</tt> or <tt>false</tt>, it will be
+deleted. Using this, you can select the part of template to be printed.
+</p>
+<h2>code and output</h2>
+<p>
+code:
+</p>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new &lt;&lt;END
+  &lt;html&gt;
+    &lt;body&gt;
+      &lt;div id=&quot;groups&quot;&gt;
+         &lt;h1 id=&quot;title&quot;&gt;&lt;/h1&gt;
+         &lt;div id=no_data&gt;
+            &lt;em&gt;This group has no data.&lt;/em&gt;
+         &lt;/div&gt;
+         &lt;div id=one_data&gt;
+             This group has only one data: &quot;&lt;span id=data&gt;&lt;/span&gt;&quot;.
+         &lt;/div&gt;
+         &lt;div id=many_data&gt;
+             Here's the list of this group's data.
+             &lt;ul&gt;
+               &lt;li id=list&gt;
+             &lt;/ul&gt;
+         &lt;/div&gt;
+       &lt;/div&gt;
+     &lt;/body&gt;
+  &lt;/html&gt;
+  END
+</pre>
+<pre>
+  data = [
+    [&quot;Group A&quot;, %w(only_one)],
+    [&quot;Group B&quot;, %w(one two three)],
+    [&quot;Group C&quot;, %w()]
+  ]
+
+  model_data = data.collect do |name, d|
+    hash = {:title =&gt; name }
+    case d.size
+    when 0
+      hash[:no_data] = true
+    when 1
+      hash[:one_data] = { :data=&gt;d[0] }
+    else
+      hash[:many_data] = { :list=&gt;d }
+    end
+    hash
+  end
+</pre>
+<pre>
+  tmpl.prettyprint = true
+  tmpl.expand(STDOUT, { :groups=&gt;model_data })
+</pre>
+<p>
+output:
+</p>
+<pre>
+  &lt;html&gt;
+    &lt;body&gt;
+      &lt;div&gt;
+        &lt;h1&gt;Group A&lt;/h1&gt;
+        &lt;div&gt; This group has only one data: &quot;only_one&quot;.
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;h1&gt;Group B&lt;/h1&gt;
+        &lt;div&gt; Here's the list of this group's data.
+          &lt;ul&gt;
+            &lt;li&gt;one&lt;/li&gt;
+            &lt;li&gt;two&lt;/li&gt;
+            &lt;li&gt;three&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;h1&gt;Group C&lt;/h1&gt;
+        &lt;div&gt;
+          &lt;em&gt;This group has no data.&lt;/em&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+</pre>
+<h3>description</h3>
+<p>
+There are three <tt>&lt;div id=...&gt;...&lt;/div&gt;</tt> parts in this
+template. Only one of those will be used. This sample sets only one key of
+<tt>no_data</tt>, <tt>one_data</tt>, <tt>many_data</tt>. Hash will be
+return <tt>nil</tt> for the key not set.So the part for <tt>nil</tt> is
+deleted.
+</p>
+<p>
+If <tt>true</tt> was given as model data for some element, it will be
+printed unmodified.
+</p>
+<hr size="1"></hr></div>
+
+
+
+
+
+
+
+</body>

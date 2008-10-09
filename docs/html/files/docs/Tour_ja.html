@@ -1,0 +1,497 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html><head>
+  <title>File: Tour_ja</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=EUC-JP" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+<table summary="Information on file" width="100%">
+ <tr class="title-row">
+ <td><table summary="layout" width="100%"><tr>
+   <td class="big-title-font" colspan="2">Tour_ja</td>
+   <td align="right"><table summary="layout" cellspacing="0" cellpadding="2">
+         <tr>
+           <td  class="small-title-font">Path:</td>
+           <td class="small-title-font">docs/Tour_ja</td>
+         </tr>
+         <tr>
+           <td class="small-title-font">Modified:</td>
+           <td class="small-title-font">Wed Nov 06 15:02:26 JST 2002</td>
+         </tr>
+        </table>
+    </td></tr></table></td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+<div class="description"><h1><a href="../../classes/Amrita.html">Amrita</a> ツアー</h1>
+<h2>HTML要素の属性を変更する</h2>
+<p>
+href=&quot;...&quot; のような属性の値を変更する方法を説明します。
+</p>
+<p>
+コード:
+</p>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new &lt;&lt;END
+  &lt;table border=&quot;1&quot;&gt;
+    &lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;author&lt;/th&gt;&lt;th&gt;webpage&lt;/tr&gt;
+    &lt;tr id=table1&gt;
+      &lt;td id=&quot;name&quot;&gt;&lt;/td&gt;
+      &lt;td id=&quot;author&quot;&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a id=&quot;webpage&quot;&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  END
+</pre>
+<pre>
+  data = {
+     :table1=&gt;[
+      {
+        :name=&gt;&quot;Ruby&quot;,
+        :author=&gt;&quot;matz&quot; ,
+        :webpage=&gt; a(:href=&gt;&quot;http://www.ruby-lang.org/&quot;) { &quot;Ruby Home Page&quot; },
+      },
+      {
+        :name=&gt;&quot;perl&quot;,
+        :author=&gt;&quot;Larry Wall&quot; ,
+        :webpage=&gt; a(:href=&gt;&quot;http://www.perl.com/&quot;) { &quot;Perl.com&quot; },
+      },
+      {
+        :name=&gt;&quot;python&quot;,
+        :author=&gt;&quot;Guido van Rossum&quot; ,
+        :webpage=&gt; a(:href=&gt;&quot;http://www.python.org/&quot;) { &quot;Python Language Website&quot; },
+      },
+     ]
+  }
+  tmpl.prettyprint = true
+  tmpl.use_compiler = true
+  tmpl.expand(STDOUT, data)
+</pre>
+<p>
+出力:
+</p>
+<pre>
+   &lt;table border=&quot;1&quot;&gt;
+     &lt;tr&gt;
+     &lt;th&gt;name&lt;/th&gt;
+     &lt;th&gt;author&lt;/th&gt;
+     &lt;th&gt;webpage&lt;/th&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+     &lt;td&gt;Ruby&lt;/td&gt;
+     &lt;td&gt;matz&lt;/td&gt;
+     &lt;td&gt;&lt;a href=&quot;http://www.ruby-lang.org/&quot;&gt;Ruby Home Page&lt;/a&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+     &lt;td&gt;perl&lt;/td&gt;
+     &lt;td&gt;Larry Wall&lt;/td&gt;
+     &lt;td&gt;&lt;a href=&quot;http://www.perl.com/&quot;&gt;Perl.com&lt;/a&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+     &lt;tr&gt;
+     &lt;td&gt;python&lt;/td&gt;
+     &lt;td&gt;Guido van Rossum&lt;/td&gt;
+     &lt;td&gt;&lt;a href=&quot;http://www.python.org/&quot;&gt;Python Language Website&lt;/a&gt;&lt;/td&gt;
+     &lt;/tr&gt;
+   &lt;/table&gt;
+</pre>
+<h3>説明</h3>
+<p>
+Amrita#a() というメソッドは <a
+href="../../classes/Amrita/AttrArray.html">Amrita::AttrArray</a>
+という特別なオブジェクトを生成します。
+</p>
+<pre>
+    a(:href=&gt;&quot;http://www.ruby-lang.org/&quot;) { &quot;Ruby Home Page&quot; },
+</pre>
+<p>
+このオブジェクトをモデルデータとして使用すると、HTML要素の属性が変更されます。
+例えば、次のようなテンプレートにこのデータを与えたとすると
+</p>
+<pre>
+    &lt;td&gt;&lt;a id=&quot;webpage&quot;&gt;&lt;/a&gt;&lt;/td&gt;
+</pre>
+<p>
+出力は次のようになります。
+</p>
+<pre>
+    &lt;td&gt;&lt;a href=&quot;http://www.ruby-lang.org/&quot;&gt;Ruby Home Page&lt;/a&gt;&lt;/td&gt;
+</pre>
+<p>
+<a href="XML_ja.html">docs/XML_ja</a> で説明している filelist.rb
+というサンプルもAttrArrayを使用しています。
+</p>
+<p>
+なお、属性の展開は別の方法もあります。詳しくは <a
+href="Tour2.html">docs/Tour2</a>の expand_attr を参照してください。
+</p>
+<hr size="1"></hr><h2>Procオブジェクト</h2>
+<p>
+モデルデータと<tt>id</tt>属性のマッチングというamrita独特の方法は、
+シンプルで見通しのよいコードを可能にします。
+</p>
+<p>
+しかし、そのような方法ではきれいに処理しきれないケースも稀には存在します。
+<tt>Proc</tt> オブジェクトをモデルデータとして与えると、
+手続き的にテンプレートを変更することができます。
+</p>
+<h3>コードと出力</h3>
+<p>
+コード:
+</p>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new &lt;&lt;END
+  &lt;ul&gt;
+    &lt;li id=list&gt;&lt;font id=data&gt;&lt;/font&gt;
+  &lt;/ul&gt;
+  END
+</pre>
+<pre>
+  languages = %w(java Ruby perl python c++ c sml cobol fortran ada lisp)
+  i = 0
+  data = {
+    :list =&gt; languages.collect do |l|
+      {
+        :data =&gt; proc do |elem|
+          if l == &quot;Ruby&quot; # Ruby is special language to me!
+            # use Amrita::Element's methods to edit
+            elem[:color] = &quot;red&quot;
+            elem[:size] = &quot;big&quot;
+            elem.set_text(&quot;I love Ruby!&quot;)
+            # e() is Amrita's method that generates Element
+            e(:em) { elem }
+          else
+            i = i + 1 # i is shared by all procs
+            elem[:color] = i%2 == 0 ? &quot;blue&quot; : &quot;black&quot;
+            elem.set_text(l)
+            elem
+          end
+        end
+      }
+    end
+  }
+
+  tmpl.prettyprint = true
+  tmpl.expand(STDOUT, data)
+</pre>
+<p>
+出力:
+</p>
+<pre>
+   &lt;ul&gt;
+     &lt;li&gt;&lt;font color=&quot;black&quot;&gt;java&lt;/font&gt; &lt;/li&gt;
+     &lt;li&gt;&lt;em&gt;&lt;font color=&quot;red&quot; size=&quot;big&quot;&gt;I love Ruby!&lt;/font&gt;&lt;/em&gt; &lt;/li&gt;
+     &lt;li&gt;&lt;font color=&quot;blue&quot;&gt;perl&lt;/font&gt; &lt;/li&gt;
+     ...
+   &lt;/ul&gt;
+</pre>
+<h3>説明</h3>
+<p>
+モデルデータとして Proc オブジェクトが渡されると、amrita は、
+テンプレート展開時に、そのProc を呼び出します。
+その際、パラメータとして、対応する <tt>id</tt> のついたHTML要素を <a
+href="../../classes/Amrita/Element.html">Amrita::Element</a>
+オブジェクトとして 渡します。 そして、その Proc
+の結果とテンプレートを置き換えます。
+</p>
+<p>
+この Proc
+の中で、次のようなメソッドを利用して自由にテンプレートを編集することができます。
+</p>
+<p>
+属性値の設定
+</p>
+<pre>
+     elem[:color] = &quot;red&quot;
+</pre>
+<p>
+要素にテキストを設定する
+</p>
+<pre>
+     elem.set_text(&quot;I love Ruby!&quot;)
+</pre>
+<p>
+Amrita#e メソッドによって、新しいHTML要素を生成する
+</p>
+<pre>
+     e(:em) { elem }
+</pre>
+<hr size="1"></hr><h2>既存のクラスをモデルデータとして使用する</h2>
+<p>
+Hashや<a href="../../classes/Array.html">Array</a>だけでなく、
+既存のクラス(Rubyの標準クラスやユーザ作成のクラス)のオブジェクトを
+そのまま、amrita のモデルデータとして使用する例です。
+</p>
+<h3>コードと出力</h3>
+<p>
+コード:
+</p>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new &lt;&lt;END
+  &lt;span id=&quot;time&quot;&gt;
+    &lt;span id=&quot;year&quot;&gt;&lt;/span&gt;/&lt;span id=&quot;month&quot;&gt;&lt;/span&gt;/&lt;span id=&quot;day&quot;&gt;&lt;/span&gt;
+  &lt;/span&gt;
+  END
+</pre>
+<pre>
+  t = Time.now
+  t.extend Amrita::ExpandByMember
+
+  data = { :time=&gt;t }
+  tmpl.compact_space = true
+  tmpl.expand(STDOUT, data)
+</pre>
+<p>
+出力:
+</p>
+<pre>
+  2002/7/17
+</pre>
+<h3>説明</h3>
+<p>
+もし、モデルデータが、<a
+href="../../classes/Amrita/ExpandByMember.html">Amrita::ExpandByMember</a>
+というモジュールをincludeしていたら、 amritaは <tt>id</tt>
+属性の値をメソッド名と見なして、そのメソッドを呼び出します。
+</p>
+<p>
+このサンプルでは、+:time+に対応するデータは、Rubyの標準のTimeオブジェクトですが、
+ExpandByMember モジュールを <tt>extend</tt> しています。 それで
+<tt>id</tt>属性の値である <tt>year</tt> をメソッド名とみなし、amritaは
+<tt>t</tt> に対してそのメソッドの呼出しを行います。
+</p>
+<p>
+その結果 <tt>&lt;span id=&quot;year&quot;&gt;&lt;/span&gt;</tt>
+という部分は、 <tt>t.year</tt>の結果 &quot;2002&quot;
+と展開され、他の部分も同様に処理されて 次のように展開されます。
+</p>
+<pre>
+  &lt;span&gt;&lt;span&gt;2002&lt;/span&gt;/&lt;span&gt;7&lt;/span&gt;/&lt;span&gt;17&lt;/span&gt;&lt;/span&gt;
+</pre>
+<p>
+amrita は 属性のない <tt>&lt;span&gt;</tt>
+要素は削除しますので、最終的な出力は
+</p>
+<pre>
+  2002/7/17
+</pre>
+<p>
+となります。
+</p>
+<hr size="1"></hr><h2>プリコンパイル</h2>
+<p>
+amrita は HTML テンプレートを Ruby のコードにコンパイルすることができます。
+</p>
+<h3>コードと出力</h3>
+<p>
+コード(table.rbにコンパイラを利用するために追加した分) :
+</p>
+<pre>
+  tmpl = TemplateText.new(TEMPLATE)
+  tmpl.use_compiler = true
+  tmpl.set_hint_by_sample_data(data) # これを追加するとそのデータに最適化します
+  tmpl.expand(STDOUT, data)  #
+  puts &quot;----code generated by Amrita -----------&quot;
+  puts tmpl.src
+  puts &quot;----code generated by Amrita end -------&quot;
+</pre>
+<p>
+出力はtable.rbと同じですが、
+コンパイラの出力したコードとベンチマークが追加されています。
+</p>
+<p>
+私のCrusoe TM5600マシン(NEC Lavie MX)での出力は次のようになります。
+</p>
+<pre>
+  43.068354 seconds for 1000 times without compiling
+  5.078764 seconds for 1000 times with pre-compiled code
+</pre>
+<h3>説明</h3>
+<p>
+基本的には、次の処理を追加するだけでコンパイラを使用できます。
+</p>
+<pre>
+  tmpl.use_compiler = true
+</pre>
+<p>
+これ以降、<tt>expand</tt> はコンパイルされたRubyコードで実行されます。
+prettyprintの機能はサポートされませんが、それ以外は同じ結果になります。
+</p>
+<p>
+サンプルデータを利用して、最適化を行なうには次の処理を追加します。
+</p>
+<p>
+And optionally give a sample data to amrita.
+</p>
+<pre>
+  tmpl.set_hint_by_sample_data(data)
+</pre>
+<p>
+amritaのコンパイラは、このデータを出力するRubyコードの最適化のために使用します。
+従って、渡すモデルデータの構造が変化したら、再度、その新しいデータで <tt><a
+href="../../classes/Amrita/Template.html#M000178">set_hint_by_sample_data</a></tt>
+を呼ぶ必要があります。
+</p>
+<p>
+amritaのコンパイラは、部分的にインタプリターモードを含めることができます。
+部分的に構造が変化するデータに対して、コンパイラを利用する場合は、
+サンプルデータの対応する部分(変化するデータの部分)に、<tt>nil</tt>
+を渡す必要があります。
+</p>
+<p>
+コンパイラは、Element::expandを使用するようなコードを対応する個所に挿入します。
+</p>
+<p>
+このようにして、スピードと柔軟性のトレードオフを自由に取ることができます。
+</p>
+<hr size="1"></hr><h2>サニタイジン -- XSS(クロスサイトスクリプティング)対策</h2>
+<p>
+amritaには、XSS対策として、<a
+href="../../classes/Amrita/Sanitizer.html">Amrita::Sanitizer</a>
+というモジュールが組込まれています。 <a
+href="../../classes/Amrita/Formatter.html">Amrita::Formatter</a>
+は自動的にこのモジュールを使用します。
+</p>
+<p>
+I will provide interface to controle sanitizer through <a
+href="../../classes/Amrita/Template.html">Amrita::Template</a> in future
+release.
+</p>
+<h3>コードと出力</h3>
+<pre>
+  require &quot;amrita/template&quot;
+  include Amrita
+
+  tmpl = TemplateText.new %q[&lt;p id=body&gt;xxx&lt;/p&gt;]
+</pre>
+<pre>
+  data = {
+     :body=&gt;&quot;I want to insert new line.&lt;br&gt;But I can't&quot;
+  }
+
+  tmpl.expand(STDOUT, data) # &lt;p&gt;I want to insert new line.&amp;lt;br&amp;gt;But I can't&lt;/p&gt;
+  puts
+</pre>
+<pre>
+  data = {
+      :body=&gt;noescape { &quot;I can insert new line &lt;br&gt;with escape { ... } &lt;br&gt;But it may be dangerous&quot; }
+  }
+
+  tmpl.expand(STDOUT, data) # &lt;p&gt;I can insert new line &lt;br&gt;with escape { ... } &lt;br&gt;But it may be dangerous&lt;/p&gt;
+  puts
+</pre>
+<pre>
+  data = {
+      # The attacker expected amrita to print &lt;p yyy=&quot;&quot;&gt;&lt;/p&gt;XSS attack&lt;p&gt;But amrita sanitize it!&lt;/p&gt;
+      :body=&gt;a(:yyy=&gt;%q[&quot;&gt;&lt;/p&gt;XSS attack here&lt;p]) { &quot;But amrita sanitize it!&quot; }
+  }
+  tmpl.expand(STDOUT, data) # &lt;p yyy=&quot;&amp;quot;&amp;gt;&amp;lt;/p&amp;gt;XSS attack here&amp;lt;p&quot;&gt;But amrita sanitize it!&lt;/p&gt;
+  puts
+
+  tmpl = TemplateText.new %q[&lt;a id=body&gt;href is treated in a special way&lt;/a&gt;]
+</pre>
+<pre>
+  data = {
+      :body=&gt;a(:href=&gt;%q[javascript:alert('hello')])
+  }
+  tmpl.expand(STDOUT, data) # &lt;a href=&quot;&quot;&gt;href is treated in a special way&lt;/a&gt;
+  puts
+</pre>
+<h3>説明</h3>
+<h4>テキスト</h4>
+<p>
+xhtml/html 内のテキストとして危険な文字、(&lt;&gt;&amp;)
+は自動的にエスケープされます。
+</p>
+<pre>
+    &quot;&lt;abc&gt;&quot; =&gt; &quot;&amp;lt;abc&amp;gt;&quot;
+</pre>
+<h4>属性値</h4>
+<p>
+属性値として危険な文字(&lt;&gt;&amp;&quot;')は自動的にエスケープされます。
+</p>
+<h4>URL用属性の扱い</h4>
+<p>
+&lt;a&gt;要素のhref属性のように、URLを値として持つ属性値は、特別扱いされます。
+</p>
+<p>
+どの属性値を特別扱いするかの詳細については tag.rb を参照してください。
+</p>
+<p>
+これらの属性値は、次のようにさらに厳しくチェックされます。
+</p>
+<pre>
+  * これらの属性値はURLとして許されない文字を持つことはできません
+  * これらの属性値は許されないスキーム(プロトコル指定)を持つことはできません
+</pre>
+<p>
+この条件に違反したら、属性値はnilで置きかえられて<tt>&lt;a
+href=&quot;&quot;&gt;....&lt;/a&gt;</tt> のように表示されます。
+</p>
+<p>
+次のように<tt>setup_taginfo</tt> メソッドを再定義することで、
+どの属性をこのように扱うか(扱わないか)をカスタマイズすることができます。
+</p>
+<pre>
+    t = TemplateFile.new ...
+
+    def t.setup_taginfo
+      ret = TagInfo.new
+      ret[:aaa].set_url_attr(:bbb)
+      ret
+    end
+</pre>
+<p>
+この場合は、
+<tt>aaa</tt>要素の<tt>bbb</tt>属性は、URLとしてサニタイズされます。
+</p>
+<h4>サニタイズを無効にする</h4>
+<p>
+<a
+href="../../classes/Amrita/SanitizedString.html">Amrita::SanitizedString</a>
+オブジェクトをモデルデータに含めることで、
+この機能を無効にすることができます。
+</p>
+<pre>
+    t = TemplateText.new '&lt;p id=&quot;a&quot;&gt;sample_text&lt;/p&gt;'
+    t.expand(STDOUT, { :a=&gt;&quot;&lt;xxx&gt;&quot; })                  # =&gt; &lt;p&gt;&amp;lt;xxx&amp;gt;&lt;/p&gt;
+    t.expand(result, { :a=&gt;SanitizedString[&quot;&lt;xxx&gt;&quot;] }) # =&gt; &lt;p&gt;&lt;xxx&gt;&lt;/p&gt;
+</pre>
+<p>
+この機能は、XSSについて理解した上で、充分注意して利用してください。
+</p>
+<p>
+なお、もうひとつ同様の効果を得る方法として、<tt>escape {...} </tt> で
+モデルデータを囲むという方法もあります。
+</p>
+<hr size="1"></hr></div>
+
+
+
+
+
+
+
+</body>

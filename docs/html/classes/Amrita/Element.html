@@ -1,0 +1,547 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>Class: Amrita::Element</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+
+<table summary="Information on class" width="100%" border="0" cellspacing="0">
+ <tr class="title-row">
+ <td class="big-title-font">
+   <sup><font color="aqua">Class</font></sup> Amrita::Element
+ </td>
+ <td align="right">
+   <table summary="layout" cellspacing="0" cellpadding="2">
+     <tr valign="top">
+      <td class="small-title-font">In:</td>
+      <td class="small-title-font">
+        <a href="../../files/lib/amrita/node_expand_rb.html" class="aqua">
+lib/amrita/node_expand.rb
+         </a>
+<br />
+        <a href="../../files/lib/amrita/node_rb.html" class="aqua">
+lib/amrita/node.rb
+         </a>
+<br />
+        <a href="../../files/lib/amrita/format_rb.html" class="aqua">
+lib/amrita/format.rb
+         </a>
+<br />
+        <a href="../../files/lib/amrita/compiler_rb.html" class="aqua">
+lib/amrita/compiler.rb
+         </a>
+<br />
+      </td>
+     </tr>
+     <tr>
+      <td class="small-title-font">Parent:</td>
+      <td class="small-title-font">
+Object
+      </td>
+     </tr>
+   </table>
+  </td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+<div class="description"><p>
+represents HTML element
+</p>
+</div>
+
+
+<table summary="Methods" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Methods</td></tr>
+</table>
+<div class="name-list">
+<a href="#M000198">&lt;&lt;</a>&nbsp; &nbsp;
+<a href="#M000189">==</a>&nbsp; &nbsp;
+<a href="#M000200">[]</a>&nbsp; &nbsp;
+<a href="#M000201">[]=</a>&nbsp; &nbsp;
+<a href="#M000187">apply_to_children</a>&nbsp; &nbsp;
+<a href="#M000191">clone</a>&nbsp; &nbsp;
+<a href="#M000202">delete_attr!</a>&nbsp; &nbsp;
+<a href="#M000204">each_element_with_id</a>&nbsp; &nbsp;
+<a href="#M000194">hid</a>&nbsp; &nbsp;
+<a href="#M000195">hide_hid!</a>&nbsp; &nbsp;
+<a href="#M000199">include_attr?</a>&nbsp; &nbsp;
+<a href="#M000188">new</a>&nbsp; &nbsp;
+<a href="#M000197">put_attr</a>&nbsp; &nbsp;
+<a href="#M000190">set_tag</a>&nbsp; &nbsp;
+<a href="#M000205">set_text</a>&nbsp; &nbsp;
+<a href="#M000196">tagclass</a>&nbsp; &nbsp;
+<a href="#M000192">tagname</a>&nbsp; &nbsp;
+<a href="#M000193">tagname_symbol</a>&nbsp; &nbsp;
+<a href="#M000203">to_ruby</a>&nbsp; &nbsp;
+</div>
+
+<table summary="Attributes" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Attributes</td></tr>
+</table>
+<table summary="Attribute details" cellspacing="5">
+     <tr valign="top">
+       <td class="attr-name">:attrs</td>
+       <td align="center" class="attr-rw">&nbsp;[R]&nbsp;</td>
+       <td><p>
+return attributes as <a href="AttrArray.html">AttrArray</a>
+</p>
+<p>
+CAUTION! never edit result of this method. use []= instead. because it may
+be shared by other Elements.
+</p>
+</td>
+     </tr>
+     <tr valign="top">
+       <td class="attr-name">:attrs_hash</td>
+       <td align="center" class="attr-rw">&nbsp;[R]&nbsp;</td>
+       <td><p>
+CAUTION! internal use only
+</p>
+</td>
+     </tr>
+     <tr valign="top">
+       <td class="attr-name">:body</td>
+       <td align="center" class="attr-rw">&nbsp;[R]&nbsp;</td>
+       <td><p>
+return body
+</p>
+</td>
+     </tr>
+     <tr valign="top">
+       <td class="attr-name">:hide_hid</td>
+       <td align="center" class="attr-rw">&nbsp;[R]&nbsp;</td>
+       <td><p>
+CAUTION! internal use only
+</p>
+</td>
+     </tr>
+</table>
+
+
+<table summary="Included modules" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Included modules</td></tr>
+</table>
+<div class="name-list">
+    <span class="method-name">Node</span>
+</div>
+
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Class methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000188"></a>
+<b>new</b>(tagname_or_element, *a, &amp;block)
+</td></tr>
+</table>
+<div class="description">
+<p>
+Don't use <a href="Element.html">Element</a>.new. Use Amrita#e instead.
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 340</span>
+    <span class="kw">def</span> initialize(tagname_or_element, *a, &amp;block)
+      <span class="kw">case</span> tagname_or_element
+      <span class="kw">when</span> Element
+        @tagname = tagname_or_element.tagname_symbol
+        @attrs = tagname_or_element.attrs
+        @attrs.shared = <span class="kw">true</span>
+        @attrs_hash = tagname_or_element.attrs_hash
+        @hide_hid = tagname_or_element.hide_hid
+        <span class="kw">if</span> block_given?
+          init_body(&amp;block)
+        <span class="kw">else</span>
+          @body = tagname_or_element.body.clone
+        <span class="kw">end</span>
+      <span class="kw">when</span> Symbol, String
+        set_tag(tagname_or_element)
+        @attrs = AttrArray.new
+        @attrs_hash = {}
+        @hide_hid = <span class="kw">false</span>
+        <span class="kw">if</span> a.size() == 1 <span class="kw">and</span> a.kind_of?(AttrArray)
+          @attrs = a
+          @attrs.shared = <span class="kw">true</span>
+          @attrs.each <span class="kw">do</span> |a|
+            @attrs_hash[a.key_symbol] = a
+          <span class="kw">end</span>
+        <span class="kw">else</span>
+          a.each { |aa| put_attr(aa) }
+        <span class="kw">end</span>
+        <span class="kw">if</span> block_given?
+          init_body(&amp;block)
+        <span class="kw">else</span>
+          @body = Null
+        <span class="kw">end</span>
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Instance methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000187"></a>
+<b>apply_to_children</b>(&amp;block) {|body| ...}
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node_expand.rb, line 336</span>
+    <span class="kw">def</span> apply_to_children(&amp;block)
+      clone { <span class="kw">yield</span>(body) }
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000189"></a>
+<b>==</b>(x)
+</td></tr>
+</table>
+<div class="description">
+<p>
+test if tagname and attributes and body are equal to self. doesn't concern
+the order of attributes
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 377</span>
+    <span class="kw">def</span> ==(x)
+      <span class="kw">return</span> <span class="kw">false</span> <span class="kw">unless</span> x.kind_of?(Element)
+      <span class="kw">return</span> <span class="kw">true</span> <span class="kw">if</span> x.id == id
+      <span class="kw">return</span> <span class="kw">false</span> <span class="kw">unless</span> x.tagname_symbol == @tagname
+      <span class="kw">return</span> <span class="kw">false</span> <span class="kw">unless</span> x.attrs.size == @attrs.size
+      @attrs.each <span class="kw">do</span> |a|
+        <span class="kw">return</span> <span class="kw">false</span> <span class="kw">unless</span> x[a.key] == a.value
+      <span class="kw">end</span>
+      <span class="kw">return</span> <span class="kw">false</span> <span class="kw">unless</span> x.body == @body
+      <span class="kw">true</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000190"></a>
+<b>set_tag</b>(tagname)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 389</span>
+    <span class="kw">def</span> set_tag(tagname)
+      <span class="kw">if</span> tagname
+        @tagname = tagname.intern 
+      <span class="kw">else</span>
+        @tagname = <span class="kw">nil</span>
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000191"></a>
+<b>clone</b>(&amp;block)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 397</span>
+    <span class="kw">def</span> clone(&amp;block)
+      Element.new(<span class="kw">self</span>, &amp;block)
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000192"></a>
+<b>tagname</b>()
+</td></tr>
+</table>
+<div class="description">
+<p>
+return <a href="Tag.html">Tag</a> as String
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 402</span>
+    <span class="kw">def</span> tagname
+      @tagname.id2name
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000193"></a>
+<b>tagname_symbol</b>()
+</td></tr>
+</table>
+<div class="description">
+<p>
+return <a href="Tag.html">Tag</a> as Symbol
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 407</span>
+    <span class="kw">def</span> tagname_symbol
+      @tagname
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000194"></a>
+<b>hid</b>()
+</td></tr>
+</table>
+<div class="description">
+<p>
+return id=... attribule value. It can be hide by +<a
+href="Element.html#M000195">hide_hid!</a>
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 412</span>
+    <span class="kw">def</span> hid
+      <span class="kw">if</span> @hide_hid
+        <span class="kw">nil</span>
+      <span class="kw">else</span>
+        <span class="kw">self</span>[:id] <span class="kw">or</span> <span class="kw">self</span>[:ID]
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000195"></a>
+<b>hide_hid!</b>()
+</td></tr>
+</table>
+<div class="description">
+<p>
+hide hid for internal use (expand).
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 421</span>
+    <span class="kw">def</span> hide_hid!
+      @hide_hid = <span class="kw">true</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000196"></a>
+<b>tagclass</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 425</span>
+    <span class="kw">def</span> tagclass
+      <span class="kw">self</span>[:class]
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000197"></a>
+<b>put_attr</b>(a)
+</td></tr>
+</table>
+<div class="description">
+<p>
+set attribule.
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 430</span>
+    <span class="kw">def</span> put_attr(a)
+      copy_on_write <span class="kw">if</span> @attrs.shared
+      <span class="kw">case</span> a
+      <span class="kw">when</span> Attr
+        <span class="kw">if</span> @attrs_hash[a.key_symbol] 
+          <span class="kw">self</span>[a.key_symbol] = a.value
+        <span class="kw">else</span>
+          a = a.clone
+          @attrs &lt;&lt; a
+          @attrs_hash[a.key_symbol] = a
+        <span class="kw">end</span>
+      <span class="kw">when</span> AttrArray
+        a.each <span class="kw">do</span> |aa|
+          put_attr(aa)
+        <span class="kw">end</span>
+      <span class="kw">when</span> Hash
+        a.each <span class="kw">do</span> |k, v|
+          put_attr(Attr.new(k, v))
+        <span class="kw">end</span>
+      <span class="kw">else</span>
+        raise &quot; &lt;&lt; not a Attr but a #{a.class}&quot; <span class="kw">unless</span> a.kind_of?(Attr)
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000198"></a>
+<b>&lt;&lt;</b>(a, &amp;block)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 454</span>
+    <span class="kw">def</span> &lt;&lt;(a, &amp;block)
+      put_attr(a)
+      init_body(&amp;block) <span class="kw">if</span> block_given?
+      <span class="kw">self</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000199"></a>
+<b>include_attr?</b>(key)
+</td></tr>
+</table>
+<div class="description">
+<p>
+test if it has attribule for <tt>key</tt>
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 461</span>
+    <span class="kw">def</span> include_attr?(key)
+      @attrs_hash.include?(key.intern)
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000200"></a>
+<b>[]</b>(key)
+</td></tr>
+</table>
+<div class="description">
+<p>
+return attribule value for <tt>key</tt>
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 466</span>
+    <span class="kw">def</span> [](key)
+      a = @attrs_hash[key.intern]
+      <span class="kw">if</span> a
+        a.value
+      <span class="kw">else</span>
+        <span class="kw">nil</span>
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000201"></a>
+<b>[]=</b>(key, value)
+</td></tr>
+</table>
+<div class="description">
+<p>
+set attribule. delete it if <tt>value</tt> is <tt>nil</tt>
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 476</span>
+    <span class="kw">def</span> []=(key, value)
+      copy_on_write <span class="kw">if</span> @attrs.shared
+      key = key.intern 
+      a = @attrs_hash[key]
+      <span class="kw">if</span> a
+        <span class="kw">if</span> value
+          a.value = value
+        <span class="kw">else</span>
+          delete_attr!(key)
+        <span class="kw">end</span>
+      <span class="kw">else</span>
+        put_attr(Attr.new(key,value)) <span class="kw">if</span> value
+      <span class="kw">end</span>
+      value
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000202"></a>
+<b>delete_attr!</b>(key)
+</td></tr>
+</table>
+<div class="description">
+<p>
+delete attribute of <tt>key</tt>
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 493</span>
+    <span class="kw">def</span> delete_attr!(key)
+      copy_on_write <span class="kw">if</span> @attrs.shared
+      key = key.intern 
+      old_attrs = @attrs
+      @attrs = AttrArray.new
+      @attrs_hash = {}
+      old_attrs.each <span class="kw">do</span> |a|
+        put_attr(a) <span class="kw">if</span> a.key_symbol != key
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000203"></a>
+<b>to_ruby</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 504</span>
+    <span class="kw">def</span> to_ruby
+      ret = &quot;e(:#{tagname}&quot;
+      <span class="kw">if</span> attrs.size &gt; 0
+        ret &lt;&lt; <span class="str">&quot;,&quot;</span>
+        ret &lt;&lt; attrs.collect { |a| a.to_ruby}.join(<span class="str">&quot;,&quot;</span>)
+      <span class="kw">end</span>
+      ret &lt;&lt; <span class="str">&quot;) &quot;</span>
+      ret &lt;&lt; &quot;{ #{body.to_ruby} }&quot; <span class="kw">if</span> body <span class="kw">and</span> <span class="kw">not</span> body.kind_of?(NullNode)
+      ret
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000204"></a>
+<b>each_element_with_id</b>(recursive=false, &amp;block) {|self| ...}
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 515</span>
+    <span class="kw">def</span> each_element_with_id(recursive=<span class="kw">false</span>, &amp;block)
+      <span class="kw">if</span> hid
+        <span class="kw">yield</span>(<span class="kw">self</span>)
+        <span class="kw">super</span> <span class="kw">if</span> recursive
+      <span class="kw">else</span>
+        <span class="kw">super</span>
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000205"></a>
+<b>set_text</b>(text)
+</td></tr>
+</table>
+<div class="description">
+<p>
+set the <tt>text</tt> to body of this <a href="Element.html">Element</a>.
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/node.rb, line 525</span>
+    <span class="kw">def</span> set_text(text)
+      @body = TextElement.new(text)
+    <span class="kw">end</span>
+</pre>
+
+</body>

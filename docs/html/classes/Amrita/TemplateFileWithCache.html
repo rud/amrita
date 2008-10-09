@@ -1,0 +1,150 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>Class: Amrita::TemplateFileWithCache</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+
+<table summary="Information on class" width="100%" border="0" cellspacing="0">
+ <tr class="title-row">
+ <td class="big-title-font">
+   <sup><font color="aqua">Class</font></sup> Amrita::TemplateFileWithCache
+ </td>
+ <td align="right">
+   <table summary="layout" cellspacing="0" cellpadding="2">
+     <tr valign="top">
+      <td class="small-title-font">In:</td>
+      <td class="small-title-font">
+        <a href="../../files/lib/amrita/template_rb.html" class="aqua">
+lib/amrita/template.rb
+         </a>
+<br />
+      </td>
+     </tr>
+     <tr>
+      <td class="small-title-font">Parent:</td>
+      <td class="small-title-font">
+        <a href="TemplateFile.html" class="aqua">
+TemplateFile
+         </a>
+      </td>
+     </tr>
+   </table>
+  </td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+
+
+<table summary="Methods" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Methods</td></tr>
+</table>
+<div class="name-list">
+<a href="#M000208">[]</a>&nbsp; &nbsp;
+<a href="#M000210">cache_path</a>&nbsp; &nbsp;
+<a href="#M000209">new</a>&nbsp; &nbsp;
+<a href="#M000207">set_cache_dir</a>&nbsp; &nbsp;
+<a href="#M000211">source_mtime</a>&nbsp; &nbsp;
+</div>
+
+
+
+
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Class methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000207"></a>
+<b>set_cache_dir</b>(path)
+</td></tr>
+</table>
+<div class="description">
+<p>
+<em>CAUTION: be careful to prevent users to edit the cache file.</em> It's
+<b>YOUR</b> resposibility to protect the cache files from crackers. Don't
+use <tt>TemplateFileWithCache::set_cache_dir</tt> if you don't understand
+this.
+</p>
+</div>
+<pre class="source">
+<span class="cmt"># File lib/amrita/template.rb, line 368</span>
+    <span class="kw">def</span> TemplateFileWithCache::set_cache_dir(path)
+      <span class="kw">if</span> path
+        @@cache_manager = SourceCache.new(path)
+      <span class="kw">else</span>
+        @@cache_manager = <span class="kw">nil</span>
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000208"></a>
+<b>[]</b>(path)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/template.rb, line 379</span>
+    <span class="kw">def</span> TemplateFileWithCache::[](path)
+      TemplateFileWithCache.new(path)
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000209"></a>
+<b>new</b>(path)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/template.rb, line 383</span>
+    <span class="kw">def</span> initialize(path)
+      <span class="kw">super</span>
+      @cache_manager = @@cache_manager <span class="kw">if</span> @@cache_manager
+    <span class="kw">end</span>
+</pre>
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Instance methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000210"></a>
+<b>cache_path</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/template.rb, line 388</span>
+    <span class="kw">def</span> cache_path
+      @path
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000211"></a>
+<b>source_mtime</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/template.rb, line 392</span>
+    <span class="kw">def</span> source_mtime
+      File::stat(@path).mtime
+    <span class="kw">end</span>
+</pre>
+
+</body>

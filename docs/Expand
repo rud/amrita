@@ -1,0 +1,210 @@
+
+= Amrita Data Model
+
+== Summary
+
+This document decribes amrita's the most import method:
+Amrita::Node#expand and "Amrita Data Model".
+
+Amrita::Node#expand expands self as a HTML/XML template with model
+data given as a parameter.
+
+== Model Data
+
+Any Ruby object can be amrita's model datas, but they are categorized
+by these groups.
+
+
+=== true
+
+=== nil, false
+
+=== Scalar
+
++String+, +Numeric+, Amrita::Node(given as a model data)
+
+Objects that are not described here is treated as a Scalar after
+converting to String by +to_s+ method.
+
+=== Dictionary
+
+Hash and object which is +kind_of+ Amrita::ExpandByMember.
+
+This kind_of datas have sub-datas with keys. 
+
+Sub-data of Hash will be retrieved by [] method. Sub-data of
+ExpandByMember will be retrieved by method call using key as method
+name.
+
+=== Enumerable
+
+Array, Range, File(iterates on lines)
+
+This kind_of datas have sequence of sub-datas.
+
+=== AttrArray
+
+=== Proc
+
+== the structure of Amrita::Node
+
+Amrita::Node represents a HTML/XML document truee. So it can be
+converted DOM data model. But it is implemented in a different way.
+
+=== Amrita::Node
+
+Amrita::Node is a base class (implemented as Ruby Module) of all types
+of nodes
+
+=== Amrita::Element
+
+Element has +tagnames+ and attributes and (optionally) one body node.
+
+=== Amrita::NodeArray
+
+In DOM, an Element can have many chidrens, but Amrita's Element can
+only one +body+. If it have two or more children, it has a NodeArray
+as +body+ and the NodeArray holds nodes as children.
+
+=== Amrita::TextElement
+
+=== Amrita::NullNode
+
+a special Node object which represents a status "there is no Node at
+all".
+
+=== Amrita::SpecialElement
+
+<? ... ?>, <%....%>, <!....>, comments...
+
+=== Amrita::FormatterNode
+
+
+== expand method
+
+== parameters
+
+expand accepts two parameter
+
+* data
+
+  modeldata
+
+* context
+
+  Amrita::ExpandContext object.
+
+  This object controles deletion of id. 
+
+=== expand(Node execpt for Element)
+
+All Nodes but Element meet a model data only at top level because
+amrita matches sub-data by Element's attribute (Default +id+).
+
+All Nodes but Element will be expanded like this:
+
+* true
+
+  return node itself unchanged.
+
+* nil, false
+
+  return NullNode
+
+* Scalar
+
+  return model data itself unchanged.
+
+* Dictionary
+
+  go to sub-node and search Element with +id+ attribute. If found any,
+  expand it with sub-data of the Dictionary using attribute value as a
+  key.
+
+* Enumerable
+
+  Expands itself with each item of the model data, then joins resulted
+  nodes and returns it.
+
+* AttrArray
+
+  an exception will be raised.
+
+* Proc
+
+  an exception will be raised.
+
+=== expand (Element)
+
+* true
+
+  return node itself unchanged.
+
+* nil, false
+
+  return NullNode
+
+* Scalar
+
+  replace element's body by the model data.
+
+  if element is <tt><span></tt> and has no attribute, replace element
+  itself by the model data.
+
+* Dictionary
+
+  go to sub-node and search Element with +id+ attribute. If found any,
+  expand it with sub-data of the Dictionary using attribute value as a
+  key.
+
+* Enumerable
+
+  Expands itself with each item of the model data, then joins resulted
+  nodes and returns it.
+
+* AttrArray
+
+  Adds or repaces attributes provided by AttrArray, then returns
+  itself expanded with AttrArray#body.
+
+* Proc
+
+  Returns result from invoking Proc#call with Element for 1st
+  argument, and optionally ExpandContext for 2nd argument.
+
+== Deletion of +id+
+
+All +id+ attributes are deleted after expand because amrita copys some
+part of HTML/XML true and may break the unique-ness of +id+ if it
+leaves id.
+
+  <ul><li id=list></li></ul> + [ "one", "two", "three" ]
+
+  becomes without deleting +id+
+
+  <ul><li id=list>one</li><li id=list>two</li><li id=list>three</li></ul>
+
+This tree has three element of same +id+ and it's not good. So amrita deletes it.
+
+  <ul><li>one</li><li>two</li><li>three</li></ul>
+
+This feature can be controled by context's flag.
+
+== Customizing
+
+amrita defines +amrita_expand_element+ method and +amrita_expand_node+
+method to Ruby's standard classes and use them in +expand+. So you can
+customize this feature by defineing +amrita_expand_element+ and
++amrita_expand_node+ to your classes supposed to be used as a model
+data.
+
+== Attribute Expansion  (experimental)
+
+This is only performed when attribute expansion is enabled by
+ExpandContext.  When Element is expanded with Dictionary, replaces
+each attributes that contains value matched to "@ID" <ID is any
+string.>. Value from Dictionary with using ID for key is used for
+string to replace with.
+
+The sub-element of the first Element will be done attribute expansion,
+too.

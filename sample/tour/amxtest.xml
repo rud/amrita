@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<?amx href="amxtest.amx" ?>
+<document>
+  <head>
+    <title>amx sample</title>
+  </head>
+  <body>
+    <paragraph>
+      amx is a XML document.
+      It contains model data as well-formed XML, HTML template 
+      and a small Ruby code map both.
+    </paragraph>
+    <paragraph>
+      This is a sample AMX document.
+    </paragraph>
+  </body>             
+</document>

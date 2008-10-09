@@ -1,0 +1,227 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html><head>
+  <title>Class: Amrita::AmsTemplate</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel=StyleSheet href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript" language="JavaScript">
+  <!--
+  function popCode(url) {
+    window.open(url, "Code", 
+          "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  //-->
+  </script>
+</head>
+
+<body bgcolor="white">
+
+<table summary="Information on class" width="100%" border="0" cellspacing="0">
+ <tr class="title-row">
+ <td class="big-title-font">
+   <sup><font color="aqua">Class</font></sup> Amrita::AmsTemplate
+ </td>
+ <td align="right">
+   <table summary="layout" cellspacing="0" cellpadding="2">
+     <tr valign="top">
+      <td class="small-title-font">In:</td>
+      <td class="small-title-font">
+        <a href="../../files/lib/amrita/ams_rb.html" class="aqua">
+lib/amrita/ams.rb
+         </a>
+<br />
+      </td>
+     </tr>
+     <tr>
+      <td class="small-title-font">Parent:</td>
+      <td class="small-title-font">
+        <a href="TemplateFile.html" class="aqua">
+TemplateFile
+         </a>
+      </td>
+     </tr>
+   </table>
+  </td>
+  </tr>
+</table>
+  <!-- banner header -->
+
+
+
+
+
+<table summary="Methods" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Methods</td></tr>
+</table>
+<div class="name-list">
+<a href="#M000086">[]</a>&nbsp; &nbsp;
+<a href="#M000084">cache_path</a>&nbsp; &nbsp;
+<a href="#M000085">cache_valid?</a>&nbsp; &nbsp;
+<a href="#M000083">expand</a>&nbsp; &nbsp;
+<a href="#M000080">load_ams_template</a>&nbsp; &nbsp;
+<a href="#M000081">load_template</a>&nbsp; &nbsp;
+<a href="#M000082">setup_context</a>&nbsp; &nbsp;
+</div>
+
+
+
+
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Class methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000086"></a>
+<b>[]</b>(path)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/ams.rb, line 96</span>
+    <span class="kw">def</span> AmsTemplate::[](path)
+      ret = @@template_cache[path]
+      <span class="kw">unless</span> ret
+        @@template_cache[path] = ret = AmsTemplate.new(path)
+      <span class="kw">end</span>
+      ret
+    <span class="kw">end</span>
+</pre>
+<table summary="Method list" cellpadding="5" width="100%">
+<tr><td class="tablesubtitle">Public Instance methods</td></tr>
+</table>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000080"></a>
+<b>load_ams_template</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/ams.rb, line 11</span>
+    <span class="kw">def</span> load_ams_template
+      File.open(@path) <span class="kw">do</span> |f|
+        @template_text  = f.read
+      <span class="kw">end</span>
+      typ, script = <span class="kw">nil</span>, <span class="kw">nil</span>
+      <span class="kw">case</span> @template_text 
+      <span class="kw">when</span> RScript1
+        typ, script = $1, $2
+        @template_text.gsub!( RScript1, <span class="str">&quot;&quot;</span>) 
+      <span class="kw">when</span> RScript2
+        typ, script = <span class="str">&quot;eval&quot;</span>, $1
+        @template_text.gsub!( RScript2, <span class="str">&quot;&quot;</span>) 
+      <span class="kw">else</span>
+        <span class="cmt"># do nothing</span>
+      <span class="kw">end</span>
+
+      @ams_type = typ
+      <span class="kw">case</span> @ams_type
+      <span class="kw">when</span> <span class="str">&quot;eval&quot;</span>
+        script = script.untaint
+        @data = eval(script, TOPLEVEL_BINDING)
+      <span class="kw">when</span> <span class="str">&quot;module&quot;</span>
+        script = script.untaint
+        cls = Class.new
+        cls.module_eval script
+        obj = cls.new
+        obj.extend ExpandByMember
+        @data = obj
+      <span class="kw">when</span> <span class="str">&quot;yaml&quot;</span>
+        require <span class="str">&quot;yaml&quot;</span>
+        @data = YAML::load script
+      <span class="kw">when</span> <span class="kw">nil</span>
+        @data = Hash.new(<span class="kw">true</span>)
+      <span class="kw">else</span>
+        raise &quot;unknown script type #{typ}&quot;
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000081"></a>
+<b>load_template</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/ams.rb, line 49</span>
+    <span class="kw">def</span> load_template
+
+      @template = get_parser_class.parse_text(@template_text) <span class="kw">do</span> |e|
+        <span class="kw">if</span> @parser_filter
+          @parser_filter.call(e)
+        <span class="kw">else</span>
+          e
+        <span class="kw">end</span>
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000082"></a>
+<b>setup_context</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/ams.rb, line 60</span>
+    <span class="kw">def</span> setup_context
+      context = <span class="kw">super</span>
+      <span class="kw">if</span> @ams_type == <span class="str">&quot;yaml&quot;</span>
+        context.hash_key_is_string = <span class="kw">true</span> 
+        context.expand_attr = <span class="kw">true</span>
+      <span class="kw">end</span>
+      context
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000083"></a>
+<b>expand</b>(stream)
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/ams.rb, line 69</span>
+    <span class="kw">def</span> expand(stream)
+      load_ams_template 
+      <span class="kw">if</span> need_update?
+        setup_template 
+      <span class="kw">end</span>
+      context = setup_context
+      formatter = setup_formatter(stream)
+      do_expand(@data, context, formatter)
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000084"></a>
+<b>cache_path</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/ams.rb, line 80</span>
+    <span class="kw">def</span> cache_path
+      <span class="kw">if</span> @@cache_dir
+        @@cache_dir + <span class="str">&quot;/&quot;</span> + File::basename(@path) + <span class="str">&quot;.amrita&quot;</span>
+      <span class="kw">else</span>
+        <span class="kw">nil</span>
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+<table summary="method"  width="100%" cellspacing="0" cellpadding="5" border="0">
+<tr><td class="methodtitle">
+<a name="M000085"></a>
+<b>cache_valid?</b>()
+</td></tr>
+</table>
+<pre class="source">
+<span class="cmt"># File lib/amrita/ams.rb, line 88</span>
+    <span class="kw">def</span> cache_valid?
+      <span class="kw">if</span> @@cache_dir <span class="kw">and</span> FileTest::readable?(cache_path) 
+        File::stat(@path).mtime &lt;= File::stat(cache_path).mtime
+      <span class="kw">else</span>
+        <span class="kw">false</span>
+      <span class="kw">end</span>
+    <span class="kw">end</span>
+</pre>
+
+</body>

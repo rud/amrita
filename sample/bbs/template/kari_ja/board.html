@@ -1,0 +1,162 @@
+<html id=board>
+<head>
+<!-- 漢字コードはＥＵＣ -->
+<link rel="stylesheet" href="http://kari.to/bbs/style.css" type="text/css">
+<!-- #BeginEditable "doctitle" --> <title>匿名掲示板@amrita（仮）</title>
+<!-- #EndEditable --> <!-- cache: on -->
+<style type="text/css">
+<!--
+.w {  color: #FFFFFF; text-decoration: none}
+-->
+</style>
+</head>
+<body bgcolor=#FFDFAF text=#000000 leftmargin="0" marginwidth="0" topmargin="0" marginheight="0">
+<table width=100% border=0 cellspacing=0 cellpadding=3 align=center bgcolor=#009900>
+<tr>
+ <td><b><font size=+1><img src=/s.gif width=4 height=1><a href=http://kari.to/ class=w>匿名掲示板（仮）</a></font></b>
+ </td>
+ <td><div align=right><font color=#FFFFFF>
+    <span id=theme_selecter>
+      <a id=theme class=w>theme</a> |
+    </span>
+  <img src=http://kari.to/s.gif width=8 height=1></font>
+  </div></td>
+</tr>
+
+</table>
+
+
+<a name="top"></a> <div class=honbun> <font color=black>
+<b><font size=+1 color=red></font></b><br>
+<h2 id=title>プログラム</h2>
+<span id=message></span>
+<br>
+</font> </div>
+<center>
+<table width=92% border=0 cellspacing=0 cellpadding=0>
+<tr> <td width=4 rowspan=3 bgcolor=#400080> <img width=2 height=2> </td>
+<th width=15% rowspan=2 NOWRAP bgcolor=#400080> <b><font color=#ffffff size=+1>グループ（掲示板）一覧</font></b></th>
+<td width=90% height=16> <p align=RIGHT> </td>
+</tr>
+<tr> <td bgcolor=#400080 height=2 width=90%></td>
+</tr>
+<tr> <td colspan=2 bgcolor=#ecd9ff> <table width=100% border=0 cellspacing=0 cellpadding=3>
+<tr id=categories> 
+  <td width=100%>
+    <font> 
+      【<span id=category></span>】 
+       <span id=boards>
+        <a id=to_board class=tl></a>/
+       </span>
+       <br>
+    </font>
+  </td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</center>
+<br>
+<table width=92% border=0 cellspacing=0 cellpadding=0 align=center>
+<tr> <td width=4 rowspan=3 bgcolor=#00a4f2> <img width=2 height=2> </td>
+<th width=15% rowspan=2 NOWRAP bgcolor=#00a4f2> <b><font color=#ffffff size=+1>スレッド一覧</font></b></th>
+<td width=90% height=16> <p align=RIGHT> 
+<font color=black>【TIPS】スレッドは自由に作成できます</font> 
+</td>
+</tr>
+<tr> <td bgcolor=#00a4f2 height=2 width=90%></td>
+</tr>
+<tr> <td colspan=2 bgcolor=#ecd9ff> <table width=100% border=0 cellspacing=0 cellpadding=3>
+<tr> <td width=100%>
+<span id=threadtitles class=BBSThreadTitle>
+  <a id=link1 class = tl>1:</a> 
+  <a id=link2 class=tl>thread no1</a>  /
+</span>
+ 
+<p align="right"><a href="">_</a></p>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<table width=92% border=3 cellspacing=2 cellpadding=3 align=center>
+<tr> <td width="100%" bgcolor=#FFFFCC> <h3>プログラム</h3>
+<p>新規の話題（スレッド作成）</p>
+<p> <table width="91%" border="0" cellspacing="0" cellpadding="0" align=center>
+<tr> <td width="100%"> 
+<form id=newthread_form method=POST action="">
+<input id=board type=hidden name=board>
+<input id=theme type=hidden name=theme>
+<input type=hidden name=action value=newthread>
+投稿者
+			  <input type=text name=from size=20 maxlength=19 value="">
+<br>
+題　名 
+			  <input type=text name=subject size=38 maxlength=69 value="">
+<input type=submit value="   書き込む   ">
+<input type=reset value="書き直し">
+<br>
+内　容 
+			  <textarea name=message cols=70 rows=5></textarea>
+<br>
+<font size=-1>以下は、オプションです。</font><br>
+　ＥＭＡＩＬ　
+			  <input type=text name=mail size=38 value="">
+</form>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<br>
+
+<div id=threadsummary>
+<a id=label name="1"></a>
+<table width=92% border=1 cellspacing=0 cellpadding=4 align=center bordercolor=#009900>
+<tr> <td bgcolor=#009900> <b><a href="/bbs/s127/" target=_blank style=text-decoration:none;> <font size=+1 color=#FFFFFF>◇</font></a></b> <font color=#FFFFFF size=+1><b id=title> thread title</b></font></td>
+<td bgcolor=#009900 align=right> 
+<font color="#FFFFFF">[<span id=num_of_article></span>] </font> 
+<a id=to_prev><font color="#FFFFFF">▼</font></a> 
+<a id=navi_all><font color="#FFFFFF">ALL</font></a> 
+<a id=navi_l50><font color="#FFFFFF">LAST50</font></a> 
+<a href="#menu"><font color="#FFFFFF">■</font></a> 
+</td>
+</tr>
+<tr> <td colspan=2 bgcolor=#FFFFCC> 
+<dl>
+<span id=summary_articles></span>
+</dl>
+
+<p align="right"><a id=navi_all>レスを全部見る</a> | <a id=navi_l50>最新レス50</a>
+</p>
+<form id=newarticle_form method=POST action="">
+<input id=board_key type=hidden name=board>
+<input id=theme type=hidden name=theme>
+<input id=thread type=hidden name=thread>
+<input type=hidden name=action value=newarticle>
+<font size=-1>投稿者、ＭＡＩＬは、入れなくても投稿できます。</font><br>
+投稿者
+		<input type=text name=from size=20 maxlength=19 value="">
+<input type=submit value="   書き込む   ">
+<input type=reset value="書き直し">
+<br>
+内　容 
+		<textarea name=message cols=70 rows=5></textarea>
+<br>
+　ＭＡＩＬ
+		<input type=text name=mail size=38 value="">
+</form>
+<p align="right"> <a href="/">サイトのトップページ</a> | <a href="/amrita-bbs/">掲示板メイン</a> | <a href="#top">ページの一番上</a> | <a href="#127">このスレの一番上</a></p>
+</td>
+</tr>
+</table>
+<br>
+
+</div>
+
+</body>
+</html>
+

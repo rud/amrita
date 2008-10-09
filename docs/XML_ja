@@ -1,0 +1,270 @@
+
+= amrita と XML
+
+== 概要
+
+amritaはHTMLと同様、XMLに対しても使用することができます。
+
+* amritaは REXML ベースの XML パーサーを持っています
+
+* amritaは HTMLと同様にXHTML文書を作成することができます
+
+  XHTMLのテンプレートを用意すれば、XHTML文書を作成します
+
+* amritaはXML文書をテンプレートとしてXML文書を作成するために使用することができます
+
+  amrita には HTMLのDTD(タグの構造)に依存したコードはわずかしかありません。
+  また、それらをOFFにすることが容易にできます。
+  ですから、XHTML以外の一般のXML文書をテンプレートとして使用することができます。
+
+* amritaはモデルデータをXMLドキュメントから取得することができます
+
+  REXMLはRubyのための自然なAPIを提供しています。
+  そして、REXMLで読みこんだXML文書をモデルデータとして使用することが容易にできます。
+
+* amx: XML用のもうひとつのスタイルシート
+
+  docs/Tour2 を参照してください。
+
+---
+
+== XHTML文書
+
+=== コードと出力
+
+コード:
+
+  :include: sample/tour/xhtml.rb
+
+出力:
+
+   <?xml version="1.0"?>                                           
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+   <html xmlns="http://www.w3.org/1999/xhtml">                     
+     <head>                                                        
+       <title>xhtml sample</title>                                 
+     </head>                                                       
+     <body>                                                        
+       <h1>SAMPLE1</h1>                                            
+       <p>members of this HASH will be inserted here and title</p> 
+       <hr />                                                      
+     </body>                                                       
+   </html>                                                         
+
+
+=== 説明
+
+基本的に、amrita は XHTMLテンプレートからはXHTML文書、HTML4.0テンプレートからHTML4.0文書を作成します。
+よって、プログラマーは特定の標準やブラウザ、デバイスに対する適合性をいちいち気にする必要がありません。
+それは、デザイナー(テンプレートを書く人)の仕事になります。
+
+プログラマーがすることは Template オブジェクト +asxml+ フラグを設定することだけです。
+これが +true+ に設定されていると、
+<tt><hr></tt> のような単独のタグは <tt><hr /></tt> のようにXMLの形式で出力されます。
+
+---
+
+== XML テンプレート
+
+=== コードと出力
+
+コード:
+
+   data = {                                                                                                    
+      :table1=>[                                                                                               
+         { :name=>"Ruby In A Nutshell", :author=>"Yukihiro Matsumoto, David L. Reynolds", :isbn=>"0596002149" }
+         { :name=>"Programming Ruby", :author=>"David Thomas, Andrew Hunt", :isbn=>"0201710897" },             
+         { :name=>"The Ruby Way", :author=>"Hal Fulton", :isbn=>"0672320835" },                                
+      ]                                                                                                        
+   }                                                                                                           
+                                                                                                               
+   xml_tmpl = TemplateText.new <<END                                                                           
+   <booklist>                                                                                                  
+     <book id="table1">                                                                                        
+        <title id="name" />                                                                                    
+        <author id="author" />                                                                                 
+        <isbn id="isbn" />                                                                                     
+     </book>                                                                                                   
+   </booklist>                                                                                                 
+   END                                                                                                         
+                                                                                                               
+   xml_tmpl.xml = true # use REXML-based parser
+   puts "------------XML output ----------------------"                                                        
+   xml_tmpl.expand(STDOUT, data)                                                                               
+                                                                                                               
+出力:
+
+   <booklist>
+     <book>
+       <title>Ruby In A Nutshell</title>
+       <author>Yukihiro Matsumoto, David L. Reynolds</author>
+       <isbn>0596002149</isbn>
+     </book><book>
+       <title>Programming Ruby</title>
+       <author>David Thomas, Andrew Hunt</author>
+       ..........
+
+=== 説明
+
+   xml_tmpl.xml = true # REXMLベースのパーサーを使用する
+   puts "------------XML output ----------------------"                                                        
+   xml_tmpl.expand(STDOUT, data)                                                                               
+
+amritaは必要があるまでテンプレートをロードしません。
+最初に +expand+ が呼ばれる時に +xml+ フラグが設定されていると、
+amritaは REXMLベースのパーサーを使用します。
+
+amritaでは、ひとつのモデルデータを複数のテンプレートに適用することもできます。
+従って、一種類のコードでXMLとHTMLを両方出力することもできます。
+詳しくは sample/tour/xml1.rb を参照してください。
+
+
+---
+
+== XML文書をモデルデータとして使用する
+
+  XML文書(データ) + HTMLテンプレート ==> HTML文書
+
+つまり、一種のスタイルシートとしてamritaを利用する方法です。
+
+=== code and output
+
+code:
+
+  :include: sample/tour/xml2.rb
+
+output:
+
+   <table border="1">                                                                      
+     <tr>                                                                                  
+     <th>title</th>                                                                        
+     <th>author</th>                                                                       
+     <th>ISBN</th>                                                                         
+     </tr>                                                                                 
+     <tr>                                                                                  
+     <td>Ruby In A Nutshell</td>                                                           
+     <td>Yukihiro Matsumoto<br>David L. Reynolds                                           
+     <br>                                                                                  
+     </td>                                                                                 
+     <td><a href="http://www.amazon.com/exec/obidos/ASIN/0596002149">0596002149</a></td>   
+     </tr>                                                                                 
+     <tr>                                                                                  
+     <td>Programming Ruby</td>                                                             
+     <td>David Thomas<br>Andrew Hunt                                                       
+     <br>                                                                                  
+     </td>                                                                                 
+     <td><a href="http://www.amazon.com/exec/obidos/ASIN/0201710897">0201710897</a></td>   
+     </tr>                                                                                 
+     <tr>                                                                                  
+     <td>The Ruby Way</td>                                                                 
+     <td>Hal Fulton<br>                                                                    
+     </td>                                                                                 
+     <td><a href="http://www.amazon.com/exec/obidos/ASIN/0672320835">0672320835</a></td>   
+     </tr>                                                                                 
+   </table>                                                                                
+
+
+=== description
+
+   table = doc.elements.to_a("booklist/book").collect do |book|                                  
+     {
+       :xxx=>.....
+     }                                                                                           
+   end                                                                                           
+
+このコードは、<tt><book></tt>要素から含むHashの配列を生成します。
+<tt><book></tt>要素はREXML::Elementクラスのインスタンスです。
+ですから、REXMLのAPIによって、下位ノードや属性値を取り出すことができます。
+
+
+       :title=>book.elements['title'],
+
+<tt>book.elements['title']</tt>は、<tt><book></tt> 要素が持つ最初の <tt><title></tt> 要素です。
+
+       :authors=>book.elements.to_a('author').collect do |a|                                     
+         { :name=>a }                                                                            
+       end,                               
+
+一冊の本にはタイトルは一つしかありませんが、著者は複数いる場合があります。
+従って、著者(author)は +to_a+によってArrayとして処理します。
+Ruby の標準メソッドである、+collect+を使用してHashの配列を作成しています。
+
+       :isbn=>e(:a, :href=>"http://www.amazon.com/exec/obidos/ASIN/#{book.attributes['isbn']}") {
+         book.attributes['isbn']                                                                 
+       }                                                                                         
+
+この例では、アマゾンへの直接リンクを貼ろうとしています。
+e(...) { ... } は次のようなタグを生成します。
+
+    <a href="http://www.amazon.com/exec/obidos/ASIN/0596002149">0596002149</a>
+
+
+このアイディア(amritaベースのXMLスタイルシート)をさらに発展させた例が
+sample/tour/xml3.rbにあります。そして、これは amx という機能としてまとめられています。
+詳細は docs/Tour2 を参照してください。
+
+
+---
+
+== Ruby のオブジェクトをXMLの項目に変換する
+
+RubyのオブジェクトをXMLに対応させようとすると、
+属性に対応するメンバーと下位要素に対応するメンバーがあると思います。
+
+このサンプルは、<tt>ls -l</tt>のような情報をXMLとして提供する例です。
+
+=== コードと出力
+
+コード:
+
+  :include: sample/tour/filelist.rb
+
+出力:
+
+  <file name="CVS" type="directory">
+     <mode>drwxr-xr-x</mode>
+     <times>
+       <ctime>Tue Sep 03 11:07:10 JST 2002</ctime>
+       <mtime>Tue Sep 03 11:07:10 JST 2002</mtime>
+       <atime>Thu Sep 05 07:30:39 JST 2002</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>652250</inode>
+     </unix_inf>
+  </file>
+  <file name="precompile.rb" type="file">
+     <size>2596</size>
+     <mode>-rw-r--r--</mode>
+     <times>
+       <ctime>Mon Aug 26 09:12:11 JST 2002</ctime>
+       <mtime>Mon Aug 26 09:12:11 JST 2002</mtime>
+       <atime>Thu Sep 05 09:26:48 JST 2002</atime>
+     </times>
+     <unix_inf uid="1000" gid="1000" dev="770">
+        <inode>310411</inode>
+     </unix_inf>
+  </file>
+  <file name="amstest.ams" type="file">
+  .....
+
+
+=== 説明
+
+    def entry(name)
+      a(:name=>name, :type=>ftype) { self }
+    end
+
+このメソッドはAttrArrayオブジェクトを生成し、
+一部の属性値を設定してから下位要素を自分自身で展開します。
+
+    def size_or_nil
+      size if ftype == "file"
+    end
+
+もしファイルが通常ファイルでないと、
+このメソッドはnilを返し、<tt><size></tt> 要素は削除されます。
+
+
+---
+

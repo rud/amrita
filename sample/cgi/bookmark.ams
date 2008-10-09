@@ -1,0 +1,40 @@
+<html>
+<body>
+
+<amritascript> <!--
+  require "bmmodel"
+  include Amrita
+
+  bm = BookmarkList.new
+  bm.load_from_file("bookmark.dat")
+  groups = bm.groups.keys.sort
+
+  data = {
+    :groups => groups.collect do |k|
+      {
+        :group_name=>k,
+        :items=>bm.groups[k].collect do |item|
+        {
+          :name=>item.name,
+          :link=>a(:href=>item.url) { item.url }
+        }
+      end
+      }
+    end
+  }
+//--></amritascript>
+
+  <div id="groups">                      
+    <h1 id="group_name"></h1>
+    <table border="1">                     
+      <tr><th>name</th><th>url</th></tr>  
+      <tr id="items">                        
+        <td id="name">name</td>                
+        <td><a id="link">url with link</a></td>                
+      </tr>                                
+    </table>                               
+  </div>                                 
+
+
+</body>
+</html>

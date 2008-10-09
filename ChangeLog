@@ -1,0 +1,343 @@
+2003-01-05  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/format.rb: 
+	fixed bug of sanitizing with pre_format
+
+2003-01-01  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/format.rb: 
+	fixed a bug of amrita_sanitize_xxx for Fixnum
+
+	* lib/amrita/compiler.rb: 
+	fixed a bug (using MergeTemplate with compiler)
+
+2002-12-30  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/compiler.rb: 
+	fixed a bug (using PartsTemplate with dynamic extend)
+
+2002-12-28  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* README:
+	released 1.0.1
+
+	* lib/amrita/
+	tested under ruby-1.6.8 and ruby-1.8.0-preview1
+
+	* lib/amrita/compiler.rb: 
+	replate *.type to *.class to test under ruby-1.8.0
+
+	* Makefile: 
+	now archive includes RDoc documents
+
+	* lib/amrita/merge.rb: 
+	fixed bug of error message
+
+2002-12-18  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* sample/cgikit/Examples/Examples.cgi: 
+	I followed API changes of cgikit 1.0b5 except Examples/SourcePage
+
+2002-12-11  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/compiler.rb: 
+	fixed bug of compiler(AttrData)
+
+2002-12-07  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* debian/rules: update for 1.0
+
+2002-12-05  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* released V 1.0.0
+
+2002-11-19  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/compiler.rb: 
+	fixed the problem that the 0.9.6 template compiler doesn't consider
+	attr_filter on attribute expansion. (from Shirai, Kaoru)
+
+2002-11-07  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* debian/control (Source): 
+	added files to make deb package (thanks to Mr Taniguchi) to CVS
+
+	* docs/Tour_ja: 
+	added Japanese Documents
+
+2002-11-06  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/compiler.rb: 
+	fixed bug of expand_attr
+
+2002-10-24  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/template.rb: 
+	make some strings untainted for mod_ruby
+
+	* sample/bbs/README: 
+	added bbs sample script
+
+	* lib/amrita/compiler.rb: 
+	fixed compiler's bug: expand_attr with single tag
+	removed unused parameter of compiled result
+
+2002-10-22  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* Makefile (test_it): 
+	add -w for test and removed warning messages
+
+2002-10-21  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/parts.rb: 
+	parts template uses compiler
+
+	* lib/amrita/template.rb: 
+	refactored code around cache
+
+2002-10-19  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/parts.rb: 
+	refactor and prepare for compiling support
+
+2002-10-16  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* sample/bbs/bbs.rb: 
+	added middle size sample cgi program "BBS"
+
+2002-10-15  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* test/testxml.rb: 
+	fixed test script for rexml 2.5.2
+
+	* lib/amrita/parser.rb: 
+	allow single dash in comment 
+
+2002-10-12  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/parts.rb: 
+	added new experimental feature "parts-template"
+
+2002-10-08  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/format.rb: 
+	not sanitize entity reference ( &....; )
+
+	* lib/amrita/parser.rb: 
+	accept &nbsp; with no conversion.
+
+2002-10-04  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* release:
+	released V0.9.4
+
+	* lib/amrita/parser.rb: 
+	fixed scanners bug: can't parse <!...> and <!-- ..--> correctly
+
+2002-10-03  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* release:
+	released V0.9.3
+
+	* lib/amrita/compiler.rb: 
+	make compiler's output to sanitize correctly
+
+2002-10-02  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/format.rb: 
+	fixed SingleLineFormatter#initialize: added tagdict parameter
+	
+
+2002-10-01  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/node_expand.rb: 
+	fixed bug of AttrArray ( which did not use the context for expanding body )
+
+	* lib/amrita/parser.rb: 
+	make parser do well with StringScanner_R(ruby version of strscan)
+
+	* lib/amrita/tag.rb: 
+	move tag information of parser.rb to tag.rb and make it customizable
+
+2002-09-18  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/tag.rb: 
+	make formatter configurable by Template#setup_taginfo
+	add url attributes
+
+	* lib/amrita/parser.rb: 
+	parse escaped char like &gt; &#39;....
+
+	* lib/amrita/compiler.rb: 
+	refactoring and add 'expand_attr' feature
+
+2002-09-16  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/template.rb: 
+	raise error if prettyprint and use_compiler are set both
+
+	* lib/amrita/format.rb: 
+	Formatter#set_attr_fillter fixed bug
+
+2002-09-06  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* release:
+	released V0.9.1
+
+2002-09-05  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* docs/Tour2: 
+	reorgnized Tour documents: now the fixed features are in Tour
+	experimental features are in Tour2
+
+	* lib/amrita/template.rb: 
+	added expand_attr and made this feature experimental 
+	(I decided to keep it ,so it is not obsolete now)
+
+	* lib/amrita/cgikit.rb: 
+	added interface to cgikit(http://www.spice-of-life.net/download/cgikit/)
+	and sample for it
+
+	* lib/amrita/format.rb: 
+	sanitize_url: not convert '&' in url
+
+2002-09-03  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* sample/tour/filelist.rb: 
+	added filelist.rb to sample/tour
+
+2002-09-02  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* sample/tour/merge_template.rb : 
+	added merge_template inspired by Tom Sawyer's idea.
+
+2002-08-24  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/ams.rb: 
+	added type=module" and type="yaml" to AmritaScript
+
+	* lib/amrita/node_expand.rb: 
+	added ExpandContext::hash_key_is_string
+
+2002-08-23    <tnakajima@brain-tokyo.jp>
+
+	* release:
+	released V0.8.5
+
+2002-08-23    <tnakajima@brain-tokyo.jp>
+
+	* docs/XML: 
+	added description of amx: Amrita XML extention feature
+
+2002-08-14    <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/amx.rb: 
+	added Amrita XML extention feature
+
+	* lib/amrita/xml.rb: 
+	fixed missing quotes in XML declaration(patch from Emiel van de Laar)
+
+2002-08-07    <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/handlers.rb: 
+	added handler and sample for mod_ruby
+
+2002-08-06    <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/template.rb: 
+	do refactoring and added TemplateFileWithCache
+
+2002-08-05    <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/ams.rb: 
+	added AmritaScript feature ( idea by Mr.Beyond )
+
+2002-08-02    <tnakajima@brain-tokyo.jp>
+
+	* release
+	released V0.8.4
+	
+	* lib/amrita/compiler.rb: 
+	use Module for output code
+	fixed many incompatibilities against Node#expand
+	added debug_compiler flag to indent the output code.
+
+	* lib/amrita/template.rb: 
+	added use_compiler flag to Template
+
+2002-07-30  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/format.rb: 
+	added expand_attr support(obsolete) for Element#pre_format
+
+	* docs/Expand: 
+	added the specification of Node#expand: amrita's key feature
+
+	* lib/amrita/node.rb: 
+	make NullNode singleton object
+	make TextElement immutable object
+	Elements share AttrArray until modfied after clone
+	added Node#== method
+
+	* lib/amrita/format.rb: 
+	added Node#pre_format: convert Elements without ID into
+	formatted string.
+
+2002-07-25  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/node.rb Amrita::a()
+	accept single String (patch from Shirai, Kaoru [walrus-ml:327])
+	
+	* lib/amrita/format.rb: Formatter#format_attr
+	support nil value (patch from Shirai, Kaoru [walrus-ml:327])
+	
+	* lib/amrita/format.rb: Santizer::sanitize_url
+	it allows '#' as url char now (Is it correct?)
+
+	* release
+	released V0.8.3
+	
+	* docs/XML: 
+	added docs/XML
+
+	* lib/amrita/compiler.rb: 
+	added AnyData(no-hint compiler)
+
+2002-07-24  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/xml.rb: 
+	added REXML based xml parser
+
+	* lib/amrita/tag.rb: 
+	refactor to gather HTML dependent info into tag.rb and parser.rb
+	now othor source files are independent of DTD
+
+2002-07-23  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* release
+	released V0.8.2
+	
+	* docs/Tour :
+	added chapter "Sanitizing -- anti XSS attack"
+
+2002-07-22  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/node_expand.rb: 
+	fixed bug of expanding elements with AttrArray model data with text
+
+	* lib/amrita/parser.rb: 
+	inserted StringScanner.must_C_version
+
+2002-07-20  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* lib/amrita/format.rb: 
+	Added Sanitezer module to fix XSS vulnerability
+
+2002-07-19  Taku Nakajima  <tnakajima@brain-tokyo.jp>
+
+	* install.rb: 
+	Added to package (Thnaks to Kaoru Shirai)
+
+	* amrita.spec : 
+	Changed to use rbconfig (apply patch from Nobu Nakata)
+

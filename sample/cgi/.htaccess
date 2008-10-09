@@ -1,0 +1,4 @@
+
+AddHandler amrita-script ams
+#Action amrita-script /amrita/cgi-bin/amshandler
+

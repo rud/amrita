@@ -1,0 +1,154 @@
+= amrita -  a html/xhtml template library for Ruby
+
+== Summary
+
+Amrita is a a html/xhtml template library for Ruby. 
+It makes html documents from a template and a model data.
+
+Key feature
+
+* The template for amrita is a pure html/xhtml document without no
+  special tag like <?...?> or <% .. %>
+
+* The template can be written by designers using almost any HTML
+  Editor.
+
+* Need no change on Ruby code to change the view of _dynamic_ part
+  (not only static part) of the template
+
+* The model data may be standard Ruby data, Hash, Array, String... or
+  an instance of a classes you made.
+
+* The output is controlled by _data_ not by logic. So It's easy to
+  write, test, debug code. (Good for eXtreamPrograming)
+
+* HTML template can be compiled into Ruby code before execution
+  with a little effort.
+
+Amrita mixes a template and model data up to a html document naturally
+matching the +id+ attribute of HTML element to model data.
+
+template:
+
+   <table border="1">                      
+     <tr><th>name</th><th>author</th></tr> 
+     <tr id="table1">                        
+       <td id="name"><td id="author">      
+     </tr>                                 
+   </table>                                
+   
+data:
+
+   data = {                                               
+      :table1=>[                                          
+         { :name=>"Ruby", :author=>"matz" },              
+         { :name=>"perl", :author=>"Larry Wall" },        
+         { :name=>"python", :author=>"Guido van Rossum" },
+      ]                                                   
+   }                                                      
+
+template + data = output:
+ 
+  <table>                    
+    <tr>                     
+    <th>name</th>            
+    <th>author</th>          
+    </tr>                    
+    <tr>                     
+    <td>Ruby</td>            
+    <td>matz</td>            
+    </tr>                    
+    <tr>                     
+    <td>perl</td>            
+    .......
+
+
+
+== Installation
+
+Amrita is a l00% pure Ruby library.
+You can install it three ways.
+
+* Edit Makefile and type ... 
+
+    $ make 
+    # make install
+
+* Use install.rb
+
+    # ruby install.rb
+
+* Copy lib/* to Ruby's library directory manually
+
+== Documents and sample
+
+[docs/QuickStart]
+   Quick start guide
+
+[docs/QuickStart_ja]
+   Quick start guide(Japanese version)
+
+[docs/Tour]
+   Show various function of amrita
+
+[docs/Tour2]
+   Show experimental features of amrita
+
+[docs/XML]
+   XML support of amrita
+
+[docs/Cgi]
+   using amrita for cgi
+
+[sample/hello/*]
+   basic samples described in docs/QuickStart docs/XML
+
+[sample/tour/*]
+   samples described in docs/Tour
+
+[sample/cgi/*]
+   using amrita for cgi
+
+[sample/cgikit/*]
+   using amrita with cgikit
+ 
+[sample/bbs/*]
+   a moderate size sample: BBS with "theme"
+
+== Credits
+
+* Thanks for many suggestions and contribution of Kaoru Shirai.
+
+* The html parser in amrita/parser.rb is based on work of MoonWolf.
+
+* sample/tour/rexml_doc.xml (sample data for sample/tour/xml3.rb)
+  was editted from documentation.xml in rexml archive and
+  xml format of docs/index.xml is based on it.
+
+* ams(AmritaScript) is based on the idea and sugestion by Mr.Beyond
+
+== License
+
+Amrita is Copyright (c) 2002 Taku Nakajima.  It is free software, and
+may be redistributed under the terms specified in the README file of
+the Ruby distribution.
+
+If you want to use Amrita in other license form, I will give you a
+BSD-like special license for only specified person and specified
+purpose. Please mail me about it in JAPANESE for detail.
+
+== ToDos and plans
+
+* AnyData doesn't work well when it was used with other Hint.
+* a compiler that produces code with more speed and less flexibility
+
+  (It's difficult to take an appropriate trade-off and make a good interface)
+
+
+= Other stuff
+
+Author::   Taku Nakajima <tnakajima@brain-tokyo.jp>
+Requires:: Ruby 1.6.7 or later
+           strscan 0.6.5 or later
+License::  Copyright (c) 2002 Taku Nakajima
+           Released under Ruby's License
