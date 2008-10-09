@@ -225,7 +225,7 @@ class TestNodeExpand < RUNIT::TestCase
     assert_equal(TextElement.new("abc"), n.expand1("abc"))
     a = Node::to_node([1,2,3])
     assert_equal(a, n.expand1([1,2,3]))
-    assert_equal(ans.type, n.expand1({ :aaa=> "xyz"}).type)
+    assert_equal(ans.class, n.expand1({ :aaa=> "xyz"}).class)
     assert_equal(ans, n.expand1({ :aaa=> "xyz"}))
   end
 

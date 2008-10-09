@@ -604,8 +604,8 @@ END
   def test_generate_hint_from_template
     template = HtmlParser.parse_text  "<body><x id=aaa></x></body>"
     h = template.generate_hint_from_template
-    assert_equals(DictionaryHint, h.type)
-    assert_equals(AnyData, h.hash[:aaa].type)
+    assert_equals(DictionaryHint, h.class)
+    assert_equals(AnyData, h.hash[:aaa].class)
 
     check_compiler("<body><x id=aaa></x></body>",
                    { :aaa=>"xxx" },
@@ -614,9 +614,9 @@ END
 
     template = HtmlParser.parse_text'<span id=xxx></span><span id=yyy></span>'
     h = template.generate_hint_from_template
-    assert_equals(DictionaryHint, h.type)
-    assert_equals(AnyData, h.hash[:xxx].type)
-    assert_equals(AnyData, h.hash[:yyy].type)
+    assert_equals(DictionaryHint, h.class)
+    assert_equals(AnyData, h.hash[:xxx].class)
+    assert_equals(AnyData, h.hash[:yyy].class)
 
     check_compiler_all('<span id=xxx></span><span id=yyy></span>',
                    { :xxx=>"xx", :yyy=>"yy" },

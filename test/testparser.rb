@@ -51,7 +51,7 @@ END
 		   "\n     ", 
 		   Tag.new("a", [["name", "28077"]])
 		 ],
-		 scan(h).indexes(0,3,6))
+		 scan(h).values_at(0,3,6))
   end
 
   def parse_and_print(t)

@@ -196,33 +196,33 @@ END
     tmpl = HtmlParser.parse_text "<p id=x>xxxx</p>"
     f = AsIsFormatter.new(nil)
     r = tmpl.pre_format(f).result
-    assert_equal(Element, r.type)
+    assert_equal(Element, r.class)
     assert_equal('e(:p,a(:id, "x")) { "xxxx" }', r.to_ruby)
 
     tmpl = HtmlParser.parse_text "<p>xxxx</p><p id=x>yyyy</p>"
     f = AsIsFormatter.new(nil)
     r = tmpl.pre_format(f).result
-    assert_equal(Array, r.type)
+    assert_equal(Array, r.class)
     assert_equal('<p>xxxx</p>', r[0])
     assert_equal('e(:p,a(:id, "x")) { "yyyy" }', r[1].to_ruby)
 
     tmpl = HtmlParser.parse_text "<p id=x>xxxx</p><p>yyyy</p>"
     f = AsIsFormatter.new(nil)
     r = tmpl.pre_format(f).result
-    assert_equal(Array, r.type)
+    assert_equal(Array, r.class)
     assert_equal('e(:p,a(:id, "x")) { "xxxx" }', r[0].to_ruby)
     assert_equal('<p>yyyy</p>', r[1])
 
     tmpl = HtmlParser.parse_text "xxx<em>yyy</em>zzz"
     f = AsIsFormatter.new(nil)
     r = tmpl.pre_format(f).result
-    assert_equal(Amrita::SanitizedString, r.type)
+    assert_equal(Amrita::SanitizedString, r.class)
     assert_equal('xxx<em>yyy</em>zzz', r)
 
     tmpl = HtmlParser.parse_text "<p id=x>xxx<em>yyy</em>zzz</p>"
     f = AsIsFormatter.new(nil)
     r = tmpl.pre_format(f).result
-    assert_equal(Element, r.type)
+    assert_equal(Element, r.class)
     assert_equal('xxx<em>yyy</em>zzz', r.body.to_s)
   end
 
@@ -273,11 +273,11 @@ END
     tmpl = HtmlParser.parse_text '<a href="@xxx">yyy</a>'
 
     pre = tmpl.pre_format(f).result
-    assert_equal(Amrita::SanitizedString, pre.type)
+    assert_equal(Amrita::SanitizedString, pre.class)
     assert_equal('<a href="@xxx">yyy</a>', pre)
 
     pre = tmpl.pre_format(f, true).result
-    assert_equal(Amrita::Element, pre.type)
+    assert_equal(Amrita::Element, pre.class)
     assert_equal(e(:a,a(:href, "@xxx")) { "yyy" }, pre)
 
     data = { :xxx=>"http://www.ruby-lang.org/" }

@@ -39,7 +39,7 @@ module Amrita
 	return @push_back_value.pop 
       end
       loop do
-	return nil if  @sc.empty?
+	return nil if  @sc.eos?
 	@pointer = @sc.pointer
 	#next_text = @sc.peek(10)
 	#puts "#{next_text}:#{state}:#{value}:#{@state}"
@@ -55,7 +55,7 @@ module Amrita
     end
 
     def empty?
-      @push_back_value.size == 0 and @sc.empty?
+      @push_back_value.size == 0 and @sc.eos?
     end
 
     def generate_tag

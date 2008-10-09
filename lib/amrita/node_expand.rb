@@ -273,7 +273,7 @@ module Amrita
       when DictionaryData
         expand1(data, context)
       else
-        raise "Amrita::Node#expand accepts only Hash or ExpandByMember as model data (#{data.type} was passed)"
+        raise "Amrita::Node#expand accepts only Hash or ExpandByMember as model data (#{data.class} was passed)"
       end
     end
 

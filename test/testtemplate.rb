@@ -245,7 +245,7 @@ class TestTemplate < RUNIT::TestCase
 
 
     t = TemplateFileWithCache.new(tempfile)  
-    assert_equal(SourceCache, t.cache_manager.type)
+    assert_equal(SourceCache, t.cache_manager.class)
     t.use_compiler = true
     assert_equal(true, t.need_update?)
     result = ""

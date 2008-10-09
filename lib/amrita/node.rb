@@ -118,7 +118,7 @@ module Amrita
 
     # AttrArray#== concerns the order of Attr
     def ==(x)
-      return true if id == x.id
+      return true if object_id == x.object_id
       return false unless x.kind_of?(AttrArray)
       each_with_index do |a, n|
         return false unless a == x[n]
@@ -376,7 +376,7 @@ module Amrita
     # doesn't concern the order of attributes
     def ==(x)
       return false unless x.kind_of?(Element)
-      return true if x.id == id
+      return true if x.object_id == object_id
       return false unless x.tagname_symbol == @tagname
       return false unless x.attrs.size == @attrs.size
       @attrs.each do |a|
