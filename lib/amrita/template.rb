@@ -1,3 +1,4 @@
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'amrita/node.rb'
 require 'amrita/node_expand.rb'
 require 'amrita/format.rb'
