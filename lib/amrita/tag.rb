@@ -1,42 +1,5 @@
+require 'set'
 module Amrita
-
-  class Set < Hash  #:nodoc:
-    def initialize(*args)
-      super()
-      args.each do |a|
-	self[a] = true
-      end
-
-    end
-
-    def +(a)
-      self[a] = true
-    end
-
-    def |(a)
-      ret = clone
-      a.each do |aa|
-	ret[aa] = true
-      end
-      ret
-    end
-
-    def -(a)
-      self[a] = false
-    end
-
-    def each(&block)
-      each_key(&block)
-    end
-
-    def to_a
-      keys
-    end
-
-    def include?(x)
-      self[x] == true
-    end
-  end
 
   # This class provide information for formatting.
   class TagInfo
@@ -265,17 +228,17 @@ module Amrita
   class HtmlTagInfo < TagInfo
     include Amrita
 
-    EMPTY = Set::new(*%w(area base basefont bgsound br col frame hr img input isindex 
-	         keygen link meta nextid param spacer wbr))
-    INLINE = Set.new(*%w(em tt i b u strike s big small strong dfn code samp kbd var cite abbr acronym sub))
-    BLOCK = Set.new(*%w(address dl isindex p blockquote fieldset menu pre center form noframes table dir
+    EMPTY = Set.new(%w(area base basefont bgsound br col frame hr img input isindex
+                       keygen link meta nextid param spacer wbr))
+    INLINE = Set.new(%w(em tt i b u strike s big small strong dfn code samp kbd var cite abbr acronym sub))
+    BLOCK = Set.new(%w(address dl isindex p blockquote fieldset menu pre center form noframes table dir
                  h1 h2 h3 h4 h5 h6 noscript ul div hr ol))
-    LIST = Set.new(*%w(ul ol dir))
-    ITEM = Set.new(*%w(li dt dd tr th td))
-    ACCEPT_ANY = Set.new(*%w(html head body td))
+    LIST = Set.new(%w(ul ol dir))
+    ITEM = Set.new(%w(li dt dd tr th td))
+    ACCEPT_ANY = Set.new(%w(html head body td))
     BLOCK_OR_ITEM = (BLOCK | ITEM)
     BLOCK_OR_EMPTY = (BLOCK | EMPTY)
-    CAN_OMIT_ENDTAG = Set.new(*%w(html head body p li tr th td thead tbody tfoot colgroup dt dd option))
+    CAN_OMIT_ENDTAG = Set.new(%w(html head body p li tr th td thead tbody tfoot colgroup dt dd option))
 
     def initialize
       super
