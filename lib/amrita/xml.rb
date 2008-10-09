@@ -98,7 +98,7 @@ module Amrita
 
     def XMLParser.parse_file(fname, dummy=nil, &block)
       l = Listener.new(&block) 
-      REXML::Document.parse_stream(REXML::File.new(fname), l)
+      REXML::Document.parse_stream(File.new(fname), l)
       l.result
     end
   end

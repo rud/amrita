@@ -56,7 +56,7 @@ module Amx
                raise "unknown param #{f.type}"
              end
       
-      doc = REXML::Document.new(REXML::File.new(path))
+      doc = REXML::Document.new(File.new(path))
       root = doc.elements['amx']
       req = root.attributes['require']
       require(req) if req
