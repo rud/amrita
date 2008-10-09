@@ -9,7 +9,7 @@ SITE_DIR=$(PREFIX)/lib/site_ruby/${RUBY_VER}
 BIN_DIR=$(PREFIX)/bin
 #RPMROOT=$(HOME)/redhat
 RPMROOT=$(HOME)/rpm
-DOCDIR=$(PREFIX)/share/doc/amrita/html
+DOCDIR=docs/html
 
 all : ;
 
@@ -56,7 +56,7 @@ profile_it :
 	(cd test; ruby -r profile.rb -I../lib testall.rb)
 
 rdoc: 
-	rdoc --op $(DOCDIR) -S --main README README docs/QuickStart  docs/Tour docs/Tour2 docs/XML docs/Cgi lib/amrita README_ja docs/QuickStart_ja docs/Tour_ja docs/XML_ja docs/Tour2_ja docs/Cgi_ja
+	rdoc --op $(DOCDIR) -S --main README.rdoc.html README.rdoc docs/QuickStart  docs/Tour docs/Tour2 docs/XML docs/Cgi lib/amrita README_ja docs/QuickStart_ja docs/Tour_ja docs/XML_ja docs/Tour2_ja docs/Cgi_ja
 	(cd $(DOCDIR)/files/; ruby -i.back -ne 'print gsub("iso-8859-1", "EUC-JP") unless /<?xml/' *ja.html)	
 	(cd $(DOCDIR)/files/docs/; ruby -i.back -ne 'print gsub("iso-8859-1", "EUC-JP") unless /<?xml/' *ja.html)	
 
