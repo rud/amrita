@@ -96,6 +96,7 @@ END
     assert_equal('<p id="aaaa" class="xyz">xxxxx</p>', ret)
   end
 
+  # Launch external "w3m" process to validate how data should be sanitized
   def w3m(str)
     %x[echo #{str.inspect} | w3m -T text/html -dump].chomp
   end
