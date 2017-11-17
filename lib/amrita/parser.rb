@@ -254,7 +254,7 @@ module Amrita
 
     def initialize(error, fname, lno, line)
       @error, @fname, @lno, @line = error, fname, lno, line
-      super("error happend in #{@fname}:#{@lno}(#{error}) \n==>#{line}")
+      super("error happened in #{@fname}:#{@lno}(#{error}) \n==>#{line}")
     end
   end
 
