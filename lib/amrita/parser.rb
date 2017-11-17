@@ -1,3 +1,4 @@
+# -*- coding: iso-8859-1; indent-tabs-mode: t; whitespace-style: nil-*-
 
 require 'strscan'
 require "amrita/node"
